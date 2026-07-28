@@ -1,0 +1,6 @@
+{
+  "name": "Idiomatic",
+  "description": "Master tech idioms, workplace jargon, and corporate vernacular through real-world contextual simulations, PR reviews, Slack chats, and under-the-hood code analogies.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
