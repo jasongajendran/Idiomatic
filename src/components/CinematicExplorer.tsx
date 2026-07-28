@@ -89,7 +89,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
         <div className="relative z-10 max-w-4xl space-y-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 shadow-inner">
             <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            <span>ISSUE NO. 24 — EDITORIAL TECH VERNACULAR</span>
+            <span>TECH VERNACULAR & SYSTEM LOGIC</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tighter text-white leading-none">
@@ -110,7 +110,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
           <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-slate-300 font-mono font-bold">
             <div className="flex items-center gap-2 bg-slate-950/60 px-3.5 py-1.5 rounded-xl border border-white/5">
               <span className="text-indigo-400 font-black text-xl">{idioms.length}</span>
-              <span>Deduplicated Terms</span>
+              <span>Terms</span>
             </div>
             <div className="flex items-center gap-2 bg-slate-950/60 px-3.5 py-1.5 rounded-xl border border-white/5">
               <span className="text-purple-400 font-black text-xl">100%</span>

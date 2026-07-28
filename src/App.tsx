@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { CinematicExplorer } from './components/CinematicExplorer';
@@ -8,7 +8,7 @@ import { JargonInspectorSheet } from './components/JargonInspectorSheet';
 import { BookmarksDrawer } from './components/BookmarksDrawer';
 import { IDIOMS_DATA } from './data/idiomsData';
 import { Idiom } from './types';
-import { Terminal, Sparkles, Layers, ShieldCheck } from 'lucide-react';
+import { Terminal, Sparkles, Layers, ShieldCheck, ArrowUp } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'explorer' | 'simulator' | 'practice'>('explorer');
@@ -16,6 +16,24 @@ export default function App() {
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set(['bikeshedding', 'technical-debt']));
   const [inspectedIdiom, setInspectedIdiom] = useState<Idiom | null>(null);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 250) {
+        setShowScrollTop(true);
+      } else {
+        setShowScrollTop(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const toggleBookmark = (id: string) => {
     setBookmarkedIds((prev) => {
@@ -130,6 +148,24 @@ export default function App() {
         onRemoveBookmark={toggleBookmark}
         onInspect={setInspectedIdiom}
       />
+
+      {/* Floating Scroll To Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 10 }}
+            onClick={scrollToTop}
+            className="fixed bottom-16 right-4 sm:bottom-8 sm:right-8 z-40 p-3 rounded-2xl bg-indigo-600/90 text-white border border-indigo-400/40 shadow-xl shadow-indigo-500/30 backdrop-blur-md hover:bg-indigo-500 hover:scale-110 active:scale-95 transition-all flex items-center gap-1.5 font-bold text-xs"
+            title="Scroll to top"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp className="w-4 h-4" />
+            <span className="hidden sm:inline font-mono">Top</span>
+          </motion.button>
+        )}
+      </AnimatePresence>
 
       {/* Sleek Footer - No Tech Stack Revelations */}
       <footer className="relative z-10 w-full border-t border-white/10 bg-slate-950/80 backdrop-blur-xl py-6 px-4 text-center text-xs text-slate-400 font-mono">

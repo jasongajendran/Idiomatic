@@ -75,7 +75,7 @@ export const PracticeStudio: React.FC = () => {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 shadow-inner">
               <Gamepad2 className="w-4 h-4 text-rose-400" />
-              <span>ARTISTIC FLAIR — PRACTICE STUDIO</span>
+              <span>INTERACTIVE PRACTICE STUDIO</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
               Interactive Scenario <br />

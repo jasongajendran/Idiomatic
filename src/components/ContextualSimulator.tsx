@@ -134,7 +134,7 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
           <div className="space-y-3 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
               <MessageSquareCode className="w-3.5 h-3.5 text-cyan-400" />
-              <span>SOPHISTICATED DARK — CONTEXTUAL SIMULATOR</span>
+              <span>WORKPLACE SCENARIO SIMULATOR</span>
             </div>
             <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
               Workplace Scenario <br />
