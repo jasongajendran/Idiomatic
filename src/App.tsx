@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Navbar } from './components/Navbar';
 import { CinematicExplorer } from './components/CinematicExplorer';
+import { MeetingCeremonyPlaybook } from './components/MeetingCeremonyPlaybook';
 import { ContextualSimulator } from './components/ContextualSimulator';
 import { PracticeStudio } from './components/PracticeStudio';
 import { JargonInspectorSheet } from './components/JargonInspectorSheet';
@@ -11,7 +12,7 @@ import { Idiom } from './types';
 import { Terminal, Sparkles, Layers, ShieldCheck, ArrowUp } from 'lucide-react';
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState<'explorer' | 'simulator' | 'practice'>('explorer');
+  const [activeTab, setActiveTab] = useState<'explorer' | 'ceremonies' | 'simulator' | 'practice'>('explorer');
   const [searchQuery, setSearchQuery] = useState('');
   const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set(['bikeshedding', 'technical-debt']));
   const [inspectedIdiom, setInspectedIdiom] = useState<Idiom | null>(null);
@@ -82,7 +83,7 @@ export default function App() {
         />
 
         {/* Main View Container with Smooth Tab Transitions */}
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8 pb-16">
+        <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-16">
           <AnimatePresence mode="wait">
             {activeTab === 'explorer' && (
               <motion.div
@@ -100,6 +101,18 @@ export default function App() {
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
                 />
+              </motion.div>
+            )}
+
+            {activeTab === 'ceremonies' && (
+              <motion.div
+                key="ceremonies-tab"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.25 }}
+              >
+                <MeetingCeremonyPlaybook />
               </motion.div>
             )}
 
@@ -157,7 +170,7 @@ export default function App() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 10 }}
             onClick={scrollToTop}
-            className="fixed bottom-16 right-4 sm:bottom-8 sm:right-8 z-40 p-3 rounded-2xl bg-indigo-600/90 text-white border border-indigo-400/40 shadow-xl shadow-indigo-500/30 backdrop-blur-md hover:bg-indigo-500 hover:scale-110 active:scale-95 transition-all flex items-center gap-1.5 font-bold text-xs"
+            className="fixed bottom-20 right-4 sm:bottom-8 sm:right-8 z-40 p-3 rounded-2xl bg-indigo-600/90 text-white border border-indigo-400/40 shadow-xl shadow-indigo-500/30 backdrop-blur-md hover:bg-indigo-500 hover:scale-110 active:scale-95 transition-all flex items-center gap-1.5 font-bold text-xs"
             title="Scroll to top"
             aria-label="Scroll to top"
           >
@@ -167,13 +180,13 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Sleek Footer - No Tech Stack Revelations */}
+      {/* Sleek Footer */}
       <footer className="relative z-10 w-full border-t border-white/10 bg-slate-950/80 backdrop-blur-xl py-6 px-4 text-center text-xs text-slate-400 font-mono">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
             <Terminal className="w-4 h-4 text-indigo-400" />
             <span className="font-bold text-white tracking-tight">[IDIOMATIC]</span>
-            <span className="text-slate-400">— Tech Vernacular & System Logic Intelligence</span>
+            <span className="text-slate-400">— Tech Vernacular & Agile Dialogue Playbook</span>
           </div>
           <div className="flex items-center gap-2 text-slate-400">
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -184,3 +197,4 @@ export default function App() {
     </div>
   );
 }
+

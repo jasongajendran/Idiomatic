@@ -1,4 +1,4 @@
-import { Idiom } from '../types';
+import { Idiom } from "../types";
 
 export const IDIOMS_DATA: Idiom[] = [
   {
@@ -4948,6 +4948,3708 @@ export const IDIOMS_DATA: Idiom[] = [
         "speaker": "Head of Product",
         "quote": "Ambient computing allows our platform to anticipate user needs before they explicitly type a query.",
         "translatedQuote": "Invisible background processing fulfills user requests proactively."
+      }
+    ]
+  },
+  {
+    "id": "once-in-a-blue-moon",
+    "term": "Once in a Blue Moon",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/wʌns ɪn ə bluː muːn/",
+    "literalDefinition": "Analogy: A solar eclipse visible from your backyard — an event so statistically improbable that you almost never expect to witness it in real time.",
+    "realMeaning": "An intermittent, non-deterministic bug, race condition, or edge case that occurs with extreme rarity (e.g. 0.0001% of requests).",
+    "corporateTranslation": "Tech Lead says: 'This crash happens once in a blue moon.' Dev hears: 'It only occurs when 3 threads attempt to flush the cache buffer at the exact same millisecond.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Intermittent race condition that reproduces once every 10 million transactions\nif (Math.random() < 0.0000001 && threadCount > 64 && isGarbageCollectionRunning) {\n  throw new Error(\"RareConcurrencyException: Once in a blue moon\");\n}",
+      "explanation": "Statistical edge condition requiring multiple independent, low-probability states to converge."
+    },
+    "etymology": "19th-century astronomical idiom referring to the rare second full moon in a single calendar month, adapted to software for elusive heisenbugs.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Statistically rare intermittent anomaly.",
+    "tags": [
+      "Heisenbug",
+      "Edge Case",
+      "Concurrency",
+      "Testing"
+    ],
+    "popularityScore": 94,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Staff Engineer",
+        "quote": "Let's still wrap this database lock in a retry block; that dead-lock happens once in a blue moon, but it corrupts state when it does.",
+        "translatedQuote": "Protect against this rare failure mode because data integrity is critical even for low-frequency edge cases."
+      }
+    ]
+  },
+  {
+    "id": "on-cloud-nine",
+    "term": "On Cloud Nine",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/ɒn klaʊd naɪn/",
+    "literalDefinition": "Analogy: Floating weightlessly at maximum altitude where nothing can disrupt your serene, sunny weather.",
+    "realMeaning": "The state of total euphoria when a high-risk production release, massive database migration, or live event succeeds with zero downtime and 100% green metrics.",
+    "corporateTranslation": "DevOps says: 'We are on cloud nine after the black friday traffic peak.' SRE hears: 'Our autoscaling handled 40,000 requests/sec with p99 latency under 20ms and 0 alerts.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (migrationSuccessRate === 1.0 && prodErrorRate === 0 && p99LatencyMs < 25) {\n  teamState.mood = \"On Cloud Nine\";\n  teamState.celebrateWithTacos();\n}",
+      "explanation": "Flawless deployment telemetry where all critical health checks pass without exceptions."
+    },
+    "etymology": "Originating from 1950s US Weather Bureau classifications where Cumulonimbus cloud category 9 was the highest, loftiest cloud in the sky.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Highly satisfied with flawless system performance.",
+    "tags": [
+      "Deployment",
+      "DevOps",
+      "Production",
+      "Milestone"
+    ],
+    "popularityScore": 92,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Engineering Lead",
+        "quote": "The whole infrastructure team is on cloud nine — zero packet drop during the Kubernetes multi-region cluster migration!",
+        "translatedQuote": "The team is thrilled that our complex infrastructure migration finished without service degradation."
+      }
+    ]
+  },
+  {
+    "id": "nitty-gritty",
+    "term": "Nitty-Gritty (Get Down to the Nitty-Gritty)",
+    "category": "Coding",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈnɪt.iˌɡrɪt.i/",
+    "literalDefinition": "Analogy: Stripping away the sleek aerodynamic body of a race car to inspect the fuel injectors, spark plugs, and gear teeth directly.",
+    "realMeaning": "Moving past high-level architectural abstractions to analyze the precise, low-level technical mechanics, byte-level data structures, or SQL execution plans.",
+    "corporateTranslation": "Architect says: 'Let's get down to the nitty-gritty.' Dev hears: 'Close the PowerPoint slides and let's examine the raw memory dumps and Redis transaction logs.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Moving past high-level interface to inspect the low-level byte buffer\nfunction inspectNittyGritty(streamBuffer: Buffer) {\n  const byteOffset = streamBuffer.readUInt32LE(0x04);\n  const checksum = streamBuffer.subarray(0x08, 0x10);\n  return { byteOffset, checksum };\n}",
+      "explanation": "Low-level implementation specifics and detailed system internals."
+    },
+    "etymology": "Mid-20th century colloquialism meaning essential, fundamental facts, widely used in engineering deep-dives.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Low-level technical specifics and granular implementation details.",
+    "tags": [
+      "Architecture",
+      "Deep Dive",
+      "Debugging",
+      "Code Quality"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Principal Architect",
+        "quote": "We've agreed on the microservice boundary; now let's get into the nitty-gritty of idempotent gRPC payload retries.",
+        "translatedQuote": "Now that the strategy is clear, let us define the exact low-level communication protocols."
+      }
+    ]
+  },
+  {
+    "id": "back-to-the-drawing-board",
+    "term": "Back to the Drawing Board",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/bæk tuː ðə ˈdrɔː.ɪŋ bɔːrd/",
+    "literalDefinition": "Analogy: An architect crumbling up blueprints after discovering the ground foundation cannot support the building's weight.",
+    "realMeaning": "Discarding a failed prototype, rejected architectural proposal, or flawed algorithm to start the design process over from scratch.",
+    "corporateTranslation": "Director says: 'It's back to the drawing board for this feature.' Dev hears: 'The proof-of-concept didn't scale past 50 concurrent users, so we must design a new solution.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (!proofOfConcept.passesSecurityCompliance() || !proofOfConcept.meetsLatencySLA()) {\n  git.discardBranch(\"poc-v1\");\n  architectureRegistry.startNewDesignSession(); // Back to drawing board\n}",
+      "explanation": "Invalidating an initial architectural hypothesis and restarting from first principles."
+    },
+    "etymology": "Popularized in 1941 by a famous New Yorker cartoon depicting an engineer walking away from a crashed aircraft design.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Revising our technical design approach from first principles.",
+    "tags": [
+      "Architecture",
+      "RFC",
+      "Redesign",
+      "Agile"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "Staff Engineer",
+        "quote": "Our graph database indexing approach failed the 100k node benchmark; we need to go back to the drawing board and test PostgreSQL relational joins.",
+        "translatedQuote": "The current technology selection is unviable for our scaling targets; we will evaluate an alternative architecture."
+      }
+    ]
+  },
+  {
+    "id": "bite-the-bullet",
+    "term": "Bite the Bullet",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/baɪt ðə ˈbʊl.ɪt/",
+    "literalDefinition": "Analogy: A patient enduring painful but life-saving surgery because delaying it will lead to total system failure.",
+    "realMeaning": "Making the tough decision to perform a necessary, painful, and time-consuming technical upgrade, migration, or refactoring.",
+    "corporateTranslation": "Tech Lead says: 'We need to bite the bullet on this migration.' PM hears: 'We must spend 2 full sprints upgrading React before security vulnerabilities break our build.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function resolveCriticalTechDebt() {\n  // Inevitable painful breaking upgrade\n  await packageManager.upgradeToMajorVersion({ breakingChanges: true, autoCodemod: false });\n  await manuallyFixTypeErrorsAcrossWorkspace();\n}",
+      "explanation": "Accepting short-term friction to resolve unavoidable long-term technical liabilities."
+    },
+    "etymology": "19th-century military practice of soldiers biting lead bullets during battlefield surgery without anesthesia.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Commit to the necessary technical remediation despite short-term effort.",
+    "tags": [
+      "Tech Debt",
+      "Refactoring",
+      "Dependencies",
+      "Decisions"
+    ],
+    "popularityScore": 93,
+    "examples": [
+      {
+        "context": "Jira",
+        "speaker": "Engineering Manager",
+        "quote": "Let's bite the bullet and migrate off our end-of-life Node 16 runtime before next month's SOC2 audit.",
+        "translatedQuote": "We need to schedule the required runtime upgrade immediately to ensure compliance."
+      }
+    ]
+  },
+  {
+    "id": "hit-the-nail-on-the-head",
+    "term": "Hit the Nail on the Head",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/hɪt ðə neɪl ɒn ðə hɛd/",
+    "literalDefinition": "Analogy: Striking a carpenter's nail dead-center with a hammer so it drives straight into the wood with zero wasted force.",
+    "realMeaning": "Accurately identifying the exact root cause of a software bug, architectural bottleneck, or team process impediment.",
+    "corporateTranslation": "DevOps says: 'You hit the nail on the head.' QA hears: 'Your hypothesis about the unclosed Redis connection pool causing memory leaks was 100% correct.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const diagnosis = incidentTriage.findRootCause();\nif (diagnosis.exactCulprit === \"UnindexedForeignKeyScanOnOrdersTable\") {\n  team.acknowledgeAccurateDiagnosis(); // Hit the nail on the head\n}",
+      "explanation": "Precision pinpointing of an underlying defect or core requirement without guesswork."
+    },
+    "etymology": "Dating back to 16th-century carpentry terminology describing precise, effective craftsmanship.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Accurately identified the exact root cause.",
+    "tags": [
+      "Debugging",
+      "Postmortem",
+      "Root Cause",
+      "Troubleshooting"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Senior SRE",
+        "quote": "Sarah hit the nail on the head: the CDN caching rules were stripping the Authorization header on preflight OPTIONS requests.",
+        "translatedQuote": "Sarah correctly discovered the exact configuration error causing the API failures."
+      }
+    ]
+  },
+  {
+    "id": "tip-of-the-iceberg",
+    "term": "Tip of the Iceberg",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/tɪp əv ði ˈaɪs.bɜːrɡ/",
+    "literalDefinition": "Analogy: A small chunk of ice protruding above the ocean surface, while a massive 10,000-ton mountain of frozen mass sits hidden beneath.",
+    "realMeaning": "A visible superficial symptom or minor bug that reveals a massive, hidden underlying problem in codebase architecture or data integrity.",
+    "corporateTranslation": "Dev says: 'This button misalignment is just the tip of the iceberg.' PM hears: 'The entire CSS layout system and component state tree are completely broken.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const visibleDefect = { bug: \"Text overlap on checkout button\", risk: \"Minor UI\" };\nconst underlyingReality = {\n  globalStateMutation: true,\n  corruptedSessionStorage: true,\n  deprecatedLegacySDK: true // 90% hidden below the surface\n};",
+      "explanation": "A minor observable flaw indicating extensive systemic technical debt beneath the surface."
+    },
+    "etymology": "Derived from oceanography where roughly 90% of an iceberg's volume resides underwater.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Superficial indicator of broader systemic architectural defects.",
+    "tags": [
+      "Tech Debt",
+      "Quality",
+      "Architecture",
+      "Risk"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "Jira",
+        "speaker": "Security Analyst",
+        "quote": "That exposed API route is only the tip of the iceberg; our microservice network has zero mutual TLS authentication between backend pods.",
+        "translatedQuote": "This vulnerability indicates a widespread lack of internal network encryption that must be addressed."
+      }
+    ]
+  },
+  {
+    "id": "kill-two-birds-with-one-stone",
+    "term": "Kill Two Birds with One Stone",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/kɪl tuː bɜːrdz wɪð wʌn stoʊn/",
+    "literalDefinition": "Analogy: A single well-aimed slingshot pebble achieving two distinct target hits at the same time.",
+    "realMeaning": "Accomplishing two significant engineering objectives with a single architectural refactor, pull request, or tool adoption.",
+    "corporateTranslation": "Tech Lead says: 'We can kill two birds with one stone.' Dev hears: 'Upgrading to TypeScript 5 will fix our circular type compilation and speed up our CI pipeline builds.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function adoptOpenTelemetry() {\n  return {\n    distributedTracing: \"Enabled across all 15 microservices\",\n    legacyLogForwardingBillingCost: \"Reduced by 60%\" // Two major outcomes with one tool\n  };\n}",
+      "explanation": "Executing a single strategic action that satisfies multiple high-value functional requirements."
+    },
+    "etymology": "Centuries-old English proverb describing double efficiency from a unified action.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Achieve dual strategic benefits through a consolidated solution.",
+    "tags": [
+      "Efficiency",
+      "Optimization",
+      "Architecture",
+      "Refactoring"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Lead Architect",
+        "quote": "Migrating from custom crypto helpers to the Web Crypto API kills two birds with one stone: better performance and audited security compliance.",
+        "translatedQuote": "This change improves execution speed while simultaneously guaranteeing standards compliance."
+      }
+    ]
+  },
+  {
+    "id": "leave-no-stone-unturned",
+    "term": "Leave No Stone Unturned",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/liːv noʊ stoʊn ʌnˈtɜːrnd/",
+    "literalDefinition": "Analogy: A forensic investigator meticulously inspecting every pebble and grain of dust at a search site.",
+    "realMeaning": "Conducting an exhaustive, meticulous investigation into an elusive production bug, memory leak, or security breach across all logs, telemetry, and code paths.",
+    "corporateTranslation": "Manager says: 'Leave no stone unturned.' SRE hears: 'Check kernel logs, TCP socket dumps, DB slow-query tables, and microservice spans until you find the culprit.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function deepIncidentInvestigation() {\n  await auditKernelLogs();\n  await analyzeHeapSnapshots();\n  await inspectThirdPartyWebhooks();\n  await traceDistributedNetworkPackets(); // Exhaustive investigation\n}",
+      "explanation": "Thorough, comprehensive analysis omitting no diagnostic vector or log source."
+    },
+    "etymology": "Ancient Greek mythological proverb originating from the legend of Polycrates seeking hidden treasure under stones.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Perform an exhaustive diagnostic investigation across all diagnostic vectors.",
+    "tags": [
+      "Postmortem",
+      "Debugging",
+      "Security",
+      "Reliability"
+    ],
+    "popularityScore": 91,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "Head of Infrastructure",
+        "quote": "During our SOC2 audit remediation, we left no stone unturned, auditing every AWS IAM role and S3 bucket permission.",
+        "translatedQuote": "We conducted a rigorous, complete audit of all cloud security configurations."
+      }
+    ]
+  },
+  {
+    "id": "play-devils-advocate",
+    "term": "Play Devil's Advocate",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/pleɪ ˈdɛv.əlz ˈæd.və.kət/",
+    "literalDefinition": "Analogy: A sparring partner attacking your defensive stance intentionally to reveal guard openings before the real fight.",
+    "realMeaning": "Taking a skeptical or opposing viewpoint during an RFC review to uncover blind spots, failure modes, or edge cases in a proposed design.",
+    "corporateTranslation": "Architect says: 'Let me play devil's advocate here.' Dev hears: 'What happens to your shiny event-driven system when AWS SQS queues back up with 5 million delayed messages?'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function reviewArchitectureProposal(rfc: Proposal) {\n  if (rfc.claimsZeroDowntime) {\n    simulateChaosMonkeyOutage(rfc); // Stress test assumptions\n  }\n}",
+      "explanation": "Constructive skepticism used to validate systemic resilience and edge-case reliability."
+    },
+    "etymology": "Originating in the Catholic Church (Advocatus Diaboli), an official appointed to argue against canonization to ensure thorough scrutiny.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Examine contrarian failure scenarios and stress-test our architectural assumptions.",
+    "tags": [
+      "Architecture",
+      "RFC",
+      "Critical Thinking",
+      "Resilience"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Staff Engineer",
+        "quote": "Playing devil's advocate for a moment: if the mobile app is offline for 4 days, how do we reconcile conflicting SQLite sync updates?",
+        "translatedQuote": "Let us evaluate potential failure states when edge devices remain disconnected for prolonged periods."
+      }
+    ]
+  },
+  {
+    "id": "cross-that-bridge",
+    "term": "Cross That Bridge When We Come to It",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/krɔːs ðæt brɪdʒ wɛn wiː kʌm tuː ɪt/",
+    "literalDefinition": "Analogy: Planning your hiking path across a mountain trail without stressing over a river crossing that is 40 miles ahead.",
+    "realMeaning": "Postponing decisions on distant scaling challenges or hypothetical edge cases until empirical data warrants implementation (YAGNI principle).",
+    "corporateTranslation": "Tech Lead says: 'Let's cross that bridge when we come to it.' Dev hears: 'Do not build a sharded multi-region distributed cache when we only have 200 daily active users.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (currentMonthlyActiveUsers < 100_000) {\n  useSinglePostgresInstance(); // Simple, clean, fast\n} else {\n  // Cross that bridge when we come to it\n  setupMultiRegionSpannerCluster();\n}",
+      "explanation": "Pragmatic deferral of premature complexity in favor of rapid, lean delivery."
+    },
+    "etymology": "19th-century American idiom advising against worrying about hypothetical future obstacles prematurely.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Defer addressing this secondary scaling requirement until empirical growth requires it.",
+    "tags": [
+      "YAGNI",
+      "Agile",
+      "Pragmatism",
+      "Architecture"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Tech Lead",
+        "quote": "We don't need a multi-tenant dynamic theme switcher today; let's cross that bridge when enterprise sales signs their first custom branding contract.",
+        "translatedQuote": "Avoid building complex dynamic styling infrastructure until actual business demand materializes."
+      }
+    ]
+  },
+  {
+    "id": "ball-is-in-your-court",
+    "term": "The Ball Is in Your Court",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/ðə bɔːl ɪz ɪn jʊər kɔːrt/",
+    "literalDefinition": "Analogy: A tennis match where the ball has bounced over the net to your side; nothing happens in the game until you swing your racket.",
+    "realMeaning": "Signaling that you have completed your part of a workflow (code review, bug fix, API spec) and are waiting on the other party to take action.",
+    "corporateTranslation": "Developer says: 'The ball is in your court.' Reviewer hears: 'I have addressed all 14 PR review comments and pushed tests; please approve the merge.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "pullRequest.status = {\n  authorActionComplete: true,\n  awaitingReviewerApproval: true,\n  nextActor: \"LeadReviewer\" // Ball is in your court\n};",
+      "explanation": "Explicit handoff of ownership in an asynchronous collaborative development cycle."
+    },
+    "etymology": "Originating in court tennis where gameplay alternates strictly based on ball possession.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Awaiting your review and subsequent feedback to proceed.",
+    "tags": [
+      "PR Review",
+      "Handoff",
+      "Collaboration",
+      "Workflow"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Backend Engineer",
+        "quote": "I've deployed the staging GraphQL endpoint and updated the schema types in NPM; the ball is in your court for frontend integration.",
+        "translatedQuote": "Backend deliverables are live and verified; frontend development can now proceed."
+      }
+    ]
+  },
+  {
+    "id": "take-with-a-grain-of-salt",
+    "term": "Take It with a Grain of Salt",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/teɪk ɪt wɪð ə ɡreɪn əv sɔːlt/",
+    "literalDefinition": "Analogy: Adding a pinch of salt to food to make an otherwise hard-to-swallow dish digestible.",
+    "realMeaning": "Maintaining healthy skepticism toward vendor benchmark claims, AI marketing hype, or unverified performance metrics.",
+    "corporateTranslation": "Architect says: 'Take their benchmark with a grain of salt.' Dev hears: 'Their vendor graph shows 100k transactions/second, but they ran it on a cluster with caching disabled and no network latency.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function evaluateVendorClaim(claimedTPS: number) {\n  const realityMultiplier = 0.20; // Take with a grain of salt\n  return {\n    marketingClaim: claimedTPS,\n    expectedRealWorldPerformance: claimedTPS * realityMultiplier\n  };\n}",
+      "explanation": "Applying critical discount factors to unverified technical claims."
+    },
+    "etymology": "Ancient Latin phrase ('cum grano salis') from Pliny the Elder's recipe for an antidote to poison.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Evaluate this technical claim with critical scrutiny and independent verification.",
+    "tags": [
+      "Benchmarks",
+      "Critical Thinking",
+      "Vendors",
+      "Evaluation"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "Principal Engineer",
+        "quote": "Take the vendor's 'zero configuration AI migration' claim with a grain of salt; we will still need custom data ingestion pipelines.",
+        "translatedQuote": "Do not accept marketing claims at face value; allocate engineering effort for integration reality."
+      }
+    ]
+  },
+  {
+    "id": "burn-the-candle-at-both-ends",
+    "term": "Burn the Candle at Both Ends",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/bɜːrn ðə ˈkæn.dəl æt boʊθ ɛndz/",
+    "literalDefinition": "Analogy: Lighting both the top wick and bottom base of a wax candle — it produces twice the light for a brief moment, then rapidly melts into nothing.",
+    "realMeaning": "Working excessive late-night hours across development and on-call rotations, leading to severe cognitive fatigue, elevated bug rates, and burnout.",
+    "corporateTranslation": "Manager says: 'Don't burn the candle at both ends.' Dev hears: 'Stop answering Slack messages at 2 AM; tired engineers push buggy code that breaks production.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (developer.sleepHours < 5 && developer.onCallPagersAnswered > 6) {\n  developer.cognitiveLoad = \"Exhausted\";\n  developer.bugIntroductionProbability *= 3.5;\n  triggerMandatoryRestProtocol();\n}",
+      "explanation": "Unsustainable workload depletion degrading cognitive acuity and software quality."
+    },
+    "etymology": "17th-century French and English idiom describing reckless waste of resources, adapted to modern developer work-life sustainability.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Overextending operational bandwidth at the risk of cognitive exhaustion.",
+    "tags": [
+      "Burnout",
+      "On-Call",
+      "Team Health",
+      "Sustainability"
+    ],
+    "popularityScore": 90,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Scrum Master",
+        "quote": "Alex has been burning the candle at both ends resolving incident hotfixes; let's assign tomorrow's standup facilitation to someone else.",
+        "translatedQuote": "Alex needs rest after intensive incident response; we will redistribute tasks."
+      }
+    ]
+  },
+  {
+    "id": "off-the-top-of-my-head",
+    "term": "Off the Top of My Head",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/ɔːf ðə tɒp əv maɪ hɛd/",
+    "literalDefinition": "Analogy: Reaching into a pocket and pulling out the first coin you touch without counting your total change.",
+    "realMeaning": "Providing a quick, preliminary ballpark estimate or recollection without consulting documentation, logs, or codebase dependencies.",
+    "corporateTranslation": "Tech Lead says: 'Off the top of my head, that's a 3-day task.' Dev hears: 'This is a rough estimate; do not hold me to this deadline until I inspect the legacy codebase.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const quickEstimate = {\n  storyPoints: 5,\n  confidenceLevel: 0.4,\n  disclaimer: \"Non-binding ballpark; requires spike investigation\" // Off the top of my head\n};",
+      "explanation": "Preliminary estimation made without granular empirical measurement."
+    },
+    "etymology": "Mid-20th-century idiom indicating immediate memory retrieval without structured research.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "As a preliminary rough approximation subject to technical verification.",
+    "tags": [
+      "Estimation",
+      "Agile",
+      "Planning",
+      "Refinement"
+    ],
+    "popularityScore": 94,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Tech Lead",
+        "quote": "Off the top of my head, updating our OAuth token expiration logic touches 4 microservices and will take about 2 days.",
+        "translatedQuote": "Based on initial memory, this task involves 4 services; I will confirm after checking the repository."
+      }
+    ]
+  },
+  {
+    "id": "cut-corners",
+    "term": "Cut Corners",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/kʌt ˈkɔːr.nərz/",
+    "literalDefinition": "Analogy: A driver driving over sidewalks and curbs instead of staying in the street lanes to arrive 10 seconds faster.",
+    "realMeaning": "Skipping essential software engineering practices — such as unit tests, input sanitization, error handling, or documentation — to meet an artificial deadline.",
+    "corporateTranslation": "Tech Lead says: 'We cannot cut corners on this billing service.' Dev hears: 'You must write comprehensive unit, integration, and fuzz tests before merging.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Cutting corners by disabling essential security checks\nconst insecureConfig = {\n  strictSSL: false, // Cut corners\n  skipInputValidation: true,\n  catchExceptionsSilently: true\n};",
+      "explanation": "Bypassing foundational software quality and security standards to expedite delivery."
+    },
+    "etymology": "19th-century coaching idiom for taking risky shortcuts across grass corners rather than following graded roads.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Bypassing quality assurance and rigorous testing standards.",
+    "tags": [
+      "Tech Debt",
+      "Security",
+      "Code Quality",
+      "Testing"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Senior Developer",
+        "quote": "We shouldn't cut corners by hardcoding the JWT signing secret in environment files; use AWS Secrets Manager instead.",
+        "translatedQuote": "Adhere to standard cryptographic credential management rather than taking shortcuts."
+      }
+    ]
+  },
+  {
+    "id": "in-a-nutshell",
+    "term": "In a Nutshell",
+    "category": "Management",
+    "seniority": "C-Suite",
+    "phonetic": "/ɪn ə ˈnʌt.ʃɛl/",
+    "literalDefinition": "Analogy: Compressing the entire text of the Encyclopedia Britannica onto a microscopic microdot that fits inside a walnut shell.",
+    "realMeaning": "Providing a clear, high-level, distilled summary (TL;DR) of a complex technical issue, incident, or system architecture in 1 or 2 sentences.",
+    "corporateTranslation": "Executive says: 'Give it to me in a nutshell.' Architect hears: 'Omit the Kubernetes network routing specifics and tell me if user checkouts are working.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// In a nutshell summary function\nfunction summarizePostmortem(incidentReport: FullIncidentLog): string {\n  return `TL;DR: ${incidentReport.rootCauseShort} - Resolved in ${incidentReport.downtimeMinutes}m`;\n}",
+      "explanation": "Concise distillation of complex multi-layered technical documentation into essential takeaways."
+    },
+    "etymology": "Tracing back to Pliny the Elder recording that Homer's entire Iliad poem was written so small it could fit into a nutshell.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "In summary / as an executive technical distillation.",
+    "tags": [
+      "Communication",
+      "Executive Summary",
+      "TLDR",
+      "Clarity"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "VP of Engineering",
+        "quote": "In a nutshell: migrating our database to Aurora reduced our monthly AWS spend by 35% while cutting query latency in half.",
+        "translatedQuote": "To summarize the outcome: the database migration achieved substantial cost and latency reductions."
+      }
+    ]
+  },
+  {
+    "id": "barking-up-the-wrong-tree",
+    "term": "Barking Up the Wrong Tree",
+    "category": "Coding",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈbɑːr.kɪŋ ʌp ðə rɔːŋ triː/",
+    "literalDefinition": "Analogy: A hunting dog barking enthusiastically at the base of an empty tree while the raccoon has already scampered up a different tree 50 yards away.",
+    "realMeaning": "Pursuing an incorrect diagnostic hypothesis or debugging the wrong subsystem while the actual defect resides elsewhere in the stack.",
+    "corporateTranslation": "Senior Dev says: 'You are barking up the wrong tree.' Junior Dev hears: 'The bug isn't in React component re-rendering; it is in the backend database pagination logic.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (investigatingSubsystem === \"FrontendCSS\" && actualBugOrigin === \"DatabaseDeadlock\") {\n  debuggerAlert(\"Barking up the wrong tree: Inspect SQL slow logs instead.\");\n}",
+      "explanation": "Misdirected troubleshooting focus focused on symptoms rather than the root cause."
+    },
+    "etymology": "19th-century American raccoon-hunting phrase describing dogs misled by scent tracks.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Investigating an unrelated subsystem based on misattributed symptoms.",
+    "tags": [
+      "Debugging",
+      "Troubleshooting",
+      "Root Cause",
+      "Analysis"
+    ],
+    "popularityScore": 93,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Senior Developer",
+        "quote": "We were barking up the wrong tree profiling Node.js CPU usage; the lag was caused by DNS resolution timeouts on our VPC gateway.",
+        "translatedQuote": "Our initial diagnostic focus on application code was incorrect; the latency originated in network DNS infrastructure."
+      }
+    ]
+  },
+  {
+    "id": "no-silver-bullet",
+    "term": "No Silver Bullet",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/noʊ ˈsɪl.vər ˈbʊl.ɪt/",
+    "literalDefinition": "Analogy: Searching for a magic potion that slays a mythical werewolf instantly, only to realize defeating the beast requires discipline, armor, and hard work.",
+    "realMeaning": "The fundamental software engineering reality (coined by Fred Brooks) that no single technology, tool, framework, or AI model can magically solve all software complexity.",
+    "corporateTranslation": "Architect says: 'There is no silver bullet here.' Dev hears: 'Adopting GraphQL or Microservices will not magically fix bad domain modeling and unoptimized queries.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function evaluateNewTrendyFramework(framework: string) {\n  // Fred Brooks' Law: No Silver Bullet\n  return {\n    solvesAllProblems: false,\n    introducesNewTradeoffs: true,\n    essentialComplexityRemains: true\n  };\n}",
+      "explanation": "Recognition that essential software complexity cannot be eliminated by trendy silver-bullet tools."
+    },
+    "etymology": "Derived from folklore on slaying werewolves, immortalized in Fred Brooks' 1986 seminal software engineering paper 'No Silver Bullet — Essence and Accident in Software Engineering'.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "There is no single panacea that resolves complex architectural trade-offs.",
+    "tags": [
+      "Architecture",
+      "Fred Brooks",
+      "Pragmatism",
+      "Trade-Offs"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "Chief Architect",
+        "quote": "Generative AI can accelerate boilerplate generation, but there is no silver bullet for rigorous distributed systems design.",
+        "translatedQuote": "AI tooling assists development, but does not eliminate the need for sound architectural engineering."
+      }
+    ]
+  },
+  {
+    "id": "under-the-weather",
+    "term": "Under the Weather",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/ˈʌn.dər ðə ˈwɛð.ər/",
+    "literalDefinition": "Analogy: A sailing vessel in choppy, stormy seas that is taking on water and slowing down, but has not yet capsized.",
+    "realMeaning": "A server cluster, API service, or database that is degraded, slow, or experiencing high error rates without suffering a complete hard outage.",
+    "corporateTranslation": "SRE says: 'The payment gateway is a bit under the weather.' Dev hears: 'Response times are spiking from 80ms to 2,400ms and 5% of webhooks are timing out.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (serviceHealth.packetLossRate > 0.08 || serviceHealth.p99LatencyMs > 2000) {\n  serviceHealth.status = \"Degraded (Under the Weather)\";\n  enableGracefulDegradation();\n}",
+      "explanation": "Sub-optimal system degradation operating below acceptable SLA benchmarks."
+    },
+    "etymology": "19th-century maritime phrase referring to sailors going below deck during storms to shelter from bad weather.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Operating in a degraded state with elevated latency and partial packet drop.",
+    "tags": [
+      "SRE",
+      "Degradation",
+      "Monitoring",
+      "Latency"
+    ],
+    "popularityScore": 92,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "DevOps On-Call",
+        "quote": "The EU database replica is feeling under the weather due to high replication lag; we've temporarily shifted read traffic to the primary.",
+        "translatedQuote": "The secondary database node is currently degraded; traffic has been rerouted to maintain reliability."
+      }
+    ]
+  },
+  {
+    "id": "done-and-dusted",
+    "term": "Done and Dusted",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/dʌn ænd ˈdʌs.tɪd/",
+    "literalDefinition": "Analogy: Sweeping the final speck of sawdust off a newly polished hardwood table — finished, sealed, and ready for use.",
+    "realMeaning": "Completely finished, tested, merged, deployed to production, and verified with zero pending follow-up items.",
+    "corporateTranslation": "Engineer says: 'The authentication refactor is done and dusted.' PM hears: 'The PR is merged, all unit and integration tests passed, it is live in prod, and documentation is updated.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const ticketStatus = {\n  prMerged: true,\n  testsPassed: true,\n  deployedToProd: true,\n  verifiedByQA: true,\n  status: \"Done and Dusted\"\n};",
+      "explanation": "Complete definition-of-done checklist fulfilled with zero remaining liabilities."
+    },
+    "etymology": "British colloquial phrase originating in the 18th century to describe accounts or agreements completely settled and sealed with sand/dust.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Completely implemented, verified, and deployed.",
+    "tags": [
+      "Done and Dusted",
+      "Delivery",
+      "Sprint",
+      "Deployment"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Senior Developer",
+        "quote": "The Stripe webhook migration is done and dusted — merged to main, verified in production, and alerts are quiet.",
+        "translatedQuote": "The payment integration is fully finished, deployed, and operating normally."
+      },
+      {
+        "context": "Slack",
+        "speaker": "QA Lead",
+        "quote": "Regression testing for release v3.4 is done and dusted with zero blocker defects.",
+        "translatedQuote": "All release validation testing has completed successfully."
+      }
+    ]
+  },
+  {
+    "id": "move-the-needle",
+    "term": "Move the Needle",
+    "category": "Strategy",
+    "seniority": "C-Suite",
+    "phonetic": "/muːv ðə ˈniː.dəl/",
+    "literalDefinition": "Analogy: Pushing the speedometer or fuel gauge of a car noticeably to the right.",
+    "realMeaning": "Creating a measurable, statistically significant positive impact on key product metrics, conversion rates, or performance benchmarks.",
+    "corporateTranslation": "VP of Product says: 'Will this micro-optimization move the needle?' Architect hears: 'Does shaving 5ms off latency actually increase checkout conversions or revenue?'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (abTest.conversionRateIncrease > 0.05 || latencyReductionPercent > 30) {\n  return \"Moved the Needle\";\n}",
+      "explanation": "Producing an observable, statistically significant delta on business or system KPIs."
+    },
+    "etymology": "Originating from analog gauges and measurement needles on industrial machinery.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Generate measurable, meaningful improvement in core metrics.",
+    "tags": [
+      "Move the Needle",
+      "Impact",
+      "Metrics",
+      "Strategy"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Sprint Planning",
+        "speaker": "Product Owner",
+        "quote": "Switching from client-side rendering to SSR really moved the needle on our Core Web Vitals and SEO rankings.",
+        "translatedQuote": "The rendering refactor generated significant measurable improvements in performance scores."
+      }
+    ]
+  },
+  {
+    "id": "at-the-end-of-the-day",
+    "term": "At the End of the Day",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/æt ði ɛnd əv ðə deɪ/",
+    "literalDefinition": "Analogy: Looking at the total cash register balance after the store closes, ignoring all mid-day transactions.",
+    "realMeaning": "The fundamental takeaway, non-negotiable requirement, or bottom-line conclusion after all debates and nuances are weighed.",
+    "corporateTranslation": "Tech Lead says: 'At the end of the day, reliability comes first.' Dev hears: 'Regardless of how cool this new library is, we cannot risk customer outages.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function evaluateEngineeringTradeoff(options: Option[]) {\n  // At the end of the day: data correctness > fancy micro-optimizations\n  return options.find(opt => opt.guaranteesDataIntegrity);\n}",
+      "explanation": "Prioritizing the ultimate foundational business constraint above secondary arguments."
+    },
+    "etymology": "Traditional English idiom used in financial ledger balancing at close-of-business.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Ultimately / when evaluating the core priority.",
+    "tags": [
+      "Priorities",
+      "Decisions",
+      "Leadership",
+      "Trade-Offs"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Principal Architect",
+        "quote": "We can debate GraphQL versus REST for hours, but at the end of the day, we need whichever API lets mobile ship by Q3.",
+        "translatedQuote": "Ultimately, delivery velocity is our most critical priority right now."
+      }
+    ]
+  },
+  {
+    "id": "on-the-same-page",
+    "term": "On the Same Page",
+    "category": "Management",
+    "seniority": "BSA",
+    "phonetic": "/ɒn ðə seɪm peɪdʒ/",
+    "literalDefinition": "Analogy: Everyone in an orchestra reading from the exact same sheet music measure.",
+    "realMeaning": "Ensuring all cross-functional team members (engineering, QA, design, product) share the exact same understanding of requirements and scope.",
+    "corporateTranslation": "BSA says: 'Let's ensure we are on the same page.' Dev hears: 'Let's confirm we both agree that the API returns ISO-8601 timestamps.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const alignment = {\n  frontendExpectation: \"JSON object with snake_case\",\n  backendImplementation: \"JSON object with snake_case\",\n  status: \"On the Same Page\"\n};",
+      "explanation": "Full congruence and mutual agreement across interfaces and expectations."
+    },
+    "etymology": "Derived from choir and choir-master rehearsals where all singers had to turn to the same hymnal page.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Share a mutual, unified understanding.",
+    "tags": [
+      "Alignment",
+      "Communication",
+      "Specs",
+      "Collaboration"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Backlog Refinement",
+        "speaker": "Business Analyst",
+        "quote": "I've updated the acceptance criteria in Jira so everyone is on the same page regarding role permissions.",
+        "translatedQuote": "I documented the user requirements clearly so the entire team has consistent expectations."
+      }
+    ]
+  },
+  {
+    "id": "up-to-speed",
+    "term": "Up to Speed (Bring Up to Speed)",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/ʌp tuː spiːd/",
+    "literalDefinition": "Analogy: A locomotive engine reaching cruising track velocity to match the train next to it.",
+    "realMeaning": "Providing a newly joined engineer or stakeholder with all the background context, architectural decisions, and current progress needed to contribute effectively.",
+    "corporateTranslation": "Manager says: 'Can you bring Alex up to speed?' Senior Dev hears: 'Walk Alex through the repo architecture and onboarding docs so they can pick up Jira tickets.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function bringEngineerUpToSpeed(newHire: Engineer) {\n  await newHire.readArchitectureOverview();\n  await newHire.setupLocalDockerDevEnvironment();\n  await newHire.reviewRecentPullRequests();\n}",
+      "explanation": "Rapid onboarding and knowledge transfer to achieve independent productivity."
+    },
+    "etymology": "Late 19th-century mechanical phrase describing engines accelerating to standard operational velocity.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Fully briefed on project context and technical background.",
+    "tags": [
+      "Onboarding",
+      "Knowledge Sharing",
+      "Documentation",
+      "Teamwork"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Scrum Master",
+        "quote": "Let's do a 15-minute pairing session after standup to bring our new contract developer up to speed on the CI/CD pipeline.",
+        "translatedQuote": "We will provide onboarding guidance so our new colleague understands our deployment workflows."
+      }
+    ]
+  },
+  {
+    "id": "fall-through-the-cracks",
+    "term": "Fall Through the Cracks",
+    "category": "Operations",
+    "seniority": "Tester / QA",
+    "phonetic": "/fɔːl θruː ðə kræks/",
+    "literalDefinition": "Analogy: A coin slipping between wooden floorboards into the dark basement below.",
+    "realMeaning": "A software defect, edge case, or user requirement that was accidentally overlooked, untracked in Jira, or missed during code review.",
+    "corporateTranslation": "QA says: 'This validation error fell through the cracks.' Dev hears: 'Neither frontend nor backend wrote a test for null values on this input field.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (ticket.isUntracked && !unitTests.coverEdgeCase(input)) {\n  // Fell through the cracks\n  systemState.recordSilentRegression();\n}",
+      "explanation": "An unhandled condition or untracked task escaping standard quality checks."
+    },
+    "etymology": "19th-century household phrase describing small items lost in floorboard gaps.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Overlooked or omitted during quality assurance review.",
+    "tags": [
+      "QA",
+      "Edge Cases",
+      "Jira",
+      "Oversight"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "QA Lead",
+        "quote": "The tablet orientation bug fell through the cracks because our automated tests only simulate mobile and desktop viewport widths.",
+        "translatedQuote": "The issue was missed due to a gap in our test matrix coverage."
+      }
+    ]
+  },
+  {
+    "id": "call-it-a-day",
+    "term": "Call It a Day / Call It a Night",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/kɔːl ɪt ə deɪ/",
+    "literalDefinition": "Analogy: A factory whistle blowing at 5:00 PM signaling workers to power down machinery.",
+    "realMeaning": "Stopping work for the current session, often after successfully finishing a sprint goal or deciding that continued late-night debugging is yielding diminishing returns.",
+    "corporateTranslation": "Lead says: 'Let's call it a day.' Dev hears: 'We fixed the production blocker and verified metrics; let's stop before fatigue leads to silly mistakes.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (emergencyHotfixDeployed && currentTime > \"18:00\") {\n  team.saveWorkState();\n  team.powerOffLaptops(); // Call it a day\n}",
+      "explanation": "Concluding development activities to prevent fatigue-induced errors."
+    },
+    "etymology": "19th-century industrial idiom meaning to declare the working day complete.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Conclude work for today.",
+    "tags": [
+      "Sustainability",
+      "Work-Life Balance",
+      "Team Health",
+      "Release"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Tech Lead",
+        "quote": "We've verified the hotfix in staging and logs are clean; let's call it a day and do the production rollout with fresh eyes tomorrow morning.",
+        "translatedQuote": "We have finished today's milestones; we will proceed with rollout tomorrow."
+      }
+    ]
+  },
+  {
+    "id": "cut-to-the-chase",
+    "term": "Cut to the Chase",
+    "category": "Management",
+    "seniority": "C-Suite",
+    "phonetic": "/kʌt tuː ðə tʃeɪs/",
+    "literalDefinition": "Analogy: A film director fast-forwarding through romance dialogue straight to the high-speed car chase scene.",
+    "realMeaning": "Skipping lengthy preamble, status chatter, or theoretical debates to focus directly on the key blocker, decision, or action item.",
+    "corporateTranslation": "VP says: 'Let's cut to the chase.' Engineer hears: 'Tell me the exact root cause of the outage and how many minutes until it is resolved.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function deliverExecutiveSummary(incidentLog: IncidentLog) {\n  return {\n    rootCause: incidentLog.culpritComponent,\n    etaToFixMinutes: incidentLog.estimatedResolutionTime\n  }; // Cut to the chase\n}",
+      "explanation": "Directly addressing the essential actionable outcome without superfluous exposition."
+    },
+    "etymology": "1920s Hollywood film-editing slang for transitioning quickly from dialogue scenes to dynamic action chase sequences.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Focus directly on the primary decision and action items.",
+    "tags": [
+      "Clarity",
+      "Executive Summary",
+      "Focus",
+      "Efficiency"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Incident War Room",
+        "speaker": "Incident Commander",
+        "quote": "Let's cut to the chase: is the Redis memory leak threatening the checkout cluster within the next 30 minutes?",
+        "translatedQuote": "Let us focus immediately on whether this memory usage poses an imminent outage risk."
+      }
+    ]
+  },
+  {
+    "id": "hit-the-ground-running",
+    "term": "Hit the Ground Running",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/hɪt ðə ɡraʊnd ˈrʌn.ɪŋ/",
+    "literalDefinition": "Analogy: A parachutist sprinting forward the instant their boots touch the earth.",
+    "realMeaning": "Starting a new project, sprint, or role at full productivity and enthusiasm from day one with minimal delay or ramp-up friction.",
+    "corporateTranslation": "Manager says: 'You will hit the ground running.' Dev hears: 'Your local Docker setup and repository permissions are pre-configured so you can code immediately.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const developerOnboarding = {\n  gitCloned: true,\n  dockerComposeRunning: true,\n  sampleTicketAssigned: true,\n  timeToFirstCommitMinutes: 45 // Hit the ground running\n};",
+      "explanation": "Immediate operational readiness and velocity upon beginning an assignment."
+    },
+    "etymology": "Mid-20th century military phrase describing airborne troops landing ready for immediate action.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Begin productive execution immediately without initial delay.",
+    "tags": [
+      "Onboarding",
+      "Velocity",
+      "Productivity",
+      "Sprint Start"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Engineering Manager",
+        "quote": "Thanks to our updated dev containers, our summer interns hit the ground running and opened their first PR on Tuesday!",
+        "translatedQuote": "Our streamlined dev setup enabled new team members to contribute code on their first week."
+      }
+    ]
+  },
+  {
+    "id": "in-the-same-boat",
+    "term": "In the Same Boat",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/ɪn ðə seɪm boʊt/",
+    "literalDefinition": "Analogy: Multiple passengers rowing together in a small boat during rough weather — whatever affects one affects all.",
+    "realMeaning": "Facing the exact same external technical blockers, platform outages, dependency delays, or organizational constraints.",
+    "corporateTranslation": "Developer says: 'We are all in the same boat.' QA hears: 'The staging auth service is down for everyone, so none of us can test until it recovers.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (thirdPartyAPI.isDownGlobally) {\n  teamA.isBlocked = true;\n  teamB.isBlocked = true; // In the same boat\n}",
+      "explanation": "Shared exposure to a common external constraint or environmental outage."
+    },
+    "etymology": "Greek antiquity phrase popularized by Thomas Hudson in the 16th century describing shared peril at sea.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Subject to the identical constraints and shared circumstances.",
+    "tags": [
+      "Empathy",
+      "Blockers",
+      "Teamwork",
+      "Dependencies"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Frontend Engineer",
+        "quote": "Don't worry about the staging gateway timeout; backend is in the same boat until the DevOps AWS certificate renewal propagates.",
+        "translatedQuote": "All teams are currently waiting on the same infrastructure update to complete."
+      }
+    ]
+  },
+  {
+    "id": "back-to-square-one",
+    "term": "Back to Square One",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/bæk tuː skwɛər wʌn/",
+    "literalDefinition": "Analogy: Rolling a penalty in a board game like Snakes and Ladders that sends your token all the way back to the starting tile.",
+    "realMeaning": "Having to start a feature, RFC, or prototype design completely over because an underlying technical assumption was fundamentally flawed.",
+    "corporateTranslation": "Tech Lead says: 'We are back to square one.' Dev hears: 'The cloud vendor's API does not support real-time WebSocket subscriptions, so our architecture won't work.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (coreDependency.lacksCriticalFeature || !regulatoryCompliancePassed) {\n  repository.revertBranch(\"poc\");\n  team.startNewArchitecturalPlan(); // Back to square one\n}",
+      "explanation": "Complete invalidation of an approach requiring restarting from initial planning."
+    },
+    "etymology": "Derived from early BBC radio soccer broadcasts where the commentary pitch map was divided into numbered squares (Square 1 being the goalkeeper's area).",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Restarting the technical evaluation from the beginning.",
+    "tags": [
+      "Pivot",
+      "Architecture",
+      "Redesign",
+      "Spikes"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "Staff Engineer",
+        "quote": "Because the vendor deprecated their SOAP endpoint without providing a REST replacement, we are back to square one on the CRM sync feature.",
+        "translatedQuote": "Due to the unexpected API deprecation, we must formulate a new integration approach."
+      }
+    ]
+  },
+  {
+    "id": "smooth-sailing",
+    "term": "Smooth Sailing",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/smuːð ˈseɪ.lɪŋ/",
+    "literalDefinition": "Analogy: A ship gliding across calm, mirror-like waters with steady winds and zero turbulence.",
+    "realMeaning": "A software deployment, sprint, or migration that progresses effortlessly without unexpected blockers, merge conflicts, or outage alarms.",
+    "corporateTranslation": "SRE says: 'It has been smooth sailing since the canary release.' PM hears: 'Error rates are near zero, CPU load is 20%, and no users are reporting bugs.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (pipelineAlertsCount === 0 && mergeConflicts === 0 && customerSatisfaction > 0.98) {\n  return \"Smooth Sailing\";\n}",
+      "explanation": "Frictionless, defect-free execution meeting all stability targets."
+    },
+    "etymology": "19th-century nautical term denoting easy navigation in favorable sea conditions.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Progressing without impediments or technical disruptions.",
+    "tags": [
+      "Stability",
+      "Deployment",
+      "Success",
+      "SRE"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "DevOps Lead",
+        "quote": "Post-release monitoring shows smooth sailing across all 5 geographical AWS regions.",
+        "translatedQuote": "Telemetry indicates zero anomalies across all deployment regions."
+      }
+    ]
+  },
+  {
+    "id": "silver-lining",
+    "term": "Silver Lining",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈsɪl.vər ˈlaɪ.nɪŋ/",
+    "literalDefinition": "Analogy: A dark thundercloud illuminated around its edges by sunlight behind it.",
+    "realMeaning": "A positive architectural improvement, automated test suite addition, or team insight discovered in the aftermath of a painful production outage or failed launch.",
+    "corporateTranslation": "Manager says: 'The silver lining is our improved monitoring.' Dev hears: 'The outage was terrible, but at least we finally set up Datadog alerts and circuit breakers.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const incidentOutcomes = {\n  downtimeMinutes: 45,\n  silverLining: \"Added comprehensive end-to-end chaos tests and automated canary rollbacks\"\n};",
+      "explanation": "Extracting constructive systemic resilience upgrades from an operational setback."
+    },
+    "etymology": "From John Milton's 1634 poem 'Comus' ('a sable cloud / Turns forth her silver lining on the night').",
+    "formality": "Safe for Clients",
+    "safeAlternative": "A constructive learning or systemic upgrade gained from a setback.",
+    "tags": [
+      "Postmortem",
+      "Resilience",
+      "Learning",
+      "Team Morale"
+    ],
+    "popularityScore": 94,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Principal Engineer",
+        "quote": "The silver lining of yesterday's cache failure is that we discovered and fixed a silent memory leak that had been lurking for 6 months.",
+        "translatedQuote": "Although the incident was disruptive, it revealed an important hidden bug we were able to fix."
+      }
+    ]
+  },
+  {
+    "id": "play-it-by-ear",
+    "term": "Play It by Ear",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/pleɪ ɪt baɪ ɪər/",
+    "literalDefinition": "Analogy: A musician improvising a melody by listening rather than following sheet music.",
+    "realMeaning": "Handling an uncertain technical situation or deployment dynamically based on real-time metrics and feedback rather than adhering rigidly to a static plan.",
+    "corporateTranslation": "Tech Lead says: 'Let's play it by ear.' Dev hears: 'We will roll out to 5% of users, watch error rates in Grafana for an hour, and decide our next step then.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function progressiveCanaryRollout() {\n  await deployToCanary(0.05);\n  // Play it by ear based on live telemetry\n  const metrics = await observeTelemetry(Duration.hours(1));\n  if (metrics.errorRateSpike) rollback(); else promoteTo100Percent();\n}",
+      "explanation": "Adaptive, empirical decision-making guided by live telemetry."
+    },
+    "etymology": "16th-century musical term describing playing an instrument without sheet music.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Adapt our approach dynamically based on live observations.",
+    "tags": [
+      "Agility",
+      "Adaptability",
+      "Canary",
+      "Real-Time"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Release Manager",
+        "quote": "Depending on how the database handles initial indexing load, we'll play it by ear whether to enable full search for mobile users tonight.",
+        "translatedQuote": "We will monitor performance in real time before deciding to enable the feature globally."
+      }
+    ]
+  },
+  {
+    "id": "clear-the-air",
+    "term": "Clear the Air",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/klɪər ði ɛər/",
+    "literalDefinition": "Analogy: A brisk breeze blowing through a smoky room to make the atmosphere clean and breathable again.",
+    "realMeaning": "Addressing lingering misunderstandings, conflicting technical assumptions, or friction between developers openly and constructively in a retro or 1-on-1.",
+    "corporateTranslation": "Scrum Master says: 'Let's clear the air in this retro.' Dev hears: 'Let's discuss why PR reviews have been delayed and agree on clear turnaround expectations.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function conductSprintRetrospective(teamState: TeamState) {\n  teamState.openPsychologicalSafetyChannel();\n  teamState.addressUnspokenFriction(); // Clear the air\n  teamState.realignActionItems();\n}",
+      "explanation": "Restoring team psychological safety and alignment through candid communication."
+    },
+    "etymology": "16th-century idiom referring to rain or wind clearing muggy weather, applied metaphorically to social harmony.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Resolve interpersonal or cross-team misalignments through open dialogue.",
+    "tags": [
+      "Retrospective",
+      "Communication",
+      "Psychological Safety",
+      "Culture"
+    ],
+    "popularityScore": 93,
+    "examples": [
+      {
+        "context": "1-on-1 Meeting",
+        "speaker": "Tech Lead",
+        "quote": "I wanted to clear the air regarding the disagreement in yesterday's API RFC; I value your feedback and want to find a consensus.",
+        "translatedQuote": "I want to discuss yesterday's design debate to ensure we are aligned and working well together."
+      }
+    ]
+  },
+  {
+    "id": "ahead-of-the-curve",
+    "term": "Ahead of the Curve",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/əˈhɛd əv ðə kɜːrv/",
+    "literalDefinition": "Analogy: A race car driver taking the inside racing line on a tight turn to exit ahead of competitors.",
+    "realMeaning": "Proactively adopting modern architecture standards, security practices, or performance optimizations before they become mandatory industry requirements.",
+    "corporateTranslation": "Architect says: 'We are ahead of the curve.' Dev hears: 'We implemented passkeys and WebAuthn before Apple and Google made passwordless auth standard.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const architecturePosture = {\n  zeroTrustNetwork: true,\n  quantumResistantCrypto: true,\n  automatedA11yAuditing: true,\n  status: \"Ahead of the Curve\"\n};",
+      "explanation": "Forward-looking technical positioning anticipating future industry benchmarks."
+    },
+    "etymology": "Originating in aeronautics and statistical bell-curves describing performance exceeding average distributions.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Proactively aligned with future industry technical standards.",
+    "tags": [
+      "Innovation",
+      "Architecture",
+      "Security",
+      "Strategy"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "VP of Engineering",
+        "quote": "By adopting OpenTelemetry two years ago, our team was ahead of the curve when multi-cloud observability mandates were introduced.",
+        "translatedQuote": "Our early adoption of modern tracing standards saved us substantial retrofitting effort."
+      }
+    ]
+  },
+  {
+    "id": "pass-the-baton",
+    "term": "Pass the Baton",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/pɑːs ðə bəˈtɒn/",
+    "literalDefinition": "Analogy: A relay runner placing the metal baton cleanly into the palm of their sprinting teammate.",
+    "realMeaning": "Transferring on-call pager duty, feature lead ownership, or release coordination responsibilities smoothly with full handover documentation.",
+    "corporateTranslation": "SRE says: 'Passing the baton to the APAC shift.' Dev hears: 'I am handing over pager duties; here is the summary of ongoing alerts and pending PRs.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function handoverOnCallShift(currentSRE: SRE, nextSRE: SRE) {\n  currentSRE.transferPagerDuty(nextSRE);\n  nextSRE.acknowledgeActiveIncidentsSummary(); // Pass the baton\n}",
+      "explanation": "Seamless transfer of operational responsibility with clear state handover."
+    },
+    "etymology": "Track and field relay race terminology where success depends on seamless baton passing between runners.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Transfer operational responsibility with formal handover documentation.",
+    "tags": [
+      "On-Call",
+      "Handover",
+      "SRE",
+      "Operations"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "On-Call Engineer",
+        "quote": "US shift signing off — passing the baton to Sydney team for overnight monitoring. Staging builds are green.",
+        "translatedQuote": "I am concluding my shift and transferring monitoring duties to our regional colleagues."
+      }
+    ]
+  },
+  {
+    "id": "cross-the-ts-and-dot-the-is",
+    "term": "Cross the T's and Dot the I's",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/krɔːs ðə tiːz ænd dɒt ði aɪz/",
+    "literalDefinition": "Analogy: A calligrapher reviewing a completed manuscript to add the final crossbars and accent marks on every letter.",
+    "realMeaning": "Ensuring thorough completeness and rigorous attention to detail on documentation, edge-case unit tests, security headers, and compliance checklists.",
+    "corporateTranslation": "Tech Lead says: 'Let's cross the t's and dot the i's.' Dev hears: 'Add JSDoc comments to public exports, write edge-case tests, and verify TypeScript types.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const finalQualityAudit = {\n  typeDefinitionsComplete: true,\n  errorHandlingExhaustive: true,\n  swaggerDocsUpdated: true,\n  securityHeadersConfigured: true // Cross the t's and dot the i's\n};",
+      "explanation": "Meticulous verification of all finishing touches and standard compliance."
+    },
+    "etymology": "19th-century penmanship idiom describing the final step of writing cursive text accurately.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Ensure exhaustive completeness and rigorous attention to detail.",
+    "tags": [
+      "Code Quality",
+      "Documentation",
+      "Testing",
+      "Compliance"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Senior Developer",
+        "quote": "The core logic looks great; let's just cross the t's and dot the i's by adding README usage examples and OpenAPI schema tags.",
+        "translatedQuote": "The implementation is solid; please complete the documentation and schema annotations before merging."
+      }
+    ]
+  },
+  {
+    "id": "put-out-fires",
+    "term": "Put Out Fires (Firefighting)",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/pʊt aʊt ˈfaɪ.ərz/",
+    "literalDefinition": "Analogy: A firefighter rushing between burning buildings with a hose instead of building fireproof structures.",
+    "realMeaning": "Spending all engineering time reactively fixing urgent production bugs, hotfixes, and broken builds instead of building scheduled product features.",
+    "corporateTranslation": "Engineer says: 'I spent all week putting out fires.' Manager hears: 'I could not finish my sprint tickets because 3 critical bugs broke production.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "while (productionIncidentQueue.length > 0) {\n  developer.pausePlannedFeatureDevelopment();\n  developer.deployEmergencyHotfix(); // Firefighting\n}",
+      "explanation": "Reactive emergency triage displacing planned strategic engineering work."
+    },
+    "etymology": "20th-century idiom comparing crisis management to emergency firefighting.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Engaged in reactive emergency defect triage and critical hotfixes.",
+    "tags": [
+      "Firefighting",
+      "Incidents",
+      "Tech Debt",
+      "Operations"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Backend Engineer",
+        "quote": "Yesterday was spent putting out fires with our payment gateway webhook timeouts; today I can finally return to the user dashboard ticket.",
+        "translatedQuote": "I spent yesterday resolving an urgent production payment issue and will resume planned work today."
+      }
+    ]
+  },
+  {
+    "id": "all-hands-on-deck",
+    "term": "All Hands on Deck",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/ɔːl hændz ɒn dɛk/",
+    "literalDefinition": "Analogy: Every sailor rushing up to the ship deck during a violent storm to keep the vessel afloat.",
+    "realMeaning": "A situation where an entire engineering team or department must drop all non-critical work to resolve an urgent high-severity incident or meet a critical deadline.",
+    "corporateTranslation": "VP says: 'It's all hands on deck for the Black Friday readiness drill.' Dev hears: 'Pause all new feature development and help load-test the payment gateway.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (p0Incident.isActive) {\n  team.members.forEach(dev => dev.assignTask(p0Incident.triageTicket));\n}",
+      "explanation": "Full team mobilization to resolve a critical system emergency."
+    },
+    "etymology": "18th-century nautical command summoning the entire crew to the upper deck in emergencies.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Full team mobilization on an urgent priority.",
+    "tags": [
+      "Emergency",
+      "Incident",
+      "Collaboration",
+      "P0"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Incident Commander",
+        "quote": "Production database replica lag is spiking — all hands on deck in the #war-room channel until recovery is confirmed.",
+        "translatedQuote": "All available engineers are requested to assist with the ongoing database latency issue."
+      }
+    ]
+  },
+  {
+    "id": "boil-the-ocean",
+    "term": "Boil the Ocean",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/bɔɪl ði ˈoʊ.ʃən/",
+    "literalDefinition": "Analogy: Trying to heat an entire ocean to boiling point just to make a single cup of tea.",
+    "realMeaning": "Attempting an impossibly massive, overly complex, or unconstrained technical redesign when a focused, incremental solution is needed.",
+    "corporateTranslation": "Architect says: 'Let's not boil the ocean.' Dev hears: 'Don't rewrite all 40 microservices just to add one new customer export field.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Avoid boiling the ocean:\n// ❌ rewriteWholeArchitecture()\n// ✅ addTargetedFeatureFlagPatch()",
+      "explanation": "Choosing targeted, incremental iterations over massive, unmanageable rewrites."
+    },
+    "etymology": "Attributed to humorist Will Rogers during World War I commenting on grand, impractical wartime schemes.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Avoid overcomplicating scope beyond the essential requirements.",
+    "tags": [
+      "Scope Creep",
+      "Architecture",
+      "Simplicity",
+      "MVP"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Sprint Planning",
+        "speaker": "Staff Engineer",
+        "quote": "We only need to speed up user login; let's not boil the ocean by migrating our entire persistence tier to Spanner this sprint.",
+        "translatedQuote": "Let us focus strictly on authentication latency rather than initiating an unconstrained database overhaul."
+      }
+    ]
+  },
+  {
+    "id": "wear-many-hats",
+    "term": "Wear Many Hats",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/wɛər ˈmɛn.i hæts/",
+    "literalDefinition": "Analogy: A performer rapidly switching between a firefighter helmet, chef hat, and police cap in a one-person theater show.",
+    "realMeaning": "Taking on diverse functional responsibilities (e.g. coding, QA testing, DevOps deployment, and customer support) across a lean startup or small squad.",
+    "corporateTranslation": "Founder says: 'You will wear many hats here.' Dev hears: 'You will write frontend, configure Terraform, manage AWS billing, and reply to support tickets.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "interface StartupEngineer extends Developer, SRE, QAEngineer, ProductDesigner {}",
+      "explanation": "Cross-functional execution across multiple technical disciplines."
+    },
+    "etymology": "Mid-19th century phrase referencing different uniforms and headwear associated with distinct professions.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Handle multi-disciplinary responsibilities across diverse domains.",
+    "tags": [
+      "Startup",
+      "Versatility",
+      "Cross-Functional",
+      "Roles"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "1-on-1 Meeting",
+        "speaker": "Engineering Manager",
+        "quote": "In our early-stage team, everyone wears many hats — yesterday our backend lead was writing documentation and designing Figma mockups.",
+        "translatedQuote": "In our agile team, developers actively assist across design, documentation, and infrastructure."
+      }
+    ]
+  },
+  {
+    "id": "drop-the-ball",
+    "term": "Drop the Ball",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/drɒp ðə bɔːl/",
+    "literalDefinition": "Analogy: A football wide receiver fumbling an easy pass right into the end zone.",
+    "realMeaning": "Making a careless mistake, failing to complete an agreed-upon deliverable, or omitting a critical testing step that leads to a setback.",
+    "corporateTranslation": "Developer says: 'I dropped the ball on the CORS headers.' Team hears: 'I forgot to whitelist the staging domain before triggering the deployment.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (ticket.assigned && !ticket.completedBeforeDeadline) {\n  team.recordOperationalMiss(); // Dropped the ball\n}",
+      "explanation": "An unhandled oversight or failed execution on an assigned deliverable."
+    },
+    "etymology": "19th-century sports metaphor from baseball and rugby describing dropped balls leading to lost points.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Failed to execute an agreed-upon responsibility.",
+    "tags": [
+      "Accountability",
+      "Mistakes",
+      "Postmortem",
+      "Delivery"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Senior Developer",
+        "quote": "We dropped the ball by not testing the dark mode toggle on Safari before shipping v1.2.",
+        "translatedQuote": "We inadvertently overlooked cross-browser validation for dark mode before the release."
+      }
+    ]
+  },
+  {
+    "id": "think-outside-the-box",
+    "term": "Think Outside the Box",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/θɪŋk ˌaʊtˈsaɪd ðə bɒks/",
+    "literalDefinition": "Analogy: Connecting nine dots arranged in a 3x3 square by drawing straight lines that extend beyond the imaginary perimeter.",
+    "realMeaning": "Devising creative, non-traditional architectural solutions rather than being constrained by standard boilerplate patterns.",
+    "corporateTranslation": "Architect says: 'Let's think outside the box.' Dev hears: 'Instead of adding more expensive database servers, let's use client-side IndexedDB caching.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Traditional: pollServerEvery500ms()\n// Outside the box: useServerSentEventsAndEdgeWorkers()",
+      "explanation": "Rethinking systemic constraints to produce innovative, elegant solutions."
+    },
+    "etymology": "Originated from the famous 'Nine Dot Puzzle' popularized by management consultants in the 1970s.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Explore unconventional, creative architectural approaches.",
+    "tags": [
+      "Innovation",
+      "Problem Solving",
+      "Architecture",
+      "Design"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Lead Architect",
+        "quote": "Thinking outside the box, instead of polling the database every second, we can push change streams directly to the browser via WebSockets.",
+        "translatedQuote": "By adopting an event-driven design, we eliminate unnecessary database polling entirely."
+      }
+    ]
+  },
+  {
+    "id": "throw-in-the-towel",
+    "term": "Throw in the Towel",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/θroʊ ɪn ðə ˈtaʊ.əl/",
+    "literalDefinition": "Analogy: A boxing trainer hurling a white towel into the center of the ring to signal surrender and protect their fighter.",
+    "realMeaning": "Deciding to abandon a failing proof-of-concept, brittle third-party library, or unworkable custom framework after exhaustive debugging.",
+    "corporateTranslation": "Tech Lead says: 'Let's throw in the towel on this custom ORM.' Dev hears: 'Stop spending days fixing edge cases in our homemade database layer and just use Prisma.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (customLibrary.bugCount > 50 && customLibrary.maintenanceHours > 120) {\n  deprecateLibrary();\n  adoptIndustryStandardPackage(); // Throw in the towel\n}",
+      "explanation": "Conceding an unviable custom approach to adopt standard industry solutions."
+    },
+    "etymology": "19th-century boxing tradition where throwing a sponge or towel into the ring halted the match.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Concede that an approach is unviable and adopt an alternative.",
+    "tags": [
+      "Pivot",
+      "Pragmatism",
+      "Tech Debt",
+      "Deprecation"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Senior Developer",
+        "quote": "After spending three days trying to make this legacy flash export library compile on ARM64, I'm throwing in the towel and replacing it with a modern canvas renderer.",
+        "translatedQuote": "I am discontinuing effort on the legacy library and migrating to a modern HTML5 canvas implementation."
+      }
+    ]
+  },
+  {
+    "id": "across-the-board",
+    "term": "Across the Board",
+    "category": "Operations",
+    "seniority": "Senior Architect",
+    "phonetic": "/əˈkrɒs ðə bɔːrd/",
+    "literalDefinition": "Analogy: Placing equal bets on every horse number listed on a racetrack betting board.",
+    "realMeaning": "Applying a security policy, linting rule, framework upgrade, or performance mandate uniformly to every repository and microservice in an organization.",
+    "corporateTranslation": "Security Lead says: 'We are enabling 2FA across the board.' Dev hears: 'Every single GitHub repo, AWS role, and internal dashboard now requires hardware security keys.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "organization.repositories.forEach(repo => {\n  repo.enforceStrictTypeScript();\n  repo.enableAutomatedVulnerabilityScanning(); // Across the board\n});",
+      "explanation": "Uniform, comprehensive enforcement across all organizational assets."
+    },
+    "etymology": "Horse racing terminology where an 'across the board' bet wagered on a horse to win, place, and show.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Universally applied to all components and services.",
+    "tags": [
+      "Governance",
+      "Security",
+      "Standards",
+      "Uniformity"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "VP of Security",
+        "quote": "We are deprecating TLS 1.0 and 1.1 across the board starting next Tuesday; all client requests must support TLS 1.3.",
+        "translatedQuote": "All internal and external API endpoints will require TLS 1.3 protocol standards."
+      }
+    ]
+  },
+  {
+    "id": "ballpark-figure",
+    "term": "Ballpark Figure / Ballpark Estimate",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈbɔːl.pɑːrk ˈfɪɡ.jər/",
+    "literalDefinition": "Analogy: Being inside the perimeter of a baseball stadium — not pinpointing the exact seat, but knowing you are in the right general arena.",
+    "realMeaning": "A rough, preliminary order-of-magnitude time or cloud infrastructure cost estimate before detailed technical grooming.",
+    "corporateTranslation": "PM says: 'Give me a ballpark figure for the migration.' Tech Lead hears: 'Is this a 2-day task, a 2-week sprint, or a 6-month enterprise project?'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const ballparkEstimate = {\n  minStoryPoints: 5,\n  maxStoryPoints: 13,\n  confidence: \"Rough order of magnitude\"\n};",
+      "explanation": "Preliminary estimation bounded within reasonable orders of magnitude."
+    },
+    "etymology": "Mid-20th century American phrase referencing being 'in the ballpark' of an acceptable estimate.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Rough, order-of-magnitude preliminary estimate.",
+    "tags": [
+      "Estimation",
+      "Planning",
+      "Budget",
+      "Jira"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Backlog Refinement",
+        "speaker": "Tech Lead",
+        "quote": "As a ballpark figure, refactoring our PDF generator should take around 3 to 5 developer days.",
+        "translatedQuote": "A preliminary estimate suggests 3 to 5 days of effort for the PDF generator refactoring."
+      }
+    ]
+  },
+  {
+    "id": "behind-the-scenes",
+    "term": "Behind the Scenes",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/bɪˈhaɪnd ðə siːnz/",
+    "literalDefinition": "Analogy: Stagehands adjusting ropes, lighting rigs, and sound equipment backstage while actors perform under the spotlight.",
+    "realMeaning": "Asynchronous background worker jobs, queues, cron tasks, or database triggers operating invisibly without direct user interaction.",
+    "corporateTranslation": "Engineer says: 'Behind the scenes, the image gets optimized.' User sees: 'Instant file upload button.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// User action is synchronous\napp.post('/upload', (req, res) => {\n  res.status(202).json({ message: \"Accepted\" });\n  // Behind the scenes:\n  backgroundQueue.push(async () => await compressAndEncrypt(req.file));\n});",
+      "explanation": "Asynchronous, decoupled background processing invisible to front-facing interfaces."
+    },
+    "etymology": "18th-century theater term for activities occurring out of the audience's view backstage.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "In the background / within asynchronous processing layers.",
+    "tags": [
+      "Background Jobs",
+      "Async",
+      "Queues",
+      "Architecture"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Backend Engineer",
+        "quote": "When the customer clicks Export, the server sends a 202 response immediately, while behind the scenes a worker generates the CSV and uploads it to S3.",
+        "translatedQuote": "The request returns instantly to the user while background workers handle the heavy file generation."
+      }
+    ]
+  },
+  {
+    "id": "by-the-book",
+    "term": "By the Book",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/baɪ ðə bʊk/",
+    "literalDefinition": "Analogy: A pilot executing a flight pre-check following every single printed checklist item in order without skipping a line.",
+    "realMeaning": "Strictly adhering to documented deployment runbooks, change management approvals, PR review requirements, and compliance standards.",
+    "corporateTranslation": "SRE says: 'We did this rollback by the book.' Manager hears: 'We followed our documented postmortem runbook, created Jira tickets, and preserved all audit logs.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function executeProductionRelease(release: Release) {\n  assert(release.hasTwoPeerApprovals());\n  assert(release.allCIStagesGreen());\n  assert(release.changeApprovalBoardApproved()); // By the book\n}",
+      "explanation": "Meticulous adherence to documented governance and operational checklists."
+    },
+    "etymology": "16th-century legal and religious idiom referencing following the authoritative book of laws or scripture.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Strictly compliant with documented standard operating procedures.",
+    "tags": [
+      "Runbooks",
+      "Compliance",
+      "Governance",
+      "Best Practices"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "DevOps Lead",
+        "quote": "For the database failover tonight, we're doing everything strictly by the book according to runbook doc #402.",
+        "translatedQuote": "We will follow the documented failover runbook step by step during tonight's maintenance."
+      }
+    ]
+  },
+  {
+    "id": "bite-off-more-than-you-can-chew",
+    "term": "Bite Off More Than You Can Chew",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/baɪt ɒf mɔːr ðæn juː kæn tʃuː/",
+    "literalDefinition": "Analogy: Shoveling a massive piece of steak into your mouth that prevents you from chewing or breathing safely.",
+    "realMeaning": "Overcommitting to too many story points in a sprint, or promising a delivery deadline that exceeds realistic team capacity.",
+    "corporateTranslation": "Scrum Master says: 'Let's not bite off more than we can chew.' Dev hears: 'Do not commit to 60 story points when our historical sprint velocity is 35.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (sprint.committedStoryPoints > team.historicalVelocity * 1.5) {\n  team.warnOvercommitment(); // Bit off more than we can chew\n}",
+      "explanation": "Excessive scope commitment exceeding sustainable engineering velocity."
+    },
+    "etymology": "Late 19th-century American idiom referring to biting off excessive plugs of chewing tobacco.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Overcommit to scope beyond sustainable capacity.",
+    "tags": [
+      "Velocity",
+      "Capacity",
+      "Sprint Planning",
+      "Burnout"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Sprint Planning",
+        "speaker": "Scrum Master",
+        "quote": "Let's leave the third-party invoice sync in the backlog for next sprint so we don't bite off more than we can chew during the holiday freeze.",
+        "translatedQuote": "Let us schedule the invoice integration for the next cycle to avoid overcommitting before the release freeze."
+      }
+    ]
+  },
+  {
+    "id": "crunch-time",
+    "term": "Crunch Time",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/krʌntʃ taɪm/",
+    "literalDefinition": "Analogy: The final 30 seconds of a tied championship basketball game where every single possession determines victory or defeat.",
+    "realMeaning": "The high-pressure final days before a major software product launch, version release, or client conference deadline.",
+    "corporateTranslation": "Manager says: 'It's crunch time before GA.' Dev hears: 'Focus exclusively on critical blocker bugs and freeze all cosmetic enhancements.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (daysUntilLaunch <= 3 && blockerDefectsCount > 0) {\n  team.focusMode = \"Crunch Time\";\n  team.blockNonEssentialMeetings();\n}",
+      "explanation": "High-focus operational period prioritizing critical launch deliverables."
+    },
+    "etymology": "American sports journalism slang popularized in the 1960s describing high-stakes moments in athletic matches.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "The critical final phase before a key milestone.",
+    "tags": [
+      "Deadline",
+      "Launch",
+      "Focus",
+      "Sprint Goal"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Engineering Manager",
+        "quote": "We are entering crunch time for our SOC-2 compliance audit; please prioritize open security PRs today.",
+        "translatedQuote": "We are in the critical phase of our compliance audit; please focus on closing open security reviews."
+      }
+    ]
+  },
+  {
+    "id": "elephant-in-the-room",
+    "term": "Elephant in the Room",
+    "category": "Management",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈɛl.ɪ.fənt ɪn ðə ruːm/",
+    "literalDefinition": "Analogy: A huge six-ton elephant standing in the middle of a living room while everyone pretends not to notice it.",
+    "realMeaning": "An obvious, severe technical risk, monolith debt, or team friction that everyone knows exists but avoids discussing publicly.",
+    "corporateTranslation": "Architect says: 'Let's address the elephant in the room.' Dev hears: 'Our legacy monolithic database will collapse if traffic doubles next month.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const elephantInTheRoom = {\n  systemComponent: \"Legacy Single Primary Database\",\n  risk: \"Zero redundancy and no automated failover\",\n  addressedInPlanning: false\n};",
+      "explanation": "A major unaddressed architectural liability known by all stakeholders."
+    },
+    "etymology": "19th-century Russian fable by Ivan Krylov popularized in English to describe glaring, unacknowledged truths.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "An obvious, critical issue that requires open discussion.",
+    "tags": [
+      "Tech Debt",
+      "Transparency",
+      "Architecture",
+      "Retrospective"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Principal Engineer",
+        "quote": "Let's talk about the elephant in the room: our deployment pipeline takes 45 minutes to run and is failing 40% of the time due to flaky end-to-end tests.",
+        "translatedQuote": "We must openly address our slow, unreliable CI build pipeline."
+      }
+    ]
+  },
+  {
+    "id": "get-the-ball-rolling",
+    "term": "Get the Ball Rolling",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/ɡɛt ðə bɔːl ˈroʊ.lɪŋ/",
+    "literalDefinition": "Analogy: Giving a heavy stone sphere its first push downhill so momentum takes over and it rolls effortlessly.",
+    "realMeaning": "Initiating the first step of a project (e.g. creating the GitHub repository, drafting an RFC, or setting up a Slack channel) to build team momentum.",
+    "corporateTranslation": "Tech Lead says: 'Let's get the ball rolling.' Dev hears: 'I will scaffold the repo and initialize the Next.js project so everyone can submit PRs.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function getTheBallRolling(projectName: string) {\n  await github.createRepository(projectName);\n  await npm.init();\n  await git.commit(\"feat: initial commit boilerplate\");\n}",
+      "explanation": "Executing the initial bootstrap steps that enable team collaboration."
+    },
+    "etymology": "1840 American political campaign slogan for William Henry Harrison, referencing rolling a giant promotional ball across towns.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Initiate the preliminary steps to build project momentum.",
+    "tags": [
+      "Kickoff",
+      "Momentum",
+      "Scaffolding",
+      "Sprint"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Senior Developer",
+        "quote": "I've drafted the OpenAPI spec to get the ball rolling on our mobile checkout endpoints.",
+        "translatedQuote": "I published the initial API specifications so we can begin frontend and backend development."
+      }
+    ]
+  },
+  {
+    "id": "go-down-the-rabbit-hole",
+    "term": "Go Down the Rabbit Hole",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/ɡoʊ daʊn ðə ˈræb.ɪt hoʊl/",
+    "literalDefinition": "Analogy: Alice falling through the rabbit burrow into a bizarre, endless wonderland with infinite winding tunnels.",
+    "realMeaning": "Getting absorbed in an endlessly complex, intricate technical problem, compiler quirk, or deep rabbit hole of legacy code.",
+    "corporateTranslation": "Engineer says: 'I went down a rabbit hole with webpack configs.' Teammate hears: 'I spent 4 hours reading 2017 GitHub issues to fix one CSS module bundling error.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "while (investigatingObscureCompilerBug) {\n  hoursSpent += 1;\n  openStackOverflowTabs.push(newTab()); // Deep in the rabbit hole\n}",
+      "explanation": "Deep, absorbing exploration into complex and winding technical intricacies."
+    },
+    "etymology": "From Lewis Carroll's 1865 classic 'Alice's Adventures in Wonderland'.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Engaged in an extensive, intricate technical investigation.",
+    "tags": [
+      "Debugging",
+      "Deep Work",
+      "Compilers",
+      "Complexity"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Frontend Developer",
+        "quote": "Yesterday I went down a rabbit hole debugging iOS Safari viewport heights; today I have a clean CSS solution ready.",
+        "translatedQuote": "I spent focused time resolving mobile browser viewport behavior and now have a tested fix."
+      }
+    ]
+  },
+  {
+    "id": "grain-of-salt",
+    "term": "Take with a Grain of Salt",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/teɪk wɪð ə ɡreɪn əv sɔːlt/",
+    "literalDefinition": "Analogy: Swallowing a doubtful or bitter remedy with a tiny pinch of salt to make it easier to digest.",
+    "realMeaning": "Treating synthetic benchmarks, unverified vendor marketing claims, or early prototype numbers with healthy technical skepticism.",
+    "corporateTranslation": "Tech Lead says: 'Take these load-test numbers with a grain of salt.' Dev hears: 'The tests ran on a single local machine, so production cluster metrics will differ.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function evaluateVendorClaim(claim: VendorBenchmark) {\n  return claim.reportedTransactionsPerSec * 0.5; // Take with a grain of salt\n}",
+      "explanation": "Applying pragmatic skepticism to unverified performance metrics."
+    },
+    "etymology": "Ancient Latin idiom ('cum grano salis') found in Pliny the Elder's Naturalis Historia (77 AD).",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Maintain pragmatic skepticism until verified by real-world telemetry.",
+    "tags": [
+      "Skepticism",
+      "Benchmarks",
+      "Telemetry",
+      "Review"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Principal Architect",
+        "quote": "Take the database vendor's 100k requests/second benchmark with a grain of salt — our queries involve complex foreign key joins.",
+        "translatedQuote": "We should evaluate vendor performance metrics with skepticism until tested against our production query patterns."
+      }
+    ]
+  },
+  {
+    "id": "hands-are-tied",
+    "term": "Hands Are Tied",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/hændz ɑːr taɪd/",
+    "literalDefinition": "Analogy: Having your wrists bound by ropes so you cannot physically move your arms to assist someone.",
+    "realMeaning": "Being prevented from making a technical change or granting an exception due to strict regulatory compliance, security policies, or legal rules.",
+    "corporateTranslation": "Lead says: 'Our hands are tied on this data retention policy.' Dev hears: 'GDPR laws require us to delete inactive user accounts after 90 days; we cannot keep them.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (regulatoryComplianceRule.isMandatory) {\n  engineer.overridePermission = false; // Hands are tied\n}",
+      "explanation": "Inability to grant exceptions due to strict regulatory or organizational constraints."
+    },
+    "etymology": "17th-century English idiom describing physical restraint applied metaphorically to policy limits.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Constrained by mandatory regulatory policies or legal governance.",
+    "tags": [
+      "Compliance",
+      "GDPR",
+      "Security",
+      "Governance"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Jira",
+        "speaker": "Security Lead",
+        "quote": "Our hands are tied regarding password complexity rules; ISO-27001 requires multi-factor authentication for all administrative accounts.",
+        "translatedQuote": "Security compliance standards require mandatory MFA across all admin access."
+      }
+    ]
+  },
+  {
+    "id": "in-the-pipeline",
+    "term": "In the Pipeline",
+    "category": "Operations",
+    "seniority": "Product Manager",
+    "phonetic": "/ɪn ðə ˈpaɪp.laɪn/",
+    "literalDefinition": "Analogy: Water or oil currently flowing through a metal pipeline on its way from a reservoir to the storage tank.",
+    "realMeaning": "Features, bug fixes, or infrastructure upgrades that are currently being actively built, reviewed, or staged for an upcoming release.",
+    "corporateTranslation": "PM says: 'Export to Excel is in the pipeline.' Customer hears: 'The feature is coded and going through QA testing for our next release.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const upcomingReleases = pipeline.filter(build => build.stage === \"StagingQA\" || build.stage === \"Canary\");",
+      "explanation": "Features actively advancing through CI/CD verification stages toward release."
+    },
+    "etymology": "Industrial oil and water distribution terminology popularized in mid-20th century commerce.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Currently in development and scheduled for upcoming release.",
+    "tags": [
+      "Roadmap",
+      "Delivery",
+      "CI/CD",
+      "Release"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Product Owner",
+        "quote": "We have several exciting accessibility enhancements in the pipeline for sprint 42.",
+        "translatedQuote": "Multiple accessibility improvements are currently in active development for the next sprint."
+      }
+    ]
+  },
+  {
+    "id": "jump-the-gun",
+    "term": "Jump the Gun",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/dʒʌmp ðə ɡʌn/",
+    "literalDefinition": "Analogy: A sprinter leaping off the starting blocks before the referee fires the starting pistol.",
+    "realMeaning": "Deploying a release, merging a pull request, or publishing public documentation prematurely before prerequisites or approvals are ready.",
+    "corporateTranslation": "DevOps says: 'We jumped the gun on the DNS change.' Team hears: 'We pointed traffic to the new server before the SSL certificates were fully installed.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (trafficRoutedToNewCluster && !sslCertificateIssued) {\n  team.triggerPrematureDeploymentAlert(); // Jumped the gun\n}",
+      "explanation": "Triggering a release step prematurely prior to completing prerequisite validations."
+    },
+    "etymology": "Track and field athletics starting pistol terminology dating to the early 20th century.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Acted prematurely before verifying all prerequisites.",
+    "tags": [
+      "Deployment",
+      "DNS",
+      "Prerequisites",
+      "Release"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Incident War Room",
+        "speaker": "SRE Lead",
+        "quote": "We jumped the gun by deploying the frontend build before the database migration finished creating the new table column.",
+        "translatedQuote": "We deployed the web application prematurely before the schema migration was complete."
+      }
+    ]
+  },
+  {
+    "id": "kick-the-can-down-the-road",
+    "term": "Kick the Can Down the Road",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/kɪk ðə kæn daʊn ðə roʊd/",
+    "literalDefinition": "Analogy: Kicking a discarded tin can a few yards down the pavement instead of picking it up and placing it in a recycling bin.",
+    "realMeaning": "Postponing an essential technical refactor, security patch, or database migration, thereby compounding technical debt for future sprints.",
+    "corporateTranslation": "Lead says: 'We can't keep kicking the can down the road on this auth system.' Dev hears: 'We must refactor this legacy login script now before it breaks.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Kicking the can down the road:\n// TODO: Fix this hack before 2024 (Written in 2021)\nfunction temporaryWorkaround() { /* ... */ }",
+      "explanation": "Deferring necessary remediation of architectural vulnerabilities."
+    },
+    "etymology": "Great Depression-era children's outdoor street game adapted into political jargon for delaying tough decisions.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Deferring necessary remediation to a future date.",
+    "tags": [
+      "Tech Debt",
+      "Refactoring",
+      "Planning",
+      "Postponement"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Tech Lead",
+        "quote": "Instead of kicking the can down the road with more temporary hotfixes, let's schedule a 2-day spike to properly rewrite the caching layer.",
+        "translatedQuote": "Rather than continuing temporary workarounds, let us dedicate focused time to build a robust caching layer."
+      }
+    ]
+  },
+  {
+    "id": "know-the-ropes",
+    "term": "Know the Ropes",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/noʊ ðə roʊps/",
+    "literalDefinition": "Analogy: An experienced sailor knowing which specific canvas sail rope to pull in any storm without looking at a manual.",
+    "realMeaning": "Being intimately familiar with a codebase's quirks, deployment quirks, internal tooling, and team culture.",
+    "corporateTranslation": "Manager says: 'Pair with Maya; she knows the ropes.' Dev hears: 'Maya knows which legacy scripts to run and which test suites take 20 minutes.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "class SeniorDeveloper {\n  knowsRepoArchitecture = true;\n  knowsUndocumentedWorkarounds = true;\n  knowsDeploymentPipelines = true;\n}",
+      "explanation": "Comprehensive institutional and architectural knowledge of a software ecosystem."
+    },
+    "etymology": "19th-century sailing term for seamen who mastered the intricate rigging systems on clipper ships.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Possesses deep institutional knowledge and domain experience.",
+    "tags": [
+      "Mentorship",
+      "Knowledge",
+      "Experience",
+      "Onboarding"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Engineering Manager",
+        "quote": "If you have questions about our legacy billing engine, reach out to Sam — he's been with the company for five years and knows the ropes.",
+        "translatedQuote": "Sam has deep experience with our billing architecture and can provide helpful guidance."
+      }
+    ]
+  },
+  {
+    "id": "learn-the-hard-way",
+    "term": "Learn the Hard Way",
+    "category": "Operations",
+    "seniority": "Senior Architect",
+    "phonetic": "/lɜːrn ðə hɑːrd weɪ/",
+    "literalDefinition": "Analogy: Learning that a stove is scorching hot by burning your fingers rather than reading the warning label.",
+    "realMeaning": "Gaining crucial engineering wisdom only after experiencing a painful production outage, data loss, or security breach.",
+    "corporateTranslation": "SRE says: 'We learned the hard way about database backups.' Team hears: 'We lost 2 hours of customer data because we never tested our backup restore scripts.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "try {\n  deployWithoutStagingTesting();\n} catch (prodOutage) {\n  team.learnTheHardWay();\n  enforceMandatoryStagingAutomatedTests();\n}",
+      "explanation": "Adopting strict systemic safeguards in the aftermath of a preventable operational failure."
+    },
+    "etymology": "19th-century educational idiom contrasting painful experience with formal instruction.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Acquired critical operational insights through firsthand experience.",
+    "tags": [
+      "Outage",
+      "Postmortem",
+      "Experience",
+      "Resilience"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Principal SRE",
+        "quote": "We learned the hard way that third-party rate limits can cascade into our login service; we've now added circuit breakers and fallbacks.",
+        "translatedQuote": "After experiencing unexpected upstream rate limits, we built automated circuit breakers to protect user authentication."
+      }
+    ]
+  },
+  {
+    "id": "level-the-playing-field",
+    "term": "Level the Playing Field",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈlɛv.əl ðə ˈpleɪ.ɪŋ fiːld/",
+    "literalDefinition": "Analogy: Grading a sloped soccer pitch so neither team plays with the unfair advantage of running downhill.",
+    "realMeaning": "Standardizing development environments (e.g. Docker Dev Containers) so every engineer has the identical fast setup regardless of their local OS.",
+    "corporateTranslation": "Lead says: 'Dev containers level the playing field.' Dev hears: 'Whether you run macOS, Linux, or Windows, tests execute identically.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Standardizing with Docker eliminates OS discrepancies\nconst environment = new DevContainer({\n  nodeVersion: \"20.10.0\",\n  os: \"Ubuntu-LTS\",\n  levelPlayingField: true\n});",
+      "explanation": "Providing uniform toolchains and environments to eliminate platform discrepancies."
+    },
+    "etymology": "Late 19th-century sports idiom ensuring impartial, fair competition grounds.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Standardize environments to ensure equal productivity and consistency.",
+    "tags": [
+      "Dev Containers",
+      "Docker",
+      "Standardization",
+      "Tooling"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "DevOps Engineer",
+        "quote": "Standardizing our staging seeds with synthetic test data levels the playing field for our remote and contract QA testers.",
+        "translatedQuote": "Using consistent synthetic test data provides all QA engineers with the exact same testing conditions."
+      }
+    ]
+  },
+  {
+    "id": "miss-the-boat",
+    "term": "Miss the Boat",
+    "category": "Strategy",
+    "seniority": "C-Suite",
+    "phonetic": "/mɪs ðə boʊt/",
+    "literalDefinition": "Analogy: Arriving at the harbor pier five minutes after the ferry departed, watching it sail away across the bay.",
+    "realMeaning": "Failing to adopt an important architectural trend, security protocol, or market feature before competitors establish dominance.",
+    "corporateTranslation": "VP says: 'We don't want to miss the boat on passwordless auth.' Architect hears: 'Implement WebAuthn passkeys now so users don't switch to competitor apps.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (marketTrend.hasHighAdoption && !ourProduct.supportsFeature) {\n  marketPosition.missedTheBoat = true;\n}",
+      "explanation": "Failing to execute on a critical industry capability in a timely window."
+    },
+    "etymology": "19th-century travel metaphor about missing passenger steamship departures.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Failing to capitalize on a timely opportunity.",
+    "tags": [
+      "Strategy",
+      "Timing",
+      "Innovation",
+      "Product"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "VP of Product",
+        "quote": "If we don't roll out our mobile app before the holiday shopping season, we'll miss the boat on our peak annual revenue window.",
+        "translatedQuote": "Delivering the mobile app before Q4 is essential to capture holiday customer demand."
+      }
+    ]
+  },
+  {
+    "id": "moving-parts",
+    "term": "Moving Parts (Lots of Moving Parts)",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈmuː.vɪŋ pɑːrts/",
+    "literalDefinition": "Analogy: A mechanical clockwork watch containing hundreds of interlocking gears, springs, and levers where one jammed tooth halts everything.",
+    "realMeaning": "A distributed system with multiple microservices, asynchronous message queues, third-party webhooks, and complex dependency graphs.",
+    "corporateTranslation": "Architect says: 'This distributed architecture has lots of moving parts.' Dev hears: 'There are 12 different failure modes; we need tracing and retries on every call.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const systemComplexity = {\n  microservicesCount: 18,\n  kafkaTopics: 45,\n  thirdPartyWebhooks: 6,\n  evaluation: \"Lots of moving parts\"\n};",
+      "explanation": "High systemic complexity requiring comprehensive telemetry and failure isolation."
+    },
+    "etymology": "Mechanical engineering phrase referencing the kinetic components inside complex engines.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "A complex distributed system with multiple interconnected components.",
+    "tags": [
+      "Microservices",
+      "Complexity",
+      "Distributed Systems",
+      "Kafka"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Staff Engineer",
+        "quote": "Because this real-time bidding pipeline has lots of moving parts, we must implement OpenTelemetry distributed tracing across all gateway nodes.",
+        "translatedQuote": "Given the distributed complexity of the bidding pipeline, end-to-end tracing is essential for observability."
+      }
+    ]
+  },
+  {
+    "id": "no-brainer",
+    "term": "No-Brainer",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/noʊ ˈbreɪ.nər/",
+    "literalDefinition": "Analogy: Choosing between a free million-dollar winning lottery ticket and an empty envelope — requires zero brainpower to decide.",
+    "realMeaning": "An engineering or product decision whose benefits are so overwhelmingly positive and low-risk that it requires no extensive debate.",
+    "corporateTranslation": "Lead says: 'Enabling Brotli compression is a no-brainer.' Dev hears: 'It takes 1 line of configuration, reduces bundle size by 20%, and has zero drawbacks.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (optimization.effortHours < 1 && optimization.performanceGainPercent > 25) {\n  return \"No-Brainer (Implement Immediately)\";\n}",
+      "explanation": "An unequivocally advantageous technical enhancement with negligible risk."
+    },
+    "etymology": "Mid-20th century American slang for a decision requiring no intellectual effort.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "An unequivocally positive, obvious decision with minimal risk.",
+    "tags": [
+      "Decisions",
+      "Optimization",
+      "Quick Wins",
+      "Performance"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Tech Lead",
+        "quote": "Upgrading from Node 18 to Node 20 is a no-brainer — our tests ran 30% faster and all dependencies are fully compatible.",
+        "translatedQuote": "Upgrading to Node 20 is an obvious improvement given the verified performance gains and zero regressions."
+      }
+    ]
+  },
+  {
+    "id": "off-the-radar",
+    "term": "Off the Radar",
+    "category": "Operations",
+    "seniority": "Junior Dev",
+    "phonetic": "/ɔːf ðə ˈreɪ.dɑːr/",
+    "literalDefinition": "Analogy: An aircraft flying below the altitude sweep of air traffic control radar towers, disappearing from screen displays.",
+    "realMeaning": "A technical debt ticket, deprecated internal dashboard, or backlog issue that has been completely forgotten or untracked by the team.",
+    "corporateTranslation": "Engineer says: 'That legacy cron job flew off the radar.' SRE hears: 'Nobody has checked whether that nightly export script has been running for 6 months.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (!ticket.hasRecentUpdates && !dashboard.monitorsService) {\n  service.status = \"Off the Radar\";\n}",
+      "explanation": "Unmonitored and untracked components escaping active engineering attention."
+    },
+    "etymology": "World War II aviation and radar monitoring terminology for undetected aircraft.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Unnoticed or untracked by current operational monitoring.",
+    "tags": [
+      "Monitoring",
+      "Tech Debt",
+      "Untracked",
+      "Telemetry"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Backend Engineer",
+        "quote": "The staging SSL certificate expiration flew off the radar because our automated alerts were muted in Slack.",
+        "translatedQuote": "The certificate renewal date was missed because the alert channel had notifications disabled."
+      }
+    ]
+  },
+  {
+    "id": "on-the-fence",
+    "term": "On the Fence",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/ɒn ðə fɛns/",
+    "literalDefinition": "Analogy: Sitting balanced on top of a wooden boundary fence, undecided which yard to step down into.",
+    "realMeaning": "Being undecided between two architectural patterns, database engines, or UI libraries after analyzing trade-offs.",
+    "corporateTranslation": "Architect says: 'I am on the fence between PostgreSQL and MySQL.' Dev hears: 'Both satisfy our query requirements; let us run benchmark spikes before choosing.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (optionA.score === optionB.score) {\n  architectDecision.state = \"On the Fence (Needs Benchmark Spike)\";\n}",
+      "explanation": "Equally balanced architectural trade-offs requiring empirical validation."
+    },
+    "etymology": "19th-century political metaphor for neutral or undecided voters.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Undecided pending further empirical evaluation.",
+    "tags": [
+      "Trade-Offs",
+      "Decisions",
+      "Evaluation",
+      "Spikes"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Lead Architect",
+        "quote": "I'm still on the fence about whether to use gRPC or REST for our internal service communication; let's benchmark payload serialization speed first.",
+        "translatedQuote": "I remain undecided between gRPC and REST until we evaluate serialized performance metrics."
+      }
+    ]
+  },
+  {
+    "id": "on-thin-ice",
+    "term": "On Thin Ice",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/ɒn θɪn aɪs/",
+    "literalDefinition": "Analogy: A skater gliding across a frozen lake where the ice is only half an inch thick and cracking with every stride.",
+    "realMeaning": "Running production infrastructure near maximum memory or disk capacity where any slight traffic surge will trigger a complete crash.",
+    "corporateTranslation": "SRE says: 'Our Redis cluster is on thin ice.' Dev hears: 'Memory usage is at 94%; if one more queue fills up, Redis will OOM-kill immediately.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (cluster.memoryUtilization > 0.92 || cluster.diskSpaceRemainingGB < 5) {\n  alertSystem.triggerWarning(\"System on Thin Ice - Immediate Scaling Required\");\n}",
+      "explanation": "Dangerous operational thresholds leaving zero margin for error."
+    },
+    "etymology": "19th-century winter metaphor describing precarious and dangerous footing.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Operating in a precarious state with negligible safety margin.",
+    "tags": [
+      "SRE",
+      "Alerts",
+      "Capacity",
+      "OOM"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "DevOps Lead",
+        "quote": "Our primary database disk is on thin ice at 91% capacity; we need to run the data archival script immediately.",
+        "translatedQuote": "Our database storage is critically close to capacity; we must initiate data archiving immediately."
+      }
+    ]
+  },
+  {
+    "id": "out-of-the-woods",
+    "term": "Out of the Woods",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/aʊt əv ðə wʊdz/",
+    "literalDefinition": "Analogy: Emerging from a dark, dangerous forest onto an open, well-lit paved highway.",
+    "realMeaning": "Passing the dangerous phase of a major production outage, data restore, or complex multi-region database migration.",
+    "corporateTranslation": "Incident Commander says: 'We are out of the woods.' Team hears: 'Traffic is stable, error rates dropped back to 0.01%, and rollback is no longer needed.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (postMigrationErrorRate < 0.001 && cpuUtilization < 0.50 && durationHours > 2) {\n  incidentState = \"Out of the Woods (Safe)\";\n}",
+      "explanation": "Confirmed stabilization following a critical operational disturbance."
+    },
+    "etymology": "Ancient Roman and Germanic phrase describing escaping wild, dangerous woodland terrain.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Past the critical risk phase and returning to operational stability.",
+    "tags": [
+      "Incidents",
+      "Postmortem",
+      "Recovery",
+      "SRE"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Incident Commander",
+        "quote": "Telemetry has been green for 45 minutes after the rollback; we are out of the woods and will publish the incident postmortem tomorrow.",
+        "translatedQuote": "System metrics have stabilized following the rollback; the operational crisis is resolved."
+      }
+    ]
+  },
+  {
+    "id": "peel-the-onion",
+    "term": "Peel the Onion",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/piːl ði ˈʌn.jən/",
+    "literalDefinition": "Analogy: Removing one papery skin layer of an onion after another, revealing deeper concentric rings underneath.",
+    "realMeaning": "Analyzing a complex, multi-layered bug or legacy architecture step-by-step to uncover the deep underlying root cause.",
+    "corporateTranslation": "Architect says: 'Let's peel the onion on this latency bug.' Dev hears: 'Inspect the CDN, then the load balancer, then the API gateway, then the database queries.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function peelTheOnion(bug: ObscureBug) {\n  const layer1 = await inspectNetworkLayer();\n  const layer2 = await inspectApplicationRuntime(layer1);\n  return inspectDatabaseEngine(layer2); // Deepest root cause\n}",
+      "explanation": "Systematic, layer-by-layer diagnostic investigation through architectural tiers."
+    },
+    "etymology": "Psychological and business metaphor from the mid-20th century for iterative discovery.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Examine complex architectural layers iteratively to find the root cause.",
+    "tags": [
+      "Debugging",
+      "Investigation",
+      "Root Cause",
+      "Architecture"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Incident War Room",
+        "speaker": "Principal Engineer",
+        "quote": "As we peel the onion on yesterday's checkout failure, we find that the gateway timeout was actually triggered by an unindexed SQL query in the inventory service.",
+        "translatedQuote": "Deeper analysis reveals that the payment timeout originated from a slow database query in the inventory service."
+      }
+    ]
+  },
+  {
+    "id": "pick-your-brain",
+    "term": "Pick Your Brain",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/pɪk jʊər breɪn/",
+    "literalDefinition": "Analogy: Reaching in to pluck specific nuggets of valuable insight directly from someone's mind.",
+    "realMeaning": "Asking an experienced engineer, architect, or subject matter expert for a brief 10-minute consultation or design advice.",
+    "corporateTranslation": "Junior dev says: 'Can I pick your brain for 5 minutes?' Senior hears: 'Can you look at my React state management approach and tell me if I am making a rookie mistake?'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function requestInformalMentorship(seniorDev: Engineer) {\n  return await seniorDev.offerArchitecturalFeedback(myDraftPullRequest);\n}",
+      "explanation": "Informal knowledge transfer and architectural consultation."
+    },
+    "etymology": "Early 20th-century American idiom for seeking someone's expert opinion or advice.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Seek your expert advice and technical perspective.",
+    "tags": [
+      "Mentorship",
+      "Advice",
+      "Pairing",
+      "Knowledge Sharing"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Frontend Engineer",
+        "quote": "Hey Chris, when you have a free moment, could I pick your brain regarding best practices for caching user sessions in Redis?",
+        "translatedQuote": "Could I consult with you briefly regarding recommended session caching strategies in Redis?"
+      }
+    ]
+  },
+  {
+    "id": "push-the-envelope",
+    "term": "Push the Envelope",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/pʊʃ ði ˈɛn.və.loʊp/",
+    "literalDefinition": "Analogy: Test pilots flying experimental jet aircraft to the extreme mathematical boundaries of altitude, speed, and aerodynamic structural limits.",
+    "realMeaning": "Pushing technology, WebAssembly rendering, or edge computing performance beyond current conventional industry standards.",
+    "corporateTranslation": "Lead says: 'We are pushing the envelope with this WebGPU engine.' Dev hears: 'We are writing low-level shader code that runs 60 FPS 3D models in the browser.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const engine = new WebGPUCanvasRenderer({\n  targetFrameRate: 120,\n  computeShaders: true,\n  pushTheEnvelope: true\n});",
+      "explanation": "Pushing technical execution to the cutting edge of browser capabilities."
+    },
+    "etymology": "1940s aeronautics term referring to the flight envelope (mathematical curve of aircraft performance capabilities), popularized by Tom Wolfe's 'The Right Stuff'.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Pioneering state-of-the-art performance boundaries.",
+    "tags": [
+      "Innovation",
+      "WebGPU",
+      "Performance",
+      "Frontier"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Principal Graphics Engineer",
+        "quote": "Our browser-based video editor pushes the envelope of WebAssembly and multi-threaded SIMD acceleration.",
+        "translatedQuote": "Our web video editor utilizes advanced WebAssembly SIMD capabilities to maximize client-side processing power."
+      }
+    ]
+  },
+  {
+    "id": "put-all-eggs-in-one-basket",
+    "term": "Put All Eggs in One Basket",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/pʊt ɔːl ɛɡz ɪn wʌn ˈbæs.kɪt/",
+    "literalDefinition": "Analogy: Carrying all fifty farm eggs in a single wicker basket — if you trip and drop it, every single egg smashes instantly.",
+    "realMeaning": "Depending on a single cloud vendor, sole-maintainer npm library, or solitary database primary with zero multi-region redundancy or failover backup.",
+    "corporateTranslation": "Architect says: 'Let's not put all our eggs in one basket.' Dev hears: 'Architect the app so we can switch from AWS to GCP or on-prem without rewriting everything.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Dangerous: all eggs in one basket\nconst paymentProvider = singleVendorStripe;\n// Resilient: multi-vendor fallback\nconst paymentRouter = new MultiVendorRouter([Stripe, Adyen, PayPal]);",
+      "explanation": "Eliminating single points of failure through redundancy and multi-vendor strategies."
+    },
+    "etymology": "Recorded in Cervantes' 'Don Quixote' (1605): 'It is the part of a wise man... not to venture all his eggs in one basket.'",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Avoid creating critical single points of failure or sole vendor dependencies.",
+    "tags": [
+      "Redundancy",
+      "SPOF",
+      "Architecture",
+      "Resilience"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "VP of Infrastructure",
+        "quote": "We shouldn't put all our eggs in one basket by relying exclusively on US-East-1 for our entire authentication infrastructure.",
+        "translatedQuote": "We should deploy multi-region redundancy rather than relying solely on a single cloud data center."
+      }
+    ]
+  },
+  {
+    "id": "raise-the-bar",
+    "term": "Raise the Bar",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/reɪz ðə bɑːr/",
+    "literalDefinition": "Analogy: Raising the high-jump crossbar higher on the vertical poles so athletes must leap higher to qualify.",
+    "realMeaning": "Increasing code review standards, test coverage thresholds, TypeScript strictness, or performance SLAs across a repository.",
+    "corporateTranslation": "Tech Lead says: 'We are raising the bar on code quality.' Dev hears: 'PRs now require 85% unit test coverage, zero ESLint warnings, and Lighthouse performance scores > 90.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const ciConfig = {\n  minTestCoveragePercent: 85, // Raised from 70\n  enforceStrictNullChecks: true,\n  lighthousePerformanceMin: 90\n};",
+      "explanation": "Elevating organizational engineering benchmarks and quality standards."
+    },
+    "etymology": "19th-century track and field high jump and pole vault terminology.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Elevate quality standards, testing coverage, and engineering benchmarks.",
+    "tags": [
+      "Quality",
+      "Code Review",
+      "Standards",
+      "CI/CD"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Tech Lead",
+        "quote": "Our new automated PR visual regression tests really raise the bar for UI consistency across all screen sizes.",
+        "translatedQuote": "Automated visual testing ensures high visual quality and eliminates UI regressions."
+      }
+    ]
+  },
+  {
+    "id": "red-tape",
+    "term": "Red Tape",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/rɛd teɪp/",
+    "literalDefinition": "Analogy: Official government legal documents bound tightly with red cloth ribbon that takes hours of bureaucracy to unspool and open.",
+    "realMeaning": "Excessive bureaucratic approval processes, manual Change Advisory Boards (CABs), or multi-week ticket delays that slow down engineering deployment velocity.",
+    "corporateTranslation": "Dev says: 'There is too much red tape to deploy a hotfix.' Manager hears: 'I have to submit 4 tickets and get 3 manager signatures just to fix a typo in production.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "while (hasBureaucraticApprovalQueues) {\n  timeToDeployInDays += 3;\n  developerFrustration.increment();\n}",
+      "explanation": "Administrative friction and excessive manual approval gates impeding deployment velocity."
+    },
+    "etymology": "16th-century Spanish and British administrative practice of binding official legal dossiers with red ribbon.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Excessive administrative approval overhead.",
+    "tags": [
+      "Bureaucracy",
+      "Process",
+      "Velocity",
+      "Governance"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Senior Developer",
+        "quote": "Let's automate our dependency vulnerability scans so we can reduce the red tape required for simple package patch releases.",
+        "translatedQuote": "Automating security validation will streamline our release approval process."
+      }
+    ]
+  },
+  {
+    "id": "roll-up-your-sleeves",
+    "term": "Roll Up Your Sleeves",
+    "category": "Coding",
+    "seniority": "Tech Lead",
+    "phonetic": "/roʊl ʌp jʊər sliːvz/",
+    "literalDefinition": "Analogy: Rolling long shirt sleeves up past the elbows before diving into heavy manual labor with grease and tools.",
+    "realMeaning": "Getting directly into the source code, debugging tricky unit tests, and doing hands-on technical work alongside the team.",
+    "corporateTranslation": "Lead says: 'Time to roll up our sleeves.' Dev hears: 'I am stopping slide presentations and pairing with you today to fix these failing integration tests.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function rollUpSleevesAndPair(juniorDev: Developer) {\n  await juniorDev.startScreenShare();\n  await debugTogetherInVSCode();\n}",
+      "explanation": "Hands-on collaborative execution to solve difficult implementation challenges."
+    },
+    "etymology": "19th-century manual trade phrase for preparing for strenuous physical work.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Engage in hands-on collaborative implementation and debugging.",
+    "tags": [
+      "Pairing",
+      "Hands-On",
+      "Leadership",
+      "Execution"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Engineering Manager",
+        "quote": "Let's roll up our sleeves this afternoon and clear out the entire backlog of P2 customer-reported bugs.",
+        "translatedQuote": "Let us collaborate closely this afternoon to resolve our outstanding bug tickets."
+      }
+    ]
+  },
+  {
+    "id": "round-the-clock",
+    "term": "Round the Clock (24/7 Monitoring)",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/raʊnd ðə klɒk/",
+    "literalDefinition": "Analogy: The hour and minute hands completing full 360-degree sweeps around the clock face continuously without stopping.",
+    "realMeaning": "Continuous, automated 24/7 on-call monitoring, pager escalation, and telemetry health checks covering global operations.",
+    "corporateTranslation": "SRE says: 'We provide round-the-clock coverage.' Customer hears: 'If servers fail at 3:00 AM on Sunday, an engineer will be debugging within 5 minutes.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const onCallRotation = new FollowTheSunSchedule([\n  { region: \"US\", hours: \"08:00-16:00\" },\n  { region: \"APAC\", hours: \"16:00-00:00\" },\n  { region: \"EMEA\", hours: \"00:00-08:00\" }\n]); // Round the clock",
+      "explanation": "Continuous 24/7 automated monitoring and global follow-the-sun on-call coverage."
+    },
+    "etymology": "Early 20th-century phrase describing uninterrupted continuous operations.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Continuous 24/7 monitoring and operational availability.",
+    "tags": [
+      "SRE",
+      "On-Call",
+      "PagerDuty",
+      "Monitoring"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "DevOps Lead",
+        "quote": "Our follow-the-sun on-call rotation ensures round-the-clock response times for critical enterprise customer alerts.",
+        "translatedQuote": "Our global engineering rotation guarantees 24/7 incident response for critical issues."
+      }
+    ]
+  },
+  {
+    "id": "rule-of-thumb",
+    "term": "Rule of Thumb",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/ruːl əv θʌm/",
+    "literalDefinition": "Analogy: A carpenter using the width of their thumb as a quick, practical 1-inch measurement guide without reaching for a metal ruler.",
+    "realMeaning": "A practical, battle-tested engineering heuristic or guideline (e.g. keeping React components under 200 lines, or capping database connection pools).",
+    "corporateTranslation": "Architect says: 'A good rule of thumb is 1 partition per CPU core.' Dev hears: 'This is not an absolute law, but it works reliably 90% of the time.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Rule of thumb: connection pool size = (cpuCores * 2) + effectiveSpindleCount\nconst recommendedPoolSize = (system.cpuCount * 2) + 1;",
+      "explanation": "A reliable practical heuristic derived from empirical industry experience."
+    },
+    "etymology": "17th-century craft trades phrase referencing using the human thumb for approximate measurement.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "A reliable practical guideline or heuristic.",
+    "tags": [
+      "Heuristics",
+      "Architecture",
+      "Best Practices",
+      "Guidelines"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Staff Engineer",
+        "quote": "As a rule of thumb, avoid keeping asynchronous network calls inside React useEffect without an AbortController.",
+        "translatedQuote": "It is recommended practice to provide an AbortController for asynchronous fetch requests in component lifecycles."
+      }
+    ]
+  },
+  {
+    "id": "scratch-the-surface",
+    "term": "Scratch the Surface",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/skrætʃ ðə ˈsɜːr.fɪs/",
+    "literalDefinition": "Analogy: Scraping away a tiny millimeter of topsoil on a vast mountain where rich mineral veins lie hundreds of feet deeper underground.",
+    "realMeaning": "Implementing only the initial rudimentary MVP features of a technology (like AI models or analytics) with massive untapped potential remaining.",
+    "corporateTranslation": "VP says: 'We are only scratching the surface with machine learning.' Dev hears: 'We added basic text completion, but full automated document analysis is our real goal.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const roadmapProgress = {\n  implementedCapabilities: [\"Text Summarization\"],\n  futureCapabilities: [\"Semantic Search\", \"Autonomous Code Review\", \"Visual Reasoning\"],\n  status: \"Only Scratching the Surface\"\n};",
+      "explanation": "Initial foundational implementation representing a small fraction of total potential."
+    },
+    "etymology": "Agricultural idiom describing shallow plowing that only touches the top layer of earth.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Addressed only the preliminary foundational aspects of a broader capability.",
+    "tags": [
+      "MVP",
+      "Roadmap",
+      "Vision",
+      "Expansion"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Sprint Planning",
+        "speaker": "Product Manager",
+        "quote": "Our current dashboard only scratches the surface of what our telemetry data can tell customers about API usage patterns.",
+        "translatedQuote": "Our initial dashboard represents just the first stage of our telemetry analytics capabilities."
+      }
+    ]
+  },
+  {
+    "id": "see-eye-to-eye",
+    "term": "See Eye to Eye",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/siː aɪ tuː aɪ/",
+    "literalDefinition": "Analogy: Two people standing face to face at the exact same height looking straight into each other's eyes with no divergence in vision.",
+    "realMeaning": "Being in total alignment and agreement on technical architecture, coding conventions, or product roadmaps.",
+    "corporateTranslation": "Dev says: 'Design and engineering see eye to eye on this component library.' PM hears: 'Figma tokens match our Tailwind theme exactly with zero discrepancies.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (designSystemTokens.colors === tailwindConfig.theme.colors) {\n  team.alignment = \"Seeing Eye to Eye\";\n}",
+      "explanation": "Complete mutual agreement and synchronization across cross-functional teams."
+    },
+    "etymology": "Ancient biblical idiom (Isaiah 52:8) denoting harmonious vision and understanding.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "In complete mutual agreement and alignment.",
+    "tags": [
+      "Alignment",
+      "Consensus",
+      "Design System",
+      "Collaboration"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "1-on-1 Meeting",
+        "speaker": "Tech Lead",
+        "quote": "I'm glad we see eye to eye on prioritizing end-to-end test automation over adding more experimental UI widgets this sprint.",
+        "translatedQuote": "I appreciate our shared consensus on prioritizing test reliability this sprint."
+      }
+    ]
+  },
+  {
+    "id": "stand-your-ground",
+    "term": "Stand Your Ground",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/stænd jʊər ɡraʊnd/",
+    "literalDefinition": "Analogy: A defender planting their boots firmly into the earth and refusing to take a single step backward against an opposing rush.",
+    "realMeaning": "Defending crucial software architecture principles, security invariants, or data integrity during PR reviews despite pressure to rush shortcuts.",
+    "corporateTranslation": "Senior Dev says: 'I stood my ground on data validation.' Lead hears: 'I rejected the PR until they added server-side schema sanitization.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function reviewPullRequest(pr: PullRequest) {\n  if (!pr.hasInputSanitization()) {\n    pr.requestChanges(\"Security invariant: Cannot bypass server validation.\"); // Stand your ground\n  }\n}",
+      "explanation": "Upholding non-negotiable architectural integrity and security requirements."
+    },
+    "etymology": "Military phrase describing soldiers maintaining their tactical defensive line under pressure.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Maintain firm adherence to non-negotiable architectural and security standards.",
+    "tags": [
+      "Code Review",
+      "Security",
+      "Integrity",
+      "Standards"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Senior Architect",
+        "quote": "I must stand my ground on requiring database transactions here; we cannot risk orphaned payment records in the event of an API timeout.",
+        "translatedQuote": "Transactional integrity is non-negotiable here to prevent orphaned payment records."
+      }
+    ]
+  },
+  {
+    "id": "start-from-scratch",
+    "term": "Start from Scratch",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/stɑːrt frʌm skrætʃ/",
+    "literalDefinition": "Analogy: A baker preparing a cake using raw flour, eggs, sugar, and cocoa rather than buying a pre-packaged boxed cake mix.",
+    "realMeaning": "Building a software module, UI component, or API service entirely from raw code rather than copying a template or using third-party libraries.",
+    "corporateTranslation": "Dev says: 'I built the modal from scratch.' Teammate hears: 'I wrote custom accessibility focus trapping, keyboard listeners, and animations without Radix.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Starting from scratch with vanilla primitives\nconst customVirtualList = new CustomVirtualScroller({\n  useZeroDependencies: true,\n  builtFromRawMath: true\n});",
+      "explanation": "Developing functionality from foundational primitives without third-party frameworks."
+    },
+    "etymology": "18th-century sports metaphor from running and cricket where the starting line was scratched into the earth.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Built from foundational primitives without external templates.",
+    "tags": [
+      "Greenfield",
+      "Custom",
+      "Scaffolding",
+      "Development"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Frontend Developer",
+        "quote": "Rather than patching the broken legacy tooltip library, I started from scratch with native HTML dialog and popover APIs.",
+        "translatedQuote": "I replaced the legacy tooltip library with a clean implementation using modern HTML popover standards."
+      }
+    ]
+  },
+  {
+    "id": "stay-on-track",
+    "term": "Stay on Track",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/steɪ ɒn træk/",
+    "literalDefinition": "Analogy: A high-speed express train keeping its steel wheels locked firmly onto the parallel railway tracks to reach the terminal safely.",
+    "realMeaning": "Keeping sprint development focused on agreed-upon milestone goals without getting distracted by unrelated scope creep or bikeshedding.",
+    "corporateTranslation": "Scrum Master says: 'Let's stay on track.' Dev hears: 'Stop debating the color of the submit button and let's finish the database migration ticket.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (sprint.daysRemaining < 3 && sprint.milestoneProgress < 0.8) {\n  team.deferNonEssentialSideTasks(); // Stay on track\n}",
+      "explanation": "Maintaining disciplined focus on core sprint objectives."
+    },
+    "etymology": "19th-century railway transportation idiom for trains remaining aligned on tracks.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Maintain disciplined alignment with agreed milestone objectives.",
+    "tags": [
+      "Sprint Goal",
+      "Focus",
+      "Discipline",
+      "Milestones"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Scrum Master",
+        "quote": "To stay on track for Friday's staging release, let's defer new UI feature requests until sprint 43 planning.",
+        "translatedQuote": "To meet our staging release deadline, we will review new UI requests in the next sprint planning."
+      }
+    ]
+  },
+  {
+    "id": "step-up-to-the-plate",
+    "term": "Step Up to the Plate",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/stɛp ʌp tuː ðə pleɪt/",
+    "literalDefinition": "Analogy: A baseball batter walking forward from the dugout to stand at home plate, bat in hand, ready to face the pitcher's fastest pitch.",
+    "realMeaning": "Voluntarily taking ownership of a difficult, high-visibility technical task, major outage investigation, or complex architecture spike.",
+    "corporateTranslation": "Manager says: 'We need someone to step up to the plate.' Dev hears: 'Who is willing to lead the Kubernetes multi-cluster migration project?'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function assignHighComplexityTicket(ticket: CriticalP0Ticket, engineer: Developer) {\n  engineer.takeOwnership(ticket); // Stepped up to the plate\n}",
+      "explanation": "Proactively assuming ownership of high-impact technical initiatives."
+    },
+    "etymology": "American baseball idiom describing taking position at home plate to bat.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Proactively take ownership of a critical engineering responsibility.",
+    "tags": [
+      "Leadership",
+      "Ownership",
+      "Initiative",
+      "Mentorship"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Slack",
+        "speaker": "Engineering Manager",
+        "quote": "Kudos to Priya for stepping up to the plate and leading our database disaster recovery dry run yesterday.",
+        "translatedQuote": "Special thanks to Priya for taking ownership of our disaster recovery exercise."
+      }
+    ]
+  },
+  {
+    "id": "tighten-the-belt",
+    "term": "Tighten the Belt",
+    "category": "Operations",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈtaɪ.tən ðə bɛlt/",
+    "literalDefinition": "Analogy: Pulling your belt one notch tighter during scarce times when food supplies are limited.",
+    "realMeaning": "Optimizing cloud infrastructure spend, reducing over-provisioned AWS compute instances, or eliminating unused SaaS database subscriptions.",
+    "corporateTranslation": "VP of Infra says: 'We need to tighten the belt on cloud costs.' SRE hears: 'Turn off idle staging clusters at 7:00 PM and downsize over-allocated EC2 instances.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const cloudCostOptimization = {\n  scaleDownIdleStagingAtNight: true,\n  pruneUnusedEBSVolumes: true,\n  monthlySavingsUSD: 4500 // Tightened the belt\n};",
+      "explanation": "Pruning redundant infrastructure to optimize operational cloud expenditures."
+    },
+    "etymology": "Late 19th-century phrase referencing enduring economic hardship or food scarcity.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Optimize cloud resource utilization and reduce operational expenditures.",
+    "tags": [
+      "FinOps",
+      "Cost Optimization",
+      "AWS",
+      "Infrastructure"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Email",
+        "speaker": "VP of Engineering",
+        "quote": "By tightening our belt on unattached cloud storage volumes, we reduced our AWS infrastructure bill by 18% last month.",
+        "translatedQuote": "By pruning unattached cloud storage volumes, we lowered infrastructure costs by 18%."
+      }
+    ]
+  },
+  {
+    "id": "up-in-the-air",
+    "term": "Up in the Air",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/ʌp ɪn ði ɛər/",
+    "literalDefinition": "Analogy: Tossing a coin high into the air — while it spins suspended mid-flight, nobody knows whether it lands on heads or tails.",
+    "realMeaning": "A technical requirement, release date, or architectural decision that remains unresolved, uncommitted, and awaiting stakeholder approval.",
+    "corporateTranslation": "Tech Lead says: 'The release date is still up in the air.' Dev hears: 'Do not make vacation plans for next week until product decides on the launch day.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const featureStatus = {\n  apiSpecFinalized: false,\n  legalApprovalReceived: false,\n  launchDate: null, // Up in the air\n  state: \"Pending Consensus\"\n};",
+      "explanation": "Unresolved decision awaiting definitive stakeholder confirmation."
+    },
+    "etymology": "Mid-18th century idiom referencing objects suspended in flight before settling.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Unresolved and awaiting final stakeholder confirmation.",
+    "tags": [
+      "Roadmap",
+      "Uncertainty",
+      "Decisions",
+      "Dependencies"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Product Owner",
+        "quote": "Whether we support single-sign-on in the mobile app for this release is still up in the air while legal reviews the vendor terms.",
+        "translatedQuote": "The inclusion of mobile SSO is pending final legal review of vendor terms."
+      }
+    ]
+  },
+  {
+    "id": "win-win-situation",
+    "term": "Win-Win Situation",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/wɪn wɪn ˌsɪtʃ.uˈeɪ.ʃən/",
+    "literalDefinition": "Analogy: A trade where two neighbors exchange tools so both can finish their home improvements simultaneously with zero losers.",
+    "realMeaning": "An engineering or tooling solution that benefits developers (faster local builds) while simultaneously benefiting customers (faster page load speeds).",
+    "corporateTranslation": "Lead says: 'Adopting Vite is a win-win situation.' Dev hears: 'HMR updates in 50ms for us, and the production bundle is 40% lighter for users.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const upgradeOutcome = {\n  developerBenefit: \"Instant Hot Module Replacement\",\n  customerBenefit: \"Sub-second Page Load Speeds\",\n  evaluation: \"Win-Win Situation\"\n};",
+      "explanation": "A technical initiative that simultaneously optimizes developer experience and end-user performance."
+    },
+    "etymology": "Game theory term coined in the mid-20th century for non-zero-sum cooperative outcomes.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "A mutually advantageous outcome benefiting all stakeholders.",
+    "tags": [
+      "DX",
+      "Performance",
+      "Optimization",
+      "Architecture"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Tech Lead",
+        "quote": "Switching to SVG sprite icons is a win-win situation: cleaner React components for developers and fewer network requests for mobile users.",
+        "translatedQuote": "Adopting SVG sprites improves component maintainability while reducing mobile network overhead."
+      }
+    ]
+  },
+  {
+    "id": "zero-in-on",
+    "term": "Zero In On",
+    "category": "Coding",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈzɪə.roʊ ɪn ɒn/",
+    "literalDefinition": "Analogy: Adjusting the crosshairs on a telescope or camera lens until the blurred subject snaps into sharp, crystal-clear focus.",
+    "realMeaning": "Narrowing down hundreds of error logs, stack traces, and telemetry metrics to isolate the exact line of code causing an issue.",
+    "corporateTranslation": "SRE says: 'We zeroed in on the culprit query.' Dev hears: 'We found the missing SQL index on line 42 of the user billing service.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "async function isolateRootCause(logs: TelemetryLog[]) {\n  const filtered = logs.filter(l => l.status === 500 && l.durationMs > 3000);\n  return filtered[0].stackTrace.culpritLine; // Zeroed in\n}",
+      "explanation": "Precision diagnostic isolation of an exact systemic defect."
+    },
+    "etymology": "Early 20th-century artillery and optical targeting terminology for calibrating sights to zero error.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Precisely isolated the specific root cause among telemetry logs.",
+    "tags": [
+      "Debugging",
+      "Root Cause",
+      "Telemetry",
+      "Profiling"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Incident War Room",
+        "speaker": "Senior SRE",
+        "quote": "Thanks to our Grafana tracing dashboard, we zeroed in on the exact microservice that was timing out under load.",
+        "translatedQuote": "Our telemetry dashboard allowed us to isolate the specific microservice experiencing latency."
+      }
+    ]
+  },
+  {
+    "id": "hit-a-brick-wall",
+    "term": "Hit a Brick Wall / Hit a Wall",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/hɪt ə brɪk wɔːl/",
+    "literalDefinition": "Analogy: Sprinting at full speed and colliding head-on with a solid unyielding red brick wall that completely halts your forward motion.",
+    "realMeaning": "Reaching a total block in technical problem-solving, debugging, or API reverse engineering where no current hypothesis makes progress.",
+    "corporateTranslation": "Dev says: 'I hit a brick wall on this OAuth token refresh issue.' Team hears: 'I have tried every solution in the docs and need another set of eyes.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (debuggingAttempts > 10 && noProgressMade) {\n  engineer.status = \"Hit a Brick Wall\";\n  requestPairProgrammingSession();\n}",
+      "explanation": "Reaching an intractable technical impasse requiring collaborative intervention."
+    },
+    "etymology": "20th-century marathon running and physical endurance metaphor for sudden exhaustion and inability to proceed.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Encountered an intractable technical block requiring peer consultation.",
+    "tags": [
+      "Blocker",
+      "Debugging",
+      "Pairing",
+      "Impediment"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Backend Engineer",
+        "quote": "I've hit a brick wall trying to reproduce the concurrency deadlock in our staging environment; could someone pair with me this afternoon?",
+        "translatedQuote": "I have encountered an impasse reproducing the database deadlock and would welcome pairing assistance."
+      }
+    ]
+  },
+  {
+    "id": "double-edged-sword",
+    "term": "Double-Edged Sword",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˌdʌb.əl.ɛdʒd sɔːrd/",
+    "literalDefinition": "Analogy: A medieval battle sword sharpened razor-thin on both edges — capable of cutting down the enemy while risking slicing the wielder's own hand on the backswing.",
+    "realMeaning": "An engineering pattern (like aggressive caching, microservices, or dynamic typing) that delivers great power but introduces dangerous hidden failure modes.",
+    "corporateTranslation": "Architect says: 'Aggressive Redis caching is a double-edged sword.' Dev hears: 'It makes pages load instantly, but if cache invalidation has a bug, users see stale data for days.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const feature = {\n  pro: \"10x speed boost through aggressive caching\",\n  con: \"Extreme risk of serving stale or corrupted data\",\n  nature: \"Double-Edged Sword\"\n};",
+      "explanation": "A technical architectural choice with substantial concurrent advantages and vulnerabilities."
+    },
+    "etymology": "Ancient biblical and military idiom describing weapons with two cutting edges.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "A solution offering substantial benefits alongside significant trade-off liabilities.",
+    "tags": [
+      "Trade-Offs",
+      "Caching",
+      "Architecture",
+      "Complexity"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Staff Engineer",
+        "quote": "Auto-scaling is a double-edged sword: it handles unexpected traffic spikes smoothly, but an infinite loop in a serverless function can run up a $20,000 cloud bill overnight.",
+        "translatedQuote": "Auto-scaling protects availability but requires strict billing alarms to prevent runaway costs."
+      }
+    ]
+  },
+  {
+    "id": "break-the-ice",
+    "term": "Break the Ice",
+    "category": "Management",
+    "seniority": "Junior Dev",
+    "phonetic": "/breɪk ði aɪs/",
+    "literalDefinition": "Analogy: An icebreaker vessel smashing through thick polar pack ice to clear a navigation channel for merchant ships.",
+    "realMeaning": "Starting a retrospective, sprint kickoff, or interview with a casual, warm greeting question to make engineers comfortable sharing feedback.",
+    "corporateTranslation": "Scrum Master says: 'Let's break the ice before we start retro.' Dev hears: 'Share your favorite weekend hobby so we feel relaxed talking about difficult process bugs.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function startSprintRetrospective() {\n  team.runCasualWarmupQuestion(); // Break the ice\n  team.openBlamelessFeedbackBoard();\n}",
+      "explanation": "Fostering psychological safety and open dialogue before technical deliberations."
+    },
+    "etymology": "16th-century nautical term for clearing ice from shipping routes to facilitate trade and passage.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Initiate conversation to foster psychological safety and open engagement.",
+    "tags": [
+      "Psychological Safety",
+      "Retrospective",
+      "Teamwork",
+      "Agile"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Scrum Master",
+        "quote": "To break the ice before our incident retrospective, let's remember our team core rule: this is a 100% blameless learning session.",
+        "translatedQuote": "Before reviewing the incident, let us reaffirm our commitment to a blameless learning environment."
+      }
+    ]
+  },
+  {
+    "id": "bring-to-the-table",
+    "term": "Bring to the Table",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/brɪŋ tuː ðə ˈteɪ.bəl/",
+    "literalDefinition": "Analogy: Guests arriving at a community potluck feast each carrying a unique dish to share with everyone at the long dining table.",
+    "realMeaning": "The specialized skills, domain knowledge, or architectural perspectives (like Rust performance, GraphQL mastery, or CSS accessibility) an engineer contributes to a project.",
+    "corporateTranslation": "Hiring Manager says: 'What does this candidate bring to the table?' Interviewer hears: 'They have 4 years of hands-on experience building high-throughput Kafka streaming pipelines.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "interface EngineerContribution {\n  specialty: \"High-throughput Kafka streaming pipelines\",\n  domainMastery: \"Event-driven distributed systems\"\n}",
+      "explanation": "Distinct technical capabilities and specialized domain competencies."
+    },
+    "etymology": "Mid-20th century negotiation and banquet metaphor for offering tangible contributions.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Specialized technical skills and domain contributions.",
+    "tags": [
+      "Skills",
+      "Hiring",
+      "Collaboration",
+      "Expertise"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "1-on-1 Meeting",
+        "speaker": "Tech Lead",
+        "quote": "Elena's deep knowledge of WebSockets and real-time state synchronization brings immense value to the table for our collaborative whiteboarding project.",
+        "translatedQuote": "Elena's expertise in real-time synchronization significantly enhances our collaborative editor project."
+      }
+    ]
+  },
+  {
+    "id": "shifting-the-goalposts",
+    "term": "Shifting the Goalposts (Moving the Goalposts)",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈʃɪf.tɪŋ ðə ˈɡoʊl.poʊsts/",
+    "literalDefinition": "Analogy: Literally picking up the physical goal frame on a football/soccer pitch and hauling it 20 yards further away right as the striker shoots.",
+    "realMeaning": "Unilaterally changing the acceptance criteria, launch blockers, or definition of success after the team has already built and delivered the agreed sprint scope.",
+    "corporateTranslation": "PM says: 'Great work hitting the PRD specs, but now stakeholders also require instant offline sync before we can approve launch.' Dev hears: 'You moved the target right as we reached it.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (sprint.hasMetCriteria(agreedPRD)) {\n  // ❌ Shifting the goalposts:\n  throw new Error('New requirement added: must also support real-time VR');\n}",
+      "explanation": "Modifying validation requirements at runtime after a contract has already been satisfied."
+    },
+    "etymology": "Derived from British football (soccer) in the late 19th and early 20th century, metaphorically denoting unfair manipulation of rules.",
+    "formality": "High Risk / Passive Aggressive",
+    "safeAlternative": "Late scope expansion / Modifying agreed acceptance criteria after delivery.",
+    "tags": [
+      "Scope Creep",
+      "Requirements",
+      "Product Management",
+      "Sprint Planning",
+      "Stakeholders"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "Sprint Planning",
+        "speaker": "Staff Engineer",
+        "quote": "We delivered all six signed acceptance criteria for the billing engine on time, but now product wants zero-latency international tax calculations before approving the release. They are shifting the goalposts on us.",
+        "translatedQuote": "The agreed delivery requirements are being expanded after completion; we should schedule tax calculations as a Phase 2 item."
+      }
+    ]
+  },
+  {
+    "id": "analysis-paralysis",
+    "term": "Analysis Paralysis",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/əˈnæl.ə.sɪs pəˈræl.ə.sɪs/",
+    "literalDefinition": "Analogy: A chess player staring at the board calculating 50 theoretical moves until their timer runs out without making a single move.",
+    "realMeaning": "Over-analyzing, debating, and theorizing options so excessively that engineering progress comes to a complete standstill.",
+    "corporateTranslation": "Lead says: 'Let's avoid analysis paralysis and build a 2-day spike.' Dev hears: 'Stop having theoretical meetings about 10 frameworks—write a test prototype and pick one.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "while (debatingStateLibraries(redux, zustand, mobx, jotai)) {\n  // Infinite loop with 0 lines of shipped feature code\n  holdAnotherArchitectureMeeting();\n}",
+      "explanation": "Endless evaluation loops preventing timely execution."
+    },
+    "etymology": "Popularized in operations research in the 1960s, tracing back to Aesop's fable 'The Fox and the Cat'.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Decision deadlock / Over-deliberation without empirical prototyping.",
+    "tags": [
+      "Decision Making",
+      "Architecture",
+      "Spike",
+      "Planning"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Tech Lead",
+        "quote": "We have spent three sprint retrospectives debating Vite vs Turbopack without benchmarking either. Let's break out of analysis paralysis: build a 2-day spike and decide Friday.",
+        "translatedQuote": "Let us end theoretical discussions by testing real benchmarks to make a swift decision."
+      }
+    ]
+  },
+  {
+    "id": "lipstick-on-a-pig",
+    "term": "Lipstick on a Pig (Putting Lipstick on a Pig)",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈlɪp.stɪk ɒn ə pɪɡ/",
+    "literalDefinition": "Analogy: Applying vibrant pink cosmetic lipstick to a mud-covered farm pig—it looks superficially different but remains inherently a pig.",
+    "realMeaning": "Applying a superficial cosmetic redesign (new Tailwind UI, flashy animations) over broken, unmaintained legacy architecture without fixing the core flaws.",
+    "corporateTranslation": "Architect says: 'Slapping a React frontend on an unindexed 15-year-old database is just putting lipstick on a pig.' Dev hears: 'We must refactor the backend schema or users will still experience 8-second page loads.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "<div className=\"bg-gradient-to-r from-purple-500 to-pink-500 rounded-3xl shadow-2xl p-8\">\n  {/* ❌ Gorgeous UI wrapped around a broken N+1 query */}\n  <UnindexedLegacyTable query={selectStarFromOneMillionRows()} />\n</div>",
+      "explanation": "Superficial visual polish masking critical underlying technical debt."
+    },
+    "etymology": "American political and colloquial idiom from the 19th century, popularized across tech when discussing superficial legacy modernization.",
+    "formality": "Internal Team Only",
+    "safeAlternative": "Cosmetic masking / Superficial redesign without underlying remediation.",
+    "tags": [
+      "Legacy Code",
+      "Refactoring",
+      "Architecture",
+      "Technical Debt"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Principal Architect",
+        "quote": "Redesigning the modal with Tailwind without fixing the unindexed SQL query that powers it is just putting lipstick on a pig.",
+        "translatedQuote": "A UI refresh will not solve the underlying database performance bottlenecks."
+      }
+    ]
+  },
+  {
+    "id": "throwing-under-the-bus",
+    "term": "Throwing Under the Bus",
+    "category": "Management",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈθroʊ.ɪŋ ˈʌn.dər ðə bʌs/",
+    "literalDefinition": "Analogy: Physically shoving a teammate in front of oncoming city traffic to divert attention from yourself.",
+    "realMeaning": "Publicly deflecting blame onto a colleague or junior engineer in front of executives to avoid taking accountability for a mistake or missed deadline.",
+    "corporateTranslation": "Manager says: 'In this blameless post-mortem, no one gets thrown under the bus.' Dev hears: 'We analyze systemic causes and missing guardrails, not personal blame.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function handleOutagePostMortem(incident) {\n  // ❌ Throwing under the bus: blameJuniorDev(incident.author);\n  // ✅ Blameless post-mortem:\n  auditSystemicGuardrails(incident.missingAutomatedTests);\n}",
+      "explanation": "Blaming individuals rather than fixing systemic processes and automated safety nets."
+    },
+    "etymology": "British and American political slang from the 1980s that became widely used in high-stakes corporate environments.",
+    "formality": "High Risk / Passive Aggressive",
+    "safeAlternative": "Scapegoating / Deflecting individual blame.",
+    "tags": [
+      "Psychological Safety",
+      "Post-Mortem",
+      "Culture",
+      "Management"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Incident War Room",
+        "speaker": "Director of Engineering",
+        "quote": "Our retrospective policy is strictly blameless. Nobody gets thrown under the bus for missing a test case; we look at why our CI gate allowed the merge.",
+        "translatedQuote": "We will focus on strengthening our automated validation pipelines rather than assigning individual fault."
+      }
+    ]
+  },
+  {
+    "id": "passing-the-buck",
+    "term": "Passing the Buck",
+    "category": "Management",
+    "seniority": "Product Manager",
+    "phonetic": "/ˈpæs.ɪŋ ðə bʌk/",
+    "literalDefinition": "Analogy: In frontier poker games, passing a buckhorn-handled knife to the next player to avoid the duty and cost of dealing the hand.",
+    "realMeaning": "Shifting the responsibility or operational ownership of an issue to another team instead of resolving it.",
+    "corporateTranslation": "Ops Lead says: 'Let's stop passing the buck between backend and infrastructure.' Dev hears: 'Let us hop on a screen-share and inspect the network ingress logs together.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "catch (error) {\n  // ❌ Passing the buck: re-throwing without investigating\n  assignTicketToDifferentDepartment(error);\n}",
+      "explanation": "Deflecting operational ownership rather than triaging root causes."
+    },
+    "etymology": "19th-century American poker terminology; famously contrasted by US President Truman's desk sign 'The buck stops here'.",
+    "formality": "Internal Team Only",
+    "safeAlternative": "Deflecting accountability / Shifting operational ownership.",
+    "tags": [
+      "Accountability",
+      "Cross-Functional",
+      "Incident Response",
+      "Ownership"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Site Reliability Lead",
+        "quote": "Let's stop passing the buck between Frontend and API teams on who owns the 504 gateway timeout; let's open a joint pairing session.",
+        "translatedQuote": "We need cross-functional collaboration to diagnose the timeout instead of disputing ownership."
+      }
+    ]
+  },
+  {
+    "id": "reinventing-the-wheel",
+    "term": "Reinventing the Wheel",
+    "category": "Coding",
+    "seniority": "Junior Dev",
+    "phonetic": "/ˌriː.ɪnˈvɛn.tɪŋ ðə wiːl/",
+    "literalDefinition": "Analogy: Spending months attempting to engineer a circular rolling device from raw stone when modern rubber tires are already in every shop.",
+    "realMeaning": "Wasting development time coding custom, unvetted utilities (like date parsing, crypto hashing, or auth state) when proven, standard open-source libraries exist.",
+    "corporateTranslation": "Staff Dev says: 'Don't reinvent the wheel for JWT rotation.' Dev hears: 'Use an audited authentication library instead of writing custom cryptographic tokens.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// ❌ Reinventing the wheel with potential bugs:\nfunction myCustomDateDifferenceParser(d1, d2) { /* 100 lines of date math */ }\n// ✅ Use standard audited library:\nimport { differenceInDays } from 'date-fns';",
+      "explanation": "Writing redundant custom implementations instead of relying on battle-tested standard libraries."
+    },
+    "etymology": "Mid-20th-century engineering idiom warning against redundant research and duplicate development.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Duplicating established solutions / Creating redundant custom implementations.",
+    "tags": [
+      "Best Practices",
+      "Libraries",
+      "Code Review",
+      "Architecture"
+    ],
+    "popularityScore": 99,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Senior Backend Engineer",
+        "quote": "Writing a custom date-time parser and timezone handler from scratch is reinventing the wheel and risks leap-year bugs. Let's import date-fns or Temporal.",
+        "translatedQuote": "We should use a proven standard library to avoid edge-case calculation bugs."
+      }
+    ]
+  },
+  {
+    "id": "shiny-object-syndrome",
+    "term": "Shiny Object Syndrome",
+    "category": "Strategy",
+    "seniority": "C-Suite",
+    "phonetic": "/ˈʃaɪ.ni ˈɒb.dʒɛkt ˈsɪn.droʊm/",
+    "literalDefinition": "Analogy: A magpie or puppy abandoning their food every time a glimmering piece of foil reflects light across the yard.",
+    "realMeaning": "The habit of constantly chasing newly released frameworks, AI models, or trendy paradigms while abandoning ongoing production commitments.",
+    "corporateTranslation": "VP says: 'Let's not get distracted by shiny object syndrome.' Dev hears: 'Finish shipping the current migration before pitching another framework rewrite.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "if (newTrendyFrameworkReleasedToday) {\n  abandonCurrentStableSprint(); // ❌ Shiny Object Syndrome\n  rewriteEntireStackInAlphaTool();\n}",
+      "explanation": "Derailing stable roadmap execution to chase unvetted technology hype."
+    },
+    "etymology": "Management and behavioral psychology idiom popularized during the late-1990s dot-com era.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Trend distraction / Hype-driven roadmap disruption.",
+    "tags": [
+      "Roadmap",
+      "Focus",
+      "Tech Debt",
+      "Strategy"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "VP of Engineering",
+        "quote": "I know a new UI compiler dropped on Hacker News today, but we cannot suffer from shiny object syndrome when we are two weeks out from SOC2 certification.",
+        "translatedQuote": "We must stay focused on our compliance commitments rather than experimenting with new tools."
+      }
+    ]
+  },
+  {
+    "id": "painting-yourself-into-a-corner",
+    "term": "Painting Yourself into a Corner",
+    "category": "Coding",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈpeɪn.tɪŋ jʊərˈsɛlf ˈɪn.tuː ə ˈkɔːr.nər/",
+    "literalDefinition": "Analogy: Painting a wood floor starting at the doorway and working inwards toward the far corner until you are trapped with wet varnish on all sides.",
+    "realMeaning": "Making inflexible design or architectural commitments that eliminate future options and make adapting to change nearly impossible without a full rewrite.",
+    "corporateTranslation": "Architect says: 'Hardcoding a single tenant ID into this table schema is painting ourselves into a corner.' Dev hears: 'If we ever need multi-tenancy, we will have to rebuild the entire database from scratch.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// ❌ Painted into a corner: tightly coupled to one single vendor\nconst storage = new S3DirectBucketOnly(); // Hardcoded, no interface abstraction",
+      "explanation": "Creating rigid architectural dependencies that preclude future adaptation."
+    },
+    "etymology": "Early 20th-century home improvement proverb representing self-created logistical dead ends.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Over-constraining architecture / Limiting future technical agility.",
+    "tags": [
+      "Architecture",
+      "System Design",
+      "Coupling",
+      "Scalability"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Principal Architect",
+        "quote": "Coupling this user service directly to the Stripe webhook format will paint us into a corner when we add PayPal and Adyen next quarter.",
+        "translatedQuote": "We must create an abstract payment interface to support multiple providers later."
+      }
+    ]
+  },
+  {
+    "id": "sweeping-under-the-rug",
+    "term": "Sweeping Under the Rug (Sweeping Under the Carpet)",
+    "category": "Operations",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈswiː.pɪŋ ˈʌn.dər ðə rʌɡ/",
+    "literalDefinition": "Analogy: Concealing dirt and broken glass beneath a floor rug rather than sweeping it into a dustbin and taking it out.",
+    "realMeaning": "Hiding errors, suppressing test warnings, or silencing unhandled rejections to give the illusion of a clean, healthy build.",
+    "corporateTranslation": "QA Lead says: 'Adding empty catch blocks is sweeping bugs under the rug.' Dev hears: 'Log and handle the exception properly; do not silence errors.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "try {\n  processPayment();\n} catch (err) {\n  // ❌ Sweeping under the rug:\n  // Do nothing, hide the error\n}",
+      "explanation": "Silencing critical runtime errors rather than diagnosing and remediating them."
+    },
+    "etymology": "19th-century domestic idiom for concealing mess instead of cleaning it.",
+    "formality": "Internal Team Only",
+    "safeAlternative": "Concealing defects / Suppressing telemetry errors.",
+    "tags": [
+      "Code Quality",
+      "Error Handling",
+      "Testing",
+      "DevOps"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "PR Review",
+        "speaker": "Senior DevOps Lead",
+        "quote": "Muting the flaky integration test just to make the GitHub Action pass is sweeping the problem under the rug. Let's fix the race condition.",
+        "translatedQuote": "We should resolve the root concurrency issue rather than disabling our test checks."
+      }
+    ]
+  },
+  {
+    "id": "robbing-peter-to-pay-paul",
+    "term": "Robbing Peter to Pay Paul",
+    "category": "Management",
+    "seniority": "Product Manager",
+    "phonetic": "/ˈrɒb.ɪŋ ˈpiː.tər tuː peɪ pɔːl/",
+    "literalDefinition": "Analogy: Taking money from one creditor (Peter) solely to settle an urgent debt with another (Paul), leaving Peter unpaid and angry.",
+    "realMeaning": "Pulling engineers or resources from one critical project to plug a temporary hole in another, only to create an urgent crisis in the first.",
+    "corporateTranslation": "Director says: 'Taking two engineers off the Security audit team for checkout is robbing Peter to pay Paul.' Dev hears: 'We will miss our SOC2 compliance deadline if we borrow security staffing.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function patchSprintDelivery() {\n  reallocateEngineers(from: 'SecurityCompliance', to: 'CheckoutUI');\n  // ❌ SecurityCompliance now fails audit\n}",
+      "explanation": "Fixing a deficit in one project by creating an equal or worse deficit in another."
+    },
+    "etymology": "Medieval English proverb referencing the tax revenues of St. Peter's and St. Paul's churches in London.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Resource shifting with reciprocal deficit / Unbalanced reallocation.",
+    "tags": [
+      "Resource Management",
+      "Capacity Planning",
+      "Sprint Management"
+    ],
+    "popularityScore": 95,
+    "examples": [
+      {
+        "context": "Sprint Planning",
+        "speaker": "Engineering Manager",
+        "quote": "Pulling our senior SRE off the disaster recovery migration to help write CSS animations is robbing Peter to pay Paul.",
+        "translatedQuote": "Reassigning infrastructure specialists to frontend tasks compromises our core reliability milestones."
+      }
+    ]
+  },
+  {
+    "id": "death-by-a-thousand-cuts",
+    "term": "Death by a Thousand Cuts (Death by a Thousand Papercuts)",
+    "category": "Operations",
+    "seniority": "Senior Architect",
+    "phonetic": "/dɛθ baɪ ə ˈθaʊ.zənd kʌts/",
+    "literalDefinition": "Analogy: An imperial sentence where numerous tiny, individual scratches gradually prove fatal over time.",
+    "realMeaning": "System failure, severe latency, or developer burnout caused by the compounding effect of many small, neglected micro-inefficiencies.",
+    "corporateTranslation": "SRE says: 'Our slow page load is death by a thousand cuts.' Dev hears: 'No single query is slow; 20 different widgets are each adding 35ms of unmemoized lag.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// ❌ Death by a thousand cuts: 30 tiny unmemoized re-renders\nconst totalLatency = trackingScripts.reduce((acc, script) => acc + script.delayMs, 0); // 1200ms total!",
+      "explanation": "The aggregate breakdown of performance from dozens of individually small oversights."
+    },
+    "etymology": "From ancient Chinese judicial history (lingchi), entered English vocabulary in the late 19th century.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Cumulative systemic degradation / Compounding micro-bottlenecks.",
+    "tags": [
+      "Performance",
+      "Optimization",
+      "Tech Debt",
+      "Monitoring"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Incident War Room",
+        "speaker": "Performance Engineer",
+        "quote": "There is no single 500ms bottleneck in our bundle; it's death by a thousand cuts. Fourteen analytics tags are each blocking the main thread for 25ms.",
+        "translatedQuote": "Our latency is driven by the cumulative impact of multiple minor tracking scripts."
+      }
+    ]
+  },
+  {
+    "id": "smoke-and-mirrors",
+    "term": "Smoke and Mirrors",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/smoʊk ænd ˈmɪr.ərz/",
+    "literalDefinition": "Analogy: Victorian stage magicians using smoke machines and angled glass mirrors to make ghosts appear in thin air.",
+    "realMeaning": "A misleading software demo or feature presentation where things appear fully automated and production-ready, but are actually simulated by hardcoded scripts.",
+    "corporateTranslation": "Senior Dev says: 'That keynote AI presentation was smoke and mirrors.' Dev hears: 'It only worked for the three exact hardcoded prompts they practiced.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function aiRecommendationEngine(prompt: string) {\n  // ❌ Smoke and mirrors demo hack:\n  if (prompt === 'Show Demo') return HARDCODED_PREFECT_RESPONSE;\n  throw new Error('Not implemented yet');\n}",
+      "explanation": "Simulating automated capabilities with hardcoded mocks for demonstration purposes."
+    },
+    "etymology": "19th-century illusionist theater craft popularized in political and business commentary in the 1970s.",
+    "formality": "High Risk / Passive Aggressive",
+    "safeAlternative": "Mocked demonstration / Simulated capability.",
+    "tags": [
+      "Demo",
+      "Product",
+      "Sales Engineering",
+      "Integrity"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "Backlog Refinement",
+        "speaker": "Lead QA Engineer",
+        "quote": "The sales demo was smoke and mirrors using hardcoded mock responses; we still need 4 weeks to build the real asynchronous processing engine.",
+        "translatedQuote": "The client demonstration utilized static mocks; full production engineering remains to be completed."
+      }
+    ]
+  },
+  {
+    "id": "squeaky-wheel-gets-the-grease",
+    "term": "The Squeaky Wheel Gets the Grease",
+    "category": "Management",
+    "seniority": "Product Manager",
+    "phonetic": "/ðə ˈskwiː.ki wiːl ɡɛts ðə ɡriːs/",
+    "literalDefinition": "Analogy: On a horse-drawn carriage with four spinning wooden wheels, the single wheel making a loud screeching noise is the one the driver stops to oil first.",
+    "realMeaning": "The client, stakeholder, or user who complains the loudest and most frequently receives immediate engineering resources, regardless of strategic priority.",
+    "corporateTranslation": "PM says: 'The squeaky wheel gets the grease on this hotfix.' Dev hears: 'Client A's CEO emailed our VP four times today, so their ticket jumps to the front of the queue.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "tickets.sort((a, b) => b.clientComplaintVolume - a.clientComplaintVolume); // Squeaky wheel prioritized",
+      "explanation": "Prioritizing tasks based on vocal escalation rather than measured severity."
+    },
+    "etymology": "19th-century American proverb popularized by humorist Josh Billings.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Prioritizing the most vocal stakeholder demand.",
+    "tags": [
+      "Triage",
+      "Customer Success",
+      "Backlog Refinement",
+      "Prioritization"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Backlog Refinement",
+        "speaker": "Product Manager",
+        "quote": "We are fast-tracking the CSV export fix because Client A's CTO is emailing hourly—the squeaky wheel gets the grease, but we will return to roadmap items on Monday.",
+        "translatedQuote": "We are expediting this specific client request due to urgent escalation."
+      }
+    ]
+  },
+  {
+    "id": "throwing-over-the-wall",
+    "term": "Throwing Over the Wall (Throwing It Over the Fence)",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/ˈθroʊ.ɪŋ ˈoʊ.vər ðə wɔːl/",
+    "literalDefinition": "Analogy: Heaving a heavy crate over a high brick courtyard wall without knowing or caring who is on the other side to catch it.",
+    "realMeaning": "Passing completed code or unverified builds to QA or Ops without documentation, context, or ongoing deployment support.",
+    "corporateTranslation": "DevOps Lead says: 'We don't throw code over the wall here.' Dev hears: 'You are responsible for monitoring your own services in staging and production.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "function releaseWorkflow() {\n  git.push('main');\n  // ❌ Throwing over the wall: dev goes home without checking logs\n  notifyOpsTeam('Good luck, you own it now');\n}",
+      "explanation": "Disconnecting development ownership from downstream operations and testing."
+    },
+    "etymology": "20th-century industrial manufacturing and waterfall software engineering phrase describing siloed departments.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Siloed handoff / Unassisted cross-departmental transfer.",
+    "tags": [
+      "DevOps",
+      "CI/CD",
+      "Cross-Functional",
+      "Culture"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "DevOps Engineer",
+        "quote": "Our CI/CD pipeline ensures developers monitor production telemetry during rollout rather than throwing builds over the wall to operations.",
+        "translatedQuote": "We promote shared ownership between development and operations throughout the release cycle."
+      }
+    ]
+  },
+  {
+    "id": "penny-wise-and-pound-foolish",
+    "term": "Penny Wise and Pound Foolish",
+    "category": "Management",
+    "seniority": "C-Suite",
+    "phonetic": "/ˈpɛn.i waɪz ænd paʊnd ˈfuː.lɪʃ/",
+    "literalDefinition": "Analogy: Obsessively hunting through sofa cushions to save 50 copper pennies while losing bags of gold pound coins through careless bookkeeping.",
+    "realMeaning": "Saving tiny, trivial amounts of money on tooling or cloud infrastructure while losing enormous sums in lost developer productivity or customer churn.",
+    "corporateTranslation": "Staff SRE says: 'Canceling our $100/mo error tracking tool is penny wise and pound foolish.' Dev hears: 'Saving $100 costs us $10,000 when an undetected checkout bug runs all night.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "const savings = 50; // $50/mo saved by running 1 shared slow CI runner\nconst developerTimeLostCost = 15000; // $15,000 in blocked developer hours!",
+      "explanation": "Optimizing for trivial micro-savings at the expense of massive operational overhead."
+    },
+    "etymology": "Recorded in Robert Burton's 'The Anatomy of Melancholy' (1621), referring to British currency denominations.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "False economy / Short-sighted micro-frugality.",
+    "tags": [
+      "Tooling",
+      "Budget",
+      "Productivity",
+      "ROI"
+    ],
+    "popularityScore": 96,
+    "examples": [
+      {
+        "context": "1-on-1 Meeting",
+        "speaker": "Staff Infrastructure Lead",
+        "quote": "Refusing to pay for faster CI runner instances to save $150 a month is penny wise and pound foolish when it wastes 40 engineering hours a week waiting for builds.",
+        "translatedQuote": "Investing in faster build infrastructure yields a substantial return in developer velocity."
+      }
+    ]
+  },
+  {
+    "id": "slippery-slope",
+    "term": "Slippery Slope",
+    "category": "Strategy",
+    "seniority": "Senior Architect",
+    "phonetic": "/ˈslɪp.ə.ri sloʊp/",
+    "literalDefinition": "Analogy: Taking one step onto a steep, wet ice slope where it is impossible to gain traction, causing an uncontrollable slide to the bottom.",
+    "realMeaning": "A decision that appears harmless on its own, but sets a dangerous precedent that will inevitably lead to a chain of unmanageable technical or security compromises.",
+    "corporateTranslation": "Security Lead says: 'Bypassing auth for this one test webhook is a slippery slope.' Dev hears: 'If we allow this once, every vendor will demand unauthenticated endpoints.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// ❌ Slippery slope precedent:\nif (vendor === 'SpecialClient') {\n  bypassAllSecurityChecks(); // Sets dangerous precedent\n}",
+      "explanation": "Creating ad-hoc exceptions that undermine systemic architecture and security."
+    },
+    "etymology": "Philosophical and legal logic terminology from the mid-20th century regarding precedent.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Dangerous precedent / Compounding risk factor.",
+    "tags": [
+      "Security",
+      "Architecture",
+      "Governance",
+      "Standards"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Security Architect",
+        "quote": "Disabling CORS protection for this one marketing partner is a slippery slope that weakens our entire API security model.",
+        "translatedQuote": "Granting security exemptions creates precedents that compromise our systemic guardrails."
+      }
+    ]
+  },
+  {
+    "id": "gold-plating",
+    "term": "Gold Plating (Scope Gold-Plating)",
+    "category": "Management",
+    "seniority": "Product Manager",
+    "phonetic": "/ɡoʊld ˈpleɪ.tɪŋ/",
+    "literalDefinition": "Analogy: Taking a perfectly functional stainless steel hammer and plating it with 24-karat gold purely for unnecessary aesthetic luxury.",
+    "realMeaning": "Adding unrequested features, excessive polish, or over-engineered customizations to a task that has already satisfied its acceptance criteria.",
+    "corporateTranslation": "Scrum Master says: 'Let's avoid gold-plating this ticket.' Dev hears: 'Ship the working table component now; don't spend three days adding 3D canvas chart animations.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Requirement: Display user email in a list\n// ❌ Gold plating: Building custom 3D WebGL particle avatar renderer\nfunction renderUserItem(user) {\n  return <span>{user.email}</span>; // Clean, sufficient\n}",
+      "explanation": "Adding unrequested architectural and visual complexity beyond the agreed specification."
+    },
+    "etymology": "Project management and industrial engineering term from the mid-20th century.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Unrequested scope embellishment / Over-engineering beyond specifications.",
+    "tags": [
+      "Agile",
+      "Scope",
+      "Productivity",
+      "Sprint Delivery"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Scrum Master",
+        "quote": "The ticket was to add a CSV export button. Let's avoid gold-plating it with real-time PDF conversion and custom chart generation until users ask for it.",
+        "translatedQuote": "Let us deliver the core CSV export requirement without expanding unrequested features."
+      }
+    ]
+  },
+  {
+    "id": "pave-the-cowpath",
+    "term": "Pave the Cowpath",
+    "category": "Strategy",
+    "seniority": "Tech Lead",
+    "phonetic": "/peɪv ðə ˈkaʊ.pæθ/",
+    "literalDefinition": "Analogy: Instead of forcing pedestrians to walk on square concrete paths, paving real roads directly over the natural dirt trails that cows carved.",
+    "realMeaning": "Automating and standardizing the natural, informal workflows and habits developers or users already use, rather than imposing an unnatural new process.",
+    "corporateTranslation": "DX Lead says: 'Let's pave the cowpath for test runners.' Dev hears: 'Developers already use npm run test:watch; let us build our new lint scripts into that command.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Paving the cowpath:\n// Developers naturally run `git commit`, so integrate checks seamlessly into pre-commit hooks",
+      "explanation": "Building tools into existing user habits rather than requiring friction-filled new procedures."
+    },
+    "etymology": "Urban planning and software architecture philosophy inspired by Ralph Waldo Emerson's essays on Boston streets.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Formalizing natural workflows / Standardizing organic user habits.",
+    "tags": [
+      "Developer Experience",
+      "Tooling",
+      "Workflow",
+      "Product Design"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Architecture Review",
+        "speaker": "Principal DX Engineer",
+        "quote": "Instead of forcing everyone to learn a brand new CLI tool, let's pave the cowpath by adding our security scan directly into the existing pull request check.",
+        "translatedQuote": "We will integrate security scanning into existing PR workflows to minimize friction."
+      }
+    ]
+  },
+  {
+    "id": "boiling-the-frog",
+    "term": "Boiling the Frog (Boiled Frog Syndrome)",
+    "category": "Operations",
+    "seniority": "DevOps Ninja",
+    "phonetic": "/ˈbɔɪ.lɪŋ ðə frɒɡ/",
+    "literalDefinition": "Analogy: A frog placed into cool water that is heated up by 0.1 degrees per minute fails to notice the danger until it is too late to jump out.",
+    "realMeaning": "Failing to notice gradual deterioration in build speed, code quality, or system reliability because the decay occurs slowly in imperceptible increments.",
+    "corporateTranslation": "DevOps Lead says: 'We are boiling the frog on CI build times.' Dev hears: 'Build times crept from 3 minutes to 45 minutes over the year because nobody stopped each 15-second increase.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// Sprint 1: CI 3m\n// Sprint 10: CI 15m\n// Sprint 30: CI 48m (❌ Nobody noticed the gradual 1m increase per sprint)",
+      "explanation": "Gradual compounding deterioration going undetected due to lack of baseline alerts."
+    },
+    "etymology": "19th-century biological thought experiment that became an established systems dynamics metaphor.",
+    "formality": "Internal Team Only",
+    "safeAlternative": "Gradual compounding degradation / Unmonitored incremental decline.",
+    "tags": [
+      "Technical Debt",
+      "CI/CD",
+      "Monitoring",
+      "Systems Thinking"
+    ],
+    "popularityScore": 97,
+    "examples": [
+      {
+        "context": "Sprint Retrospective",
+        "speaker": "Site Reliability Lead",
+        "quote": "Our staging memory usage has doubled over the past 6 months without any single spike—we are boiling the frog. Let's set up memory regression budgets.",
+        "translatedQuote": "We must establish automated telemetry thresholds to catch gradual memory leaks before they cause outages."
+      }
+    ]
+  },
+  {
+    "id": "can-of-worms",
+    "term": "Open a Can of Worms",
+    "category": "Coding",
+    "seniority": "Tech Lead",
+    "phonetic": "/ˈoʊ.pən ə kæn ʌv wɜːrmz/",
+    "literalDefinition": "Analogy: Opening a metal tin of live earthworms that instantly wriggle outwards in all directions, making them impossible to stuff back inside.",
+    "realMeaning": "Attempting what seems like a simple, 1-line refactor or dependency upgrade, only to uncover an interconnected web of legacy bugs and architectural debt.",
+    "corporateTranslation": "Senior Dev says: 'Upgrading that auth cookie logic opened a can of worms.' Dev hears: 'It triggered breaking changes across five microservices and we need a dedicated ticket.'",
+    "codeAnalogy": {
+      "language": "typescript",
+      "snippet": "// What seemed like a simple fix: `npm update auth-library`\n// Result: 18 peer dependency conflicts, 6 broken interfaces, and CORS errors across 4 microservices.",
+      "explanation": "A seemingly trivial modification that exposes deep hidden complexities."
+    },
+    "etymology": "Mid-20th-century American fishing idiom for unintended complications.",
+    "formality": "Safe for Clients",
+    "safeAlternative": "Uncovering complex cascading complications / Exposing unforeseen legacy issues.",
+    "tags": [
+      "Refactoring",
+      "Legacy Code",
+      "Dependencies",
+      "Troubleshooting"
+    ],
+    "popularityScore": 98,
+    "examples": [
+      {
+        "context": "Daily Standup",
+        "speaker": "Senior Developer",
+        "quote": "Upgrading the session handler opened a whole can of worms with cross-domain iframe authentication. I have logged a spike ticket so we can tackle it cleanly.",
+        "translatedQuote": "The session handler upgrade uncovered unexpected authentication complexities that require a dedicated investigation."
       }
     ]
   }

@@ -92,5 +92,95 @@ export const QUIZ_QUESTIONS: QuizQuestion[] = [
       }
     ],
     codeAnalogySnippet: `if (!actualDemand) return simpleDirectImplementation();`
+  },
+  {
+    id: 'q4',
+    scenarioText: 'A developer says: "This database race condition happens once in a blue moon, but we must protect against it before black friday."',
+    speakerRole: 'Senior Backend Engineer',
+    highlightedTerm: 'Once in a Blue Moon',
+    questionText: 'What does the phrase "Once in a Blue Moon" communicate in a software engineering context?',
+    options: [
+      {
+        text: 'A critical outage occurring every 30 days during lunar cycles',
+        isCorrect: false,
+        explanation: 'Incorrect. It is not tied to real calendar cycles.'
+      },
+      {
+        text: 'An exceedingly rare, intermittent edge condition that happens in 0.0001% of requests',
+        isCorrect: true,
+        explanation: 'Correct! "Once in a blue moon" describes extremely rare, intermittent edge-case anomalies or heisenbugs.'
+      },
+      {
+        text: 'A scheduled monthly cron job batch script',
+        isCorrect: false,
+        explanation: 'Incorrect. Scheduled jobs are predictable, not random edge conditions.'
+      },
+      {
+        text: 'A routine code styling lint failure',
+        isCorrect: false,
+        explanation: 'Incorrect. Linting errors are reproducible deterministically.'
+      }
+    ],
+    codeAnalogySnippet: `if (Math.random() < 0.0000001 && isFullMoon()) { triggerRareHeisenbug(); }`
+  },
+  {
+    id: 'q5',
+    scenarioText: 'The team spent 2 hours reviewing high-level PowerPoint diagrams. The Lead Architect says: "Let\'s move past the slides and get down to the nitty-gritty."',
+    speakerRole: 'Lead Architect',
+    highlightedTerm: 'Nitty-Gritty',
+    questionText: 'What is the team about to do when getting down to the "Nitty-Gritty"?',
+    options: [
+      {
+        text: 'Cancel the sprint and postpone the release',
+        isCorrect: false,
+        explanation: 'Incorrect. It refers to deep technical execution, not cancellation.'
+      },
+      {
+        text: 'Dive into the specific low-level code mechanics, byte buffers, schema fields, and execution plans',
+        isCorrect: true,
+        explanation: 'Correct! "Getting down to the nitty-gritty" means examining the exact low-level technical specifics and implementation details.'
+      },
+      {
+        text: 'Discuss high-level executive marketing roadmaps',
+        isCorrect: false,
+        explanation: 'Incorrect. That is high-level abstraction, the exact opposite of the nitty-gritty.'
+      },
+      {
+        text: 'Delete legacy git branches and clean up Jira tags',
+        isCorrect: false,
+        explanation: 'Incorrect. That is general repository maintenance.'
+      }
+    ],
+    codeAnalogySnippet: `const nittyGrittyDetails = { cpuRegisters, memoryPointers, byteOffset, rawSocketBuffer };`
+  },
+  {
+    id: 'q6',
+    scenarioText: 'After pulling an all-nighter, the DevOps lead sends a message to Slack: "The team is on cloud nine — the zero-downtime multi-region Kubernetes migration passed with 0 errors!"',
+    speakerRole: 'DevOps Lead',
+    highlightedTerm: 'On Cloud Nine',
+    questionText: 'What does "On Cloud Nine" describe in an engineering team context?',
+    options: [
+      {
+        text: 'Migrating servers to AWS cloud region us-east-9',
+        isCorrect: false,
+        explanation: 'Incorrect. It is an idiomatic state of happiness, not a literal cloud region.'
+      },
+      {
+        text: 'Experiencing total euphoria and relief when a high-risk production release succeeds with perfect metrics',
+        isCorrect: true,
+        explanation: 'Correct! "On cloud nine" expresses total team celebration when critical high-stakes deployments succeed without defects.'
+      },
+      {
+        text: 'Running 9 microservices simultaneously in parallel containers',
+        isCorrect: false,
+        explanation: 'Incorrect. It has nothing to do with container counts.'
+      },
+      {
+        text: 'A high-severity cloud infrastructure outage alert',
+        isCorrect: false,
+        explanation: 'Incorrect. Cloud nine is positive and celebratory.'
+      }
+    ],
+    codeAnalogySnippet: `if (migrationSuccessRate === 1.0 && prodErrorRate === 0) { teamMood = 'On Cloud Nine'; }`
   }
 ];

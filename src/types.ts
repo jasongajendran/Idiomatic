@@ -1,6 +1,6 @@
 export type WorkflowCategory = 'Coding' | 'Management' | 'Operations' | 'Strategy';
 
-export type SeniorityLevel = 'Junior Dev' | 'Senior Architect' | 'Tech Lead' | 'C-Suite' | 'DevOps Ninja';
+export type SeniorityLevel = 'Junior Dev' | 'Senior Architect' | 'Tech Lead' | 'C-Suite' | 'DevOps Ninja' | 'Product Manager' | 'BSA' | 'Tester / QA';
 
 export type FormalityRisk = 'Safe for Clients' | 'Internal Team Only' | 'High Risk / Passive Aggressive';
 
@@ -11,7 +11,7 @@ export interface CodeAnalogy {
 }
 
 export interface RealWorldExample {
-  context: 'Slack' | 'PR Review' | 'Jira' | 'Email';
+  context: 'Slack' | 'PR Review' | 'Jira' | 'Email' | 'Daily Standup' | 'Sprint Planning' | 'Sprint Retrospective' | 'Backlog Refinement' | 'Architecture Review' | 'Incident War Room' | '1-on-1 Meeting';
   speaker: string;
   quote: string;
   translatedQuote: string;
