@@ -12,7 +12,12 @@ import {
   ArrowUpDown,
   BookOpen,
   ChevronDown,
-  ChevronUp
+  ChevronUp,
+  Dice5,
+  Search,
+  X,
+  Filter,
+  ShieldCheck
 } from 'lucide-react';
 import { Idiom, WorkflowCategory } from '../types';
 import { IdiomMorphCard } from './IdiomMorphCard';
@@ -35,14 +40,16 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
   setSearchQuery
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<WorkflowCategory | 'All'>('All');
+  const [selectedFormality, setSelectedFormality] = useState<string>('All');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-  const [sortBy, setSortBy] = useState<'alphabetical' | 'category'>('alphabetical');
+  const [sortBy, setSortBy] = useState<'alphabetical' | 'category' | 'popularity'>('alphabetical');
   const [showPopularPhrases, setShowPopularPhrases] = useState(false);
 
   // Filter & Sort Logic
   const filteredIdioms = useMemo(() => {
     return idioms.filter((item) => {
       const matchesCategory = selectedCategory === 'All' || item.category === selectedCategory;
+      const matchesFormality = selectedFormality === 'All' || item.formality === selectedFormality;
       const q = searchQuery.toLowerCase().trim();
       const matchesSearch =
         !q ||
@@ -50,14 +57,16 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
         item.realMeaning.toLowerCase().includes(q) ||
         (item.corporateTranslation && item.corporateTranslation.toLowerCase().includes(q)) ||
         (item.safeAlternative && item.safeAlternative.toLowerCase().includes(q)) ||
+        (item.literalDefinition && item.literalDefinition.toLowerCase().includes(q)) ||
         (item.tags && item.tags.some((tag) => tag.toLowerCase().includes(q)));
 
-      return matchesCategory && matchesSearch;
+      return matchesCategory && matchesFormality && matchesSearch;
     }).sort((a, b) => {
       if (sortBy === 'alphabetical') return a.term.localeCompare(b.term);
+      if (sortBy === 'popularity') return (b.popularityScore || 50) - (a.popularityScore || 50);
       return a.category.localeCompare(b.category);
     });
-  }, [idioms, selectedCategory, searchQuery, sortBy]);
+  }, [idioms, selectedCategory, selectedFormality, searchQuery, sortBy]);
 
   const categories: Array<{ label: WorkflowCategory | 'All'; icon: React.ReactNode }> = [
     { label: 'All', icon: <Layers className="w-4 h-4" /> },
@@ -106,6 +115,12 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
     'Silver Lining'
   ];
 
+  const handleRandomIdiom = () => {
+    if (idioms.length === 0) return;
+    const randomIdx = Math.floor(Math.random() * idioms.length);
+    onInspect(idioms[randomIdx]);
+  };
+
   return (
     <div className="space-y-8 pb-12">
       
@@ -114,9 +129,20 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
         <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative z-10 max-w-4xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
-            <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-            <span>SOFTWARE & WORKPLACE PHRASES DICTIONARY</span>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+              <span>SOFTWARE & WORKPLACE PHRASES DICTIONARY</span>
+            </div>
+
+            <button
+              onClick={handleRandomIdiom}
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 transition-all shadow-sm group cursor-pointer"
+              title="Inspect a random idiom"
+            >
+              <Dice5 className="w-4 h-4 text-purple-400 group-hover:rotate-180 transition-transform duration-500" />
+              <span>Random Discovery</span>
+            </button>
           </div>
 
           <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
@@ -131,15 +157,38 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
           </p>
 
           {/* Quick Counter */}
-          <div className="pt-1 flex items-center gap-4 text-xs text-slate-300 font-semibold">
+          <div className="pt-1 flex flex-wrap items-center gap-4 text-xs text-slate-300 font-semibold">
             <span className="text-indigo-400 font-bold text-base">{idioms.length} Phrases & Terms</span>
-            <span className="text-slate-600">•</span>
+            <span className="text-slate-600 hidden sm:inline">•</span>
             <span className="text-slate-300">Phonetic Audio Pronunciations</span>
-            <span className="text-slate-600">•</span>
+            <span className="text-slate-600 hidden sm:inline">•</span>
             <span className="text-slate-300">Plain English Translations</span>
           </div>
 
-          {/* Popular Phrases Quick Search Chips (Collapsible, collapsed on load) */}
+          {/* Search Input inside Header on Mobile / Direct Access */}
+          <div className="pt-2">
+            <div className="relative max-w-xl">
+              <Search className="absolute left-4 top-3.5 w-4 h-4 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search phrase, meaning, tag, or plain alternative..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-11 pr-10 py-3 bg-slate-950/90 border border-white/15 rounded-2xl text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all font-sans shadow-inner"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3.5 top-3.5 text-slate-400 hover:text-white transition-colors"
+                  title="Clear search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Popular Phrases Quick Search Chips (Collapsible) */}
           <div className="pt-2">
             <button
               onClick={() => setShowPopularPhrases(!showPopularPhrases)}
@@ -181,27 +230,45 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
       {/* Filter Controls Bar */}
       <div className="space-y-4">
         
-        {/* Category Tabs */}
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {categories.map((cat) => (
-            <button
-              key={cat.label}
-              onClick={() => setSelectedCategory(cat.label)}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
-                selectedCategory === cat.label
-                  ? 'bg-indigo-600 text-white shadow-md border border-indigo-400/40'
-                  : 'bg-slate-900 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-800'
-              }`}
-            >
-              {cat.icon}
-              <span>{cat.label}</span>
-              {cat.label !== 'All' && (
-                <span className="px-2 py-0.5 text-[11px] bg-slate-950/60 rounded-md text-slate-300">
-                  {idioms.filter(i => i.category === cat.label).length}
-                </span>
-              )}
-            </button>
-          ))}
+        {/* Category Tabs & Formality Filter */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {categories.map((cat) => (
+              <button
+                key={cat.label}
+                onClick={() => setSelectedCategory(cat.label)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 ${
+                  selectedCategory === cat.label
+                    ? 'bg-indigo-600 text-white shadow-md border border-indigo-400/40'
+                    : 'bg-slate-900 text-slate-400 border border-white/10 hover:text-white hover:bg-slate-800'
+                }`}
+              >
+                {cat.icon}
+                <span>{cat.label}</span>
+                {cat.label !== 'All' && (
+                  <span className="px-2 py-0.5 text-[11px] bg-slate-950/60 rounded-md text-slate-300">
+                    {idioms.filter(i => i.category === cat.label).length}
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 text-xs text-slate-300 bg-slate-900 px-3 py-1.5 rounded-xl border border-white/10 font-semibold shrink-0">
+              <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+              <select
+                value={selectedFormality}
+                onChange={(e) => setSelectedFormality(e.target.value)}
+                className="bg-transparent text-slate-200 focus:outline-none cursor-pointer text-xs"
+              >
+                <option value="All" className="bg-slate-900">All Formality Levels</option>
+                <option value="Safe for Clients" className="bg-slate-900">Safe for Clients</option>
+                <option value="Internal Team Only" className="bg-slate-900">Internal Team Only</option>
+                <option value="Casual Chat Only" className="bg-slate-900">Casual Chat Only</option>
+              </select>
+            </div>
+          </div>
         </div>
 
         {/* Sorting & Layout View Toggle */}
@@ -220,6 +287,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                 className="bg-transparent text-slate-200 focus:outline-none cursor-pointer text-xs"
               >
                 <option value="alphabetical" className="bg-slate-900">Alphabetical (A-Z)</option>
+                <option value="popularity" className="bg-slate-900">Most Popular</option>
                 <option value="category" className="bg-slate-900">By Category</option>
               </select>
             </div>
@@ -260,11 +328,12 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
           <button
             onClick={() => {
               setSelectedCategory('All');
+              setSelectedFormality('All');
               setSearchQuery('');
             }}
-            className="mt-4 px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-500 transition-colors shadow-lg"
+            className="mt-4 px-5 py-2.5 bg-indigo-600 text-white rounded-xl text-xs font-bold hover:bg-indigo-500 transition-colors shadow-lg min-h-[44px]"
           >
-            Reset Search
+            Reset All Filters
           </button>
         </div>
       ) : viewMode === 'grid' ? (
@@ -311,7 +380,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                     e.stopPropagation();
                     onInspect(idiom);
                   }}
-                  className="px-3.5 py-1.5 rounded-lg bg-indigo-600/20 text-indigo-300 hover:bg-indigo-600 hover:text-white text-xs font-bold transition-colors"
+                  className="px-3.5 py-1.5 rounded-lg bg-indigo-600/20 text-indigo-300 hover:bg-indigo-600 hover:text-white text-xs font-bold transition-colors min-h-[36px]"
                 >
                   Details
                 </button>
