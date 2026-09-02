@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Users, 
   Calendar, 
-  Copy, 
-  Check, 
   Volume2, 
   Search, 
   Sparkles, 
@@ -35,7 +33,6 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
   const [selectedCeremony, setSelectedCeremony] = useState<AgileCeremony | 'All'>('All');
   const [selectedTone, setSelectedTone] = useState<PhraseTone | 'All'>('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [copiedId, setCopiedId] = useState<string | null>(null);
   const [speakingId, setSpeakingId] = useState<string | null>(null);
 
   const roles: Array<{ role: MeetingRole | 'All'; icon: React.ReactNode; label: string }> = [
@@ -77,12 +74,6 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
       return matchRole && matchCeremony && matchTone && matchSearch;
     });
   }, [selectedRole, selectedCeremony, selectedTone, searchQuery]);
-
-  const handleCopy = (phrase: MeetingPhrase) => {
-    navigator.clipboard.writeText(phrase.phrase);
-    setCopiedId(phrase.id);
-    setTimeout(() => setCopiedId(null), 2200);
-  };
 
   const handleSpeak = async (phrase: MeetingPhrase) => {
     setSpeakingId(phrase.id);
@@ -161,8 +152,8 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
               <span>Dev, QA, BSA, IM, Colleague, Gen-Z</span>
             </div>
             <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
-              <span className="text-cyan-400 font-black text-lg">1-Click</span>
-              <span>Zoom/Slack Copy</span>
+              <span className="text-cyan-400 font-black text-lg">Audio</span>
+              <span>Spoken Pronunciation</span>
             </div>
           </div>
         </div>
@@ -266,7 +257,6 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <AnimatePresence mode="popLayout">
             {filteredPhrases.map((phrase) => {
-              const isCopied = copiedId === phrase.id;
               const isSpeaking = speakingId === phrase.id;
 
               return (
@@ -335,8 +325,8 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Bottom Action Row: Quick Copy & TTS Speech */}
-                  <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between gap-3">
+                  {/* Bottom Action Row: Audio Speech */}
+                  <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">
                     <div className="flex flex-wrap items-center gap-1.5">
                       {phrase.tags.map((tag) => (
                         <span 
@@ -351,36 +341,16 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                     <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => handleSpeak(phrase)}
-                        className={`p-2.5 rounded-xl border transition-all min-h-[44px] min-w-[44px] flex items-center justify-center ${
+                        className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-all min-h-[40px] cursor-pointer text-xs font-semibold ${
                           isSpeaking 
-                            ? 'bg-indigo-500 text-white border-indigo-400 animate-pulse' 
-                            : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white hover:bg-slate-700'
+                            ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md shadow-indigo-500/30' 
+                            : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
                         }`}
                         title="Listen to pronunciation & delivery"
+                        aria-label={`Listen to phrase: ${phrase.phrase}`}
                       >
-                        <Volume2 className="w-4 h-4" />
-                      </button>
-
-                      <button
-                        onClick={() => handleCopy(phrase)}
-                        className={`flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold border transition-all min-h-[44px] ${
-                          isCopied
-                            ? 'bg-emerald-600 text-white border-emerald-400 shadow-md shadow-emerald-500/25'
-                            : 'bg-indigo-600 hover:bg-indigo-500 text-white border-indigo-400/30 shadow-md shadow-indigo-500/20'
-                        }`}
-                        title="Copy phrase to clipboard"
-                      >
-                        {isCopied ? (
-                          <>
-                            <Check className="w-4 h-4" />
-                            <span>Copied!</span>
-                          </>
-                        ) : (
-                          <>
-                            <Copy className="w-4 h-4" />
-                            <span>Quick Copy</span>
-                          </>
-                        )}
+                        <Volume2 className="w-4 h-4 text-indigo-400" />
+                        <span>{isSpeaking ? 'Playing...' : 'Audio Pronunciation'}</span>
                       </button>
                     </div>
                   </div>

@@ -8,13 +8,12 @@ import {
   MessageSquare,
   CheckCircle2,
   BookOpen,
-  Copy,
-  Check,
   Tag,
   Shield,
   Layers,
   ArrowRight,
-  Eye
+  Eye,
+  Code2
 } from 'lucide-react';
 import { Idiom } from '../types';
 import { speakTerm, speakSentence } from '../utils/speechUtils';
@@ -36,7 +35,6 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
   onSelectRelated
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [copiedSafe, setCopiedSafe] = useState(false);
   const [speakingExampleIdx, setSpeakingExampleIdx] = useState<number | null>(null);
 
   if (!idiom) return null;
@@ -51,12 +49,6 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
     setSpeakingExampleIdx(idx);
     await speakSentence(sentence);
     setSpeakingExampleIdx(null);
-  };
-
-  const handleCopySafe = () => {
-    navigator.clipboard.writeText(idiom.safeAlternative || idiom.term);
-    setCopiedSafe(true);
-    setTimeout(() => setCopiedSafe(false), 2000);
   };
 
   // Find 3 related idioms from the same category or sharing tags
@@ -82,97 +74,119 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex justify-end bg-slate-950/80 backdrop-blur-md">
-        
+      <div 
+        id="idiom-detail-modal-overlay"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 md:p-6 lg:p-8 bg-slate-950/85 backdrop-blur-md overflow-y-auto"
+      >
         {/* Backdrop click to close */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="absolute inset-0"
+          className="fixed inset-0"
         />
 
-        {/* Slide-over Sheet Panel */}
+        {/* Centered Responsive Modal Container */}
         <motion.div
-          initial={{ x: '100%' }}
-          animate={{ x: 0 }}
-          exit={{ x: '100%' }}
-          transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="relative z-10 w-full max-w-xl h-full bg-slate-950/95 border-l border-white/10 p-6 sm:p-8 space-y-6 overflow-y-auto shadow-2xl flex flex-col justify-between backdrop-blur-2xl"
+          id="idiom-detail-modal-card"
+          initial={{ opacity: 0, scale: 0.94, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.94, y: 20 }}
+          transition={{ type: 'spring', damping: 25, stiffness: 260 }}
+          className="relative z-10 w-full max-w-3xl max-h-[92vh] sm:max-h-[88vh] bg-slate-900/98 border border-white/15 rounded-2xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl my-auto"
         >
-          <div className="space-y-6">
-            
-            {/* Top Sheet Actions */}
-            <div className="flex items-center justify-between pb-4 border-b border-white/10">
-              <div className="flex items-center gap-2 flex-wrap">
-                <span className="px-3 py-1 rounded-xl text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                  {idiom.category}
+          {/* Modal Header */}
+          <div className="flex items-center justify-between p-4 sm:p-6 border-b border-white/10 bg-slate-950/70 shrink-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <span className="px-3 py-1 rounded-xl text-xs font-semibold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                {idiom.category}
+              </span>
+              {idiom.seniority && (
+                <span className="px-2.5 py-1 rounded-xl text-xs font-mono bg-slate-900 text-slate-400 border border-white/10">
+                  {idiom.seniority}
                 </span>
-                {idiom.seniority && (
-                  <span className="px-2.5 py-1 rounded-xl text-xs font-mono bg-slate-900 text-slate-400 border border-white/10">
-                    {idiom.seniority}
-                  </span>
-                )}
-                {idiom.formality && (
-                  <span className={`px-2.5 py-1 rounded-xl text-xs font-medium border ${getFormalityColor(idiom.formality)}`}>
-                    {idiom.formality}
-                  </span>
-                )}
-              </div>
-
-              <div className="flex items-center gap-2 shrink-0">
-                <button
-                  onClick={() => onToggleBookmark(idiom.id)}
-                  className={`p-2.5 rounded-xl border transition-all ${
-                    isBookmarked
-                      ? 'bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-sm'
-                      : 'bg-slate-900 text-slate-400 border-white/10 hover:text-white'
-                  }`}
-                  title={isBookmarked ? 'Bookmarked' : 'Bookmark phrase'}
-                >
-                  <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-amber-400' : ''}`} />
-                </button>
-
-                <button
-                  onClick={onClose}
-                  className="p-2.5 rounded-xl bg-slate-900 text-slate-400 hover:text-white border border-white/10 transition-all"
-                  title="Close Inspector"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
+              )}
+              {idiom.formality && (
+                <span className={`px-2.5 py-1 rounded-xl text-xs font-medium border ${getFormalityColor(idiom.formality)}`}>
+                  {idiom.formality}
+                </span>
+              )}
             </div>
 
-            {/* Title, Phonetic & Audio */}
-            <div className="space-y-2">
-              <div className="flex items-center justify-between flex-wrap gap-2">
-                <h2 className="text-2xl sm:text-3xl font-black text-white">{idiom.term}</h2>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                id="modal-toggle-bookmark-btn"
+                onClick={() => onToggleBookmark(idiom.id)}
+                className={`p-2.5 rounded-xl border transition-all cursor-pointer min-h-[40px] min-w-[40px] flex items-center justify-center ${
+                  isBookmarked
+                    ? 'bg-amber-500/20 text-amber-400 border-amber-500/40 shadow-sm'
+                    : 'bg-slate-900 text-slate-400 border-white/10 hover:text-white hover:bg-slate-800'
+                }`}
+                title={isBookmarked ? 'Bookmarked' : 'Bookmark phrase'}
+                aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark phrase'}
+              >
+                <Bookmark className={`w-4 h-4 ${isBookmarked ? 'fill-amber-400 text-amber-400' : ''}`} />
+              </button>
+
+              <button
+                id="modal-close-icon-btn"
+                onClick={onClose}
+                className="p-2.5 rounded-xl bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-white/10 transition-all cursor-pointer min-h-[40px] min-w-[40px] flex items-center justify-center"
+                title="Close Details"
+                aria-label="Close Details Modal"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Modal Scrollable Content Body */}
+          <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
+            
+            {/* Title, Phonetic & Audio Pronunciation */}
+            <div className="space-y-3 pb-2 border-b border-white/10">
+              <div className="flex items-center justify-between flex-wrap gap-3">
+                <div className="flex items-baseline gap-2.5 flex-wrap">
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+                    {idiom.term}
+                  </h2>
+                  {idiom.phonetic && (
+                    <span className="font-mono text-xs sm:text-sm text-indigo-300 bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-500/30">
+                      {idiom.phonetic}
+                    </span>
+                  )}
+                </div>
+
                 <button
+                  id="modal-pronounce-term-btn"
                   onClick={handleSpeak}
-                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border text-xs font-mono font-bold transition-all ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer min-h-[40px] ${
                     isPlaying
-                      ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse'
-                      : 'bg-slate-900 text-slate-300 border-white/10 hover:bg-slate-800'
+                      ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md shadow-indigo-500/30'
+                      : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
                   }`}
+                  title="Listen to pronunciation"
+                  aria-label={`Pronounce ${idiom.term}`}
                 >
-                  <Volume2 className="w-4 h-4 text-indigo-400" />
-                  <span>{idiom.phonetic || 'Listen'}</span>
+                  <Volume2 className="w-4 h-4 text-indigo-300" />
+                  <span>{isPlaying ? 'Playing...' : 'Audio Pronunciation'}</span>
                 </button>
               </div>
-              <p className="text-sm sm:text-base text-slate-200 leading-relaxed font-sans font-medium">
+
+              <p className="text-base sm:text-lg text-slate-100 leading-relaxed font-sans font-medium">
                 {idiom.realMeaning}
               </p>
             </div>
 
             {/* Literal Visual Metaphor */}
             {idiom.literalDefinition && (
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-900 to-indigo-950/40 border border-white/10 space-y-1.5 shadow-inner">
-                <span className="text-[11px] font-bold text-cyan-400 flex items-center gap-1.5 uppercase tracking-wider">
-                  <Eye className="w-3.5 h-3.5 text-cyan-400" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-950 to-indigo-950/40 border border-white/10 space-y-1.5 shadow-inner">
+                <span className="text-[11px] sm:text-xs font-bold text-cyan-400 flex items-center gap-1.5 uppercase tracking-wider">
+                  <Eye className="w-4 h-4 text-cyan-400" />
                   Visual & Literal Origin Analogy
                 </span>
-                <p className="text-xs sm:text-sm text-slate-300 font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
                   {idiom.literalDefinition}
                 </p>
               </div>
@@ -180,9 +194,9 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 
             {/* Practical Subtext & Meeting Translation */}
             {idiom.corporateTranslation && (
-              <div className="p-4 rounded-2xl bg-slate-900/90 border border-white/10 space-y-1.5 shadow-inner">
-                <span className="text-[11px] font-bold text-purple-400 flex items-center gap-1.5 uppercase tracking-wider">
-                  <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/90 border border-purple-500/20 space-y-2 shadow-inner">
+                <span className="text-[11px] sm:text-xs font-bold text-purple-300 flex items-center gap-1.5 uppercase tracking-wider">
+                  <Sparkles className="w-4 h-4 text-purple-400" />
                   In Tech Meetings & Slack Chats
                 </span>
                 <p className="text-xs sm:text-sm text-slate-200 italic font-medium leading-relaxed font-sans">
@@ -195,29 +209,29 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
             {idiom.examples && idiom.examples.length > 0 && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
-                    <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
+                  <span className="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                    <MessageSquare className="w-4 h-4 text-indigo-400" />
                     Real-World Workplace Dialogue
                   </span>
-                  <span className="text-[11px] text-slate-400 font-medium">Tap speaker icon to listen</span>
+                  <span className="text-[11px] text-slate-400 font-medium">Click audio to listen</span>
                 </div>
-                <div className="space-y-2.5">
+                <div className="space-y-3">
                   {idiom.examples.map((ex, idx) => (
-                    <div key={idx} className="rounded-xl bg-slate-900/90 p-4 border border-slate-700/60 shadow-md space-y-2 hover:border-indigo-500/40 transition-colors">
+                    <div key={idx} className="rounded-xl bg-slate-950/85 p-4 border border-slate-700/60 shadow-md space-y-2.5 hover:border-indigo-500/40 transition-colors">
                       <div className="flex items-center justify-between gap-2 text-xs font-mono">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <span className="text-indigo-300 font-bold">{ex.speaker}</span>
                           <span className="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[11px] font-sans border border-slate-700">
                             {ex.context}
                           </span>
                         </div>
-                        {/* Audio Icon on Example Quote */}
+                        {/* Audio Button on Example Quote */}
                         <button
                           onClick={() => handleSpeakExample(ex.quote, idx)}
-                          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-sans font-semibold transition-all cursor-pointer min-h-[32px] ${
+                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-sans font-semibold transition-all cursor-pointer min-h-[34px] ${
                             speakingExampleIdx === idx
                               ? 'bg-indigo-600 text-white border-indigo-400 shadow-md animate-pulse'
-                              : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600/30 hover:text-white'
+                              : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
                           }`}
                           title="Listen to how this sentence is spoken"
                           aria-label={`Listen to quote: ${ex.quote}`}
@@ -239,27 +253,36 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
             )}
 
             {/* Direct Alternative / Plain Language */}
-            <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/10 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans flex items-start justify-between gap-3">
-              <div className="space-y-1">
+            {idiom.safeAlternative && (
+              <div className="p-4 rounded-2xl bg-slate-950/90 border border-emerald-500/30 text-xs sm:text-sm leading-relaxed font-sans space-y-1">
                 <div className="flex items-center gap-1.5 font-bold text-emerald-300">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                   <span>Plain English Alternative</span>
                 </div>
-                <p className="text-slate-200 font-medium">"{idiom.safeAlternative}"</p>
+                <p className="text-slate-100 font-medium">"{idiom.safeAlternative}"</p>
               </div>
-              <button
-                onClick={handleCopySafe}
-                className="p-2 rounded-xl bg-slate-800 text-slate-400 hover:text-white border border-white/5 transition-all shrink-0"
-                title="Copy safe wording"
-              >
-                {copiedSafe ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
+            )}
+
+            {/* Code Analogy if available */}
+            {idiom.codeAnalogy && (
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/95 border border-slate-700/80 space-y-2 font-mono">
+                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300 uppercase tracking-wider">
+                  <Code2 className="w-4 h-4 text-amber-400" />
+                  <span>Code Analogy: {idiom.codeAnalogy.concept}</span>
+                </div>
+                <pre className="p-3 bg-slate-900 rounded-xl text-xs text-slate-200 overflow-x-auto border border-white/5 leading-relaxed font-mono">
+                  {idiom.codeAnalogy.snippet}
+                </pre>
+                <p className="text-xs text-slate-300 font-sans">
+                  {idiom.codeAnalogy.explanation}
+                </p>
+              </div>
+            )}
 
             {/* Origin & Etymology */}
             {idiom.etymology && (
-              <div className="p-3.5 rounded-2xl bg-slate-900/80 border border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
-                <div className="flex items-center gap-1.5 font-bold text-indigo-300 mb-1">
+              <div className="p-4 rounded-2xl bg-slate-950/80 border border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans space-y-1.5">
+                <div className="flex items-center gap-1.5 font-bold text-indigo-300">
                   <BookOpen className="w-4 h-4 text-indigo-400" />
                   <span>Origin & Background</span>
                 </div>
@@ -276,7 +299,7 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {idiom.tags.map((tag) => (
-                    <span key={tag} className="px-2.5 py-1 rounded-lg text-xs bg-slate-900 text-slate-300 border border-white/5 font-mono">
+                    <span key={tag} className="px-2.5 py-1 rounded-lg text-xs bg-slate-950 text-slate-300 border border-white/10 font-mono">
                       #{tag}
                     </span>
                   ))}
@@ -286,22 +309,22 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 
             {/* Related Idioms Quick Jumps */}
             {relatedIdioms.length > 0 && onSelectRelated && (
-              <div className="space-y-2.5 pt-2 border-t border-white/10">
+              <div className="space-y-3 pt-2 border-t border-white/10">
                 <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
                   <Layers className="w-3.5 h-3.5 text-indigo-400" />
                   Explore Related Idioms
                 </span>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
                   {relatedIdioms.map((rel) => (
                     <button
                       key={rel.id}
                       onClick={() => onSelectRelated(rel)}
-                      className="p-2.5 rounded-xl bg-slate-900 hover:bg-indigo-950/40 border border-white/10 hover:border-indigo-500/40 text-left transition-all group"
+                      className="p-3 rounded-xl bg-slate-950 hover:bg-indigo-950/60 border border-white/10 hover:border-indigo-500/50 text-left transition-all group cursor-pointer"
                     >
                       <span className="text-xs font-bold text-slate-200 group-hover:text-indigo-300 block truncate">
                         {rel.term}
                       </span>
-                      <span className="text-[10px] text-slate-400 block truncate">
+                      <span className="text-[10px] text-slate-400 block truncate mt-0.5">
                         {rel.category}
                       </span>
                     </button>
@@ -312,12 +335,14 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 
           </div>
 
-          <div className="pt-6 border-t border-white/10">
+          {/* Modal Footer */}
+          <div className="p-4 sm:p-5 border-t border-white/10 bg-slate-950/70 shrink-0">
             <button
+              id="modal-close-bottom-btn"
               onClick={onClose}
-              className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm border border-indigo-400/30 transition-colors shadow-lg min-h-[44px]"
+              className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs sm:text-sm border border-indigo-400/30 transition-colors shadow-lg min-h-[44px] cursor-pointer"
             >
-              Close Inspector
+              Close Details
             </button>
           </div>
         </motion.div>
