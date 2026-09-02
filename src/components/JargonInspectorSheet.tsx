@@ -8,7 +8,6 @@ import {
   MessageSquare,
   CheckCircle2,
   BookOpen,
-  Code2,
   Copy,
   Check,
   Tag,
@@ -18,7 +17,7 @@ import {
   Eye
 } from 'lucide-react';
 import { Idiom } from '../types';
-import { speakTerm } from '../utils/speechUtils';
+import { speakTerm, speakSentence } from '../utils/speechUtils';
 import { IDIOMS_DATA } from '../data/idiomsData';
 
 interface JargonInspectorSheetProps {
@@ -38,7 +37,7 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [copiedSafe, setCopiedSafe] = useState(false);
-  const [copiedCode, setCopiedCode] = useState(false);
+  const [speakingExampleIdx, setSpeakingExampleIdx] = useState<number | null>(null);
 
   if (!idiom) return null;
 
@@ -48,18 +47,16 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
     setIsPlaying(false);
   };
 
+  const handleSpeakExample = async (sentence: string, idx: number) => {
+    setSpeakingExampleIdx(idx);
+    await speakSentence(sentence);
+    setSpeakingExampleIdx(null);
+  };
+
   const handleCopySafe = () => {
     navigator.clipboard.writeText(idiom.safeAlternative || idiom.term);
     setCopiedSafe(true);
     setTimeout(() => setCopiedSafe(false), 2000);
-  };
-
-  const handleCopyCode = () => {
-    if (idiom.codeAnalogy?.snippet) {
-      navigator.clipboard.writeText(idiom.codeAnalogy.snippet);
-      setCopiedCode(true);
-      setTimeout(() => setCopiedCode(false), 2000);
-    }
   };
 
   // Find 3 related idioms from the same category or sharing tags
@@ -194,47 +191,47 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
               </div>
             )}
 
-            {/* Under-the-Hood Code & Logic Analogy */}
-            {idiom.codeAnalogy && (
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                    <Code2 className="w-3.5 h-3.5 text-cyan-400" />
-                    Code & Logic Analogy
-                  </span>
-                  <button
-                    onClick={handleCopyCode}
-                    className="flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-cyan-300 transition-colors"
-                  >
-                    {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedCode ? 'Copied' : 'Copy snippet'}</span>
-                  </button>
-                </div>
-                <div className="rounded-2xl bg-slate-950 border border-cyan-500/20 p-4 font-mono text-xs text-cyan-200 overflow-x-auto shadow-inner">
-                  <pre className="leading-relaxed">{idiom.codeAnalogy.snippet}</pre>
-                </div>
-                <p className="text-xs text-slate-400 leading-relaxed font-sans italic px-1">
-                  💡 {idiom.codeAnalogy.explanation}
-                </p>
-              </div>
-            )}
-
             {/* Real World Dialogue Examples */}
             {idiom.examples && idiom.examples.length > 0 && (
-              <div className="space-y-2.5">
-                <span className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                  <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
-                  Real-World Workplace Dialogue
-                </span>
-                <div className="space-y-2">
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                    <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
+                    Real-World Workplace Dialogue
+                  </span>
+                  <span className="text-[11px] text-slate-400 font-medium">Tap speaker icon to listen</span>
+                </div>
+                <div className="space-y-2.5">
                   {idiom.examples.map((ex, idx) => (
-                    <div key={idx} className="rounded-xl bg-slate-900/80 p-3.5 border border-white/5 space-y-1.5">
-                      <div className="flex items-center justify-between text-xs font-mono text-slate-400">
-                        <span className="text-indigo-300 font-bold">{ex.speaker}</span>
-                        <span className="bg-slate-800 px-2 py-0.5 rounded text-[11px] text-slate-300">{ex.context}</span>
+                    <div key={idx} className="rounded-xl bg-slate-900/90 p-4 border border-slate-700/60 shadow-md space-y-2 hover:border-indigo-500/40 transition-colors">
+                      <div className="flex items-center justify-between gap-2 text-xs font-mono">
+                        <div className="flex items-center gap-2">
+                          <span className="text-indigo-300 font-bold">{ex.speaker}</span>
+                          <span className="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[11px] font-sans border border-slate-700">
+                            {ex.context}
+                          </span>
+                        </div>
+                        {/* Audio Icon on Example Quote */}
+                        <button
+                          onClick={() => handleSpeakExample(ex.quote, idx)}
+                          className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-sans font-semibold transition-all cursor-pointer min-h-[32px] ${
+                            speakingExampleIdx === idx
+                              ? 'bg-indigo-600 text-white border-indigo-400 shadow-md animate-pulse'
+                              : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600/30 hover:text-white'
+                          }`}
+                          title="Listen to how this sentence is spoken"
+                          aria-label={`Listen to quote: ${ex.quote}`}
+                        >
+                          <Volume2 className={`w-3.5 h-3.5 ${speakingExampleIdx === idx ? 'text-white' : 'text-indigo-400'}`} />
+                          <span className="text-[11px]">{speakingExampleIdx === idx ? 'Playing...' : 'Audio'}</span>
+                        </button>
                       </div>
-                      <p className="italic text-slate-100 text-xs sm:text-sm">"{ex.quote}"</p>
-                      <p className="text-xs text-indigo-200 font-sans">→ Meaning: {ex.translatedQuote}</p>
+                      <p className="italic text-slate-100 text-xs sm:text-sm font-sans leading-relaxed">
+                        "{ex.quote}"
+                      </p>
+                      <p className="text-xs text-indigo-300 font-sans font-medium">
+                        → Plain meaning: {ex.translatedQuote}
+                      </p>
                     </div>
                   ))}
                 </div>

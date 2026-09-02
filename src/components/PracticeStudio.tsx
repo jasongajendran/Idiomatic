@@ -548,12 +548,6 @@ export const PracticeStudio: React.FC = () => {
                     {currentQuestion.options[selectedOption].explanation}
                   </p>
 
-                  {currentQuestion.codeAnalogySnippet && (
-                    <div className="p-3.5 rounded-xl bg-slate-950 font-mono text-xs text-cyan-300 border border-cyan-500/20 overflow-x-auto shadow-inner">
-                      <pre>{currentQuestion.codeAnalogySnippet}</pre>
-                    </div>
-                  )}
-
                   <div className="pt-2 flex justify-end">
                     <button
                       onClick={handleNextQuiz}
@@ -701,12 +695,6 @@ export const PracticeStudio: React.FC = () => {
                       {currentFlashcard.corporateTranslation && (
                         <div className="p-3 rounded-xl bg-slate-950/70 border border-white/10 text-xs text-slate-300 italic">
                           "{currentFlashcard.corporateTranslation}"
-                        </div>
-                      )}
-
-                      {currentFlashcard.codeAnalogy && (
-                        <div className="p-3 rounded-xl bg-slate-950 font-mono text-xs text-cyan-300 border border-cyan-500/20 overflow-x-auto">
-                          <pre>{currentFlashcard.codeAnalogy.snippet}</pre>
                         </div>
                       )}
                     </div>

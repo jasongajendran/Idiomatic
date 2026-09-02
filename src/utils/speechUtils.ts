@@ -64,3 +64,47 @@ export function stopSpeaking() {
   }
 }
 
+export function speakSentence(text: string, rate: number = 0.95): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      console.warn('Web Speech API is not supported in this browser.');
+      resolve(false);
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    // Clean outer quotes or brackets while preserving slashes and full sentence flow
+    const cleaned = text
+      .replace(/^["“”'']|["“”'']$/g, '')
+      .replace(/\[.*?\]/g, '')
+      .trim();
+
+    const utterance = new SpeechSynthesisUtterance(cleaned || text);
+    utterance.rate = rate;
+    utterance.pitch = 1.0;
+
+    const voices = cachedVoices.length > 0 ? cachedVoices : window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(
+      v => v.lang.startsWith('en') && (
+        v.name.includes('Natural') || 
+        v.name.includes('Google') || 
+        v.name.includes('Samantha') || 
+        v.name.includes('Daniel') ||
+        v.name.includes('Alex') ||
+        v.name.includes('Arthur')
+      )
+    ) || voices.find(v => v.lang.startsWith('en'));
+
+    if (englishVoice) {
+      utterance.voice = englishVoice;
+    }
+
+    utterance.onend = () => resolve(true);
+    utterance.onerror = () => resolve(false);
+
+    window.speechSynthesis.speak(utterance);
+  });
+}
+
+

@@ -8,7 +8,9 @@ import {
   Search,
   BookOpen,
   MessageSquare,
-  Users
+  Users,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 interface NavbarProps {
@@ -18,6 +20,8 @@ interface NavbarProps {
   onOpenBookmarks: () => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
+  theme: 'dark' | 'light';
+  onToggleTheme: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
@@ -26,7 +30,9 @@ export const Navbar: React.FC<NavbarProps> = ({
   bookmarksCount,
   onOpenBookmarks,
   searchQuery,
-  setSearchQuery
+  setSearchQuery,
+  theme,
+  onToggleTheme
 }) => {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/10 bg-slate-950/80 backdrop-blur-2xl shadow-xl shadow-black/40">
@@ -51,7 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 v2.6
               </span>
             </div>
-            <p className="text-[10px] sm:text-[11px] font-sans text-slate-400 hidden md:block">Tech Vernacular & System Logic Analogies</p>
+            <p className="text-[10px] sm:text-[11px] font-sans text-slate-300 hidden md:block">Tech Vernacular & Meeting Dialogue Playbook</p>
           </div>
         </div>
 
@@ -119,10 +125,25 @@ export const Navbar: React.FC<NavbarProps> = ({
             />
           </div>
 
+          {/* Theme Switcher Button */}
+          <button
+            onClick={onToggleTheme}
+            className="relative flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white hover:border-indigo-400/60 transition-all backdrop-blur-md shadow-md min-h-[40px] min-w-[40px] cursor-pointer"
+            title={theme === 'dark' ? 'Switch to Bright Mode' : 'Switch to Dark Mode'}
+            aria-label={theme === 'dark' ? 'Switch to Bright Mode' : 'Switch to Dark Mode'}
+          >
+            {theme === 'dark' ? (
+              <Sun className="w-4 h-4 text-amber-400" />
+            ) : (
+              <Moon className="w-4 h-4 text-indigo-300" />
+            )}
+          </button>
+
           <button
             onClick={onOpenBookmarks}
-            className="relative flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-white/10 text-slate-200 hover:text-white hover:border-white/20 transition-all backdrop-blur-md shadow-md min-h-[40px] min-w-[40px]"
+            className="relative flex items-center justify-center p-2.5 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:text-white hover:border-white/20 transition-all backdrop-blur-md shadow-md min-h-[40px] min-w-[40px] cursor-pointer"
             title="Saved Bookmarks"
+            aria-label="Saved Bookmarks"
           >
             <Bookmark className="w-4 h-4 text-amber-400" />
             {bookmarksCount > 0 && (

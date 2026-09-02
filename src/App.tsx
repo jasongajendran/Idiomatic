@@ -18,6 +18,23 @@ export default function App() {
   const [inspectedIdiom, setInspectedIdiom] = useState<Idiom | null>(null);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [theme, setTheme] = useState<'dark' | 'light'>(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('idiomatic_theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+    }
+    return 'dark';
+  });
+
+  const toggleTheme = () => {
+    setTheme((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('idiomatic_theme', next);
+      }
+      return next;
+    });
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,13 +79,13 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500 selection:text-white flex flex-col justify-between relative overflow-x-hidden">
+    <div className={`min-h-screen ${theme === 'dark' ? 'bg-[#0b101e] text-slate-100' : 'bg-slate-900 text-slate-100'} font-sans antialiased selection:bg-indigo-500 selection:text-white flex flex-col justify-between relative overflow-x-hidden transition-colors duration-300`}>
       
-      {/* Background Ambient Aesthetics */}
+      {/* Background Ambient Aesthetics with pleasing contrast highlights */}
       <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[120px]" />
-        <div className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-purple-600/10 rounded-full blur-[140px]" />
-        <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-emerald-600/10 rounded-full blur-[150px]" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-600/15 rounded-full blur-[130px]" />
+        <div className="absolute top-1/3 right-10 w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[140px]" />
+        <div className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-teal-600/15 rounded-full blur-[150px]" />
       </div>
 
       <div className="relative z-10">
@@ -80,6 +97,8 @@ export default function App() {
           onOpenBookmarks={() => setIsBookmarksOpen(true)}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          theme={theme}
+          onToggleTheme={toggleTheme}
         />
 
         {/* Main View Container with Smooth Tab Transitions */}
