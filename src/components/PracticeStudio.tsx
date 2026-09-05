@@ -42,7 +42,13 @@ interface DynamicQuestion {
   }>;
 }
 
-export const PracticeStudio: React.FC = () => {
+interface PracticeStudioProps {
+  isDistractionFree?: boolean;
+}
+
+export const PracticeStudio: React.FC<PracticeStudioProps> = ({
+  isDistractionFree = false
+}) => {
   const [activeMode, setActiveMode] = useState<PracticeMode>('quiz');
 
   // ==========================
@@ -351,70 +357,109 @@ export const PracticeStudio: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-16">
+    <div className="space-y-6 pb-16">
       
-      {/* Header Banner - Artistic Flair with Vibrant Colors */}
-      <div className="relative rounded-3xl bg-gradient-to-br from-rose-950/80 via-slate-900 to-indigo-950/80 border border-pink-500/30 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 bg-rose-500/20 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
+      {/* Header Banner - Hidden in Focus Mode */}
+      {!isDistractionFree ? (
+        <div className="relative rounded-3xl bg-gradient-to-br from-rose-950/80 via-slate-900 to-indigo-950/80 border border-pink-500/30 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-rose-500/20 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-10 -left-10 w-80 h-80 bg-amber-500/20 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 shadow-inner">
-              <Gamepad2 className="w-4 h-4 text-rose-400" />
-              <span>INTERACTIVE PRACTICE STUDIO ({IDIOMS_DATA.length} IDIOMS)</span>
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30 shadow-inner">
+                <Gamepad2 className="w-4 h-4 text-rose-400" />
+                <span>INTERACTIVE PRACTICE STUDIO ({IDIOMS_DATA.length} IDIOMS)</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                Interactive Scenario <br />
+                <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-amber-300 bg-clip-text text-transparent">
+                  Challenge & Flashcard Studio
+                </span>
+              </h2>
+              <p className="text-sm text-slate-200 max-w-xl font-sans leading-relaxed">
+                Decipher corporate jargon, code review debates, and sprint trade-offs under real scenario pressure with dynamic quizzes, interactive 3D flashcards, and speed matching.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-              Interactive Scenario <br />
-              <span className="bg-gradient-to-r from-pink-400 via-rose-300 to-amber-300 bg-clip-text text-transparent">
-                Challenge & Flashcard Studio
-              </span>
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-200 max-w-xl font-sans">
-              Decipher corporate jargon, code review debates, and sprint trade-offs under real scenario pressure with dynamic quizzes, interactive 3D flashcards, and speed matching.
-            </p>
-          </div>
 
-          {/* Mode Selector Tabs */}
-          <div className="flex flex-wrap md:flex-col gap-2 bg-slate-950/80 p-2 rounded-2xl border border-white/10 shrink-0 backdrop-blur-md">
-            <button
-              onClick={() => setActiveMode('quiz')}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
-                activeMode === 'quiz'
-                  ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg shadow-pink-500/25'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
-              }`}
-            >
-              <BrainCircuit className="w-4 h-4" />
-              <span>Scenario Quiz ({quizLength} Qs)</span>
-            </button>
+            {/* Mode Selector Tabs */}
+            <div className="flex flex-wrap md:flex-col gap-2 bg-slate-950/80 p-2 rounded-2xl border border-white/10 shrink-0 backdrop-blur-md">
+              <button
+                onClick={() => setActiveMode('quiz')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeMode === 'quiz'
+                    ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-lg shadow-pink-500/25'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-900'
+                }`}
+              >
+                <BrainCircuit className="w-4 h-4" />
+                <span>Scenario Quiz ({quizLength} Qs)</span>
+              </button>
 
-            <button
-              onClick={() => setActiveMode('flashcards')}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
-                activeMode === 'flashcards'
-                  ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
-              }`}
-            >
-              <Layers className="w-4 h-4" />
-              <span>Flashcard Trainer (314)</span>
-            </button>
+              <button
+                onClick={() => setActiveMode('flashcards')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeMode === 'flashcards'
+                    ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-900'
+                }`}
+              >
+                <Layers className="w-4 h-4" />
+                <span>Flashcard Trainer (314)</span>
+              </button>
 
-            <button
-              onClick={() => setActiveMode('speed_match')}
-              className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all ${
-                activeMode === 'speed_match'
-                  ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/25'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-900'
-              }`}
-            >
-              <Zap className="w-4 h-4" />
-              <span>Speed Matcher</span>
-            </button>
+              <button
+                onClick={() => setActiveMode('speed_match')}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
+                  activeMode === 'speed_match'
+                    ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-lg shadow-amber-500/25'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-900'
+                }`}
+              >
+                <Zap className="w-4 h-4" />
+                <span>Speed Matcher</span>
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /* Focus Mode Compact Tabs */
+        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          <button
+            onClick={() => setActiveMode('quiz')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeMode === 'quiz'
+                ? 'bg-gradient-to-r from-pink-600 to-rose-600 text-white shadow-md'
+                : 'bg-slate-900 text-slate-300 hover:text-white border border-slate-800'
+            }`}
+          >
+            <BrainCircuit className="w-4 h-4" />
+            <span>Scenario Quiz</span>
+          </button>
+          <button
+            onClick={() => setActiveMode('flashcards')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeMode === 'flashcards'
+                ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md'
+                : 'bg-slate-900 text-slate-300 hover:text-white border border-slate-800'
+            }`}
+          >
+            <Layers className="w-4 h-4" />
+            <span>Flashcards</span>
+          </button>
+          <button
+            onClick={() => setActiveMode('speed_match')}
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
+              activeMode === 'speed_match'
+                ? 'bg-gradient-to-r from-amber-500 to-orange-600 text-white shadow-md'
+                : 'bg-slate-900 text-slate-300 hover:text-white border border-slate-800'
+            }`}
+          >
+            <Zap className="w-4 h-4" />
+            <span>Speed Match</span>
+          </button>
+        </div>
+      )}
 
       {/* ========================================================================= */}
       {/* MODE 1: SCENARIO QUIZ */}
@@ -482,16 +527,16 @@ export const PracticeStudio: React.FC = () => {
 
               {/* Scenario Context Box */}
               <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-900 to-indigo-950/80 border border-white/10 space-y-2 shadow-inner">
-                <span className="text-[11px] font-mono text-pink-400 font-black block uppercase tracking-wider">
+                <span className="text-xs font-mono text-pink-400 font-black block uppercase tracking-wider">
                   WORKPLACE SCENARIO CONTEXT
                 </span>
-                <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+                <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
                   "{currentQuestion.scenarioText}"
                 </p>
               </div>
 
               {/* Question Text */}
-              <h3 className="text-lg sm:text-xl font-extrabold text-white">
+              <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
                 {currentQuestion.questionText}
               </h3>
 
@@ -516,15 +561,15 @@ export const PracticeStudio: React.FC = () => {
                       key={idx}
                       onClick={() => handleSelectQuizOption(idx)}
                       disabled={selectedOption !== null}
-                      className={`w-full p-4 sm:p-5 rounded-2xl border text-left text-xs sm:text-sm transition-all duration-200 flex items-center justify-between gap-3 ${btnStyle}`}
+                      className={`w-full p-4 sm:p-5 rounded-2xl border text-left text-sm sm:text-base transition-all duration-200 flex items-center justify-between gap-3 ${btnStyle}`}
                     >
-                      <span className="font-medium">{option.text}</span>
+                      <span className="font-medium leading-relaxed">{option.text}</span>
                       {selectedOption !== null && (
                         <span>
                           {option.isCorrect ? (
-                            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+                            <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
                           ) : isSelected ? (
-                            <XCircle className="w-5 h-5 text-rose-400" />
+                            <XCircle className="w-5 h-5 text-rose-400 shrink-0" />
                           ) : null}
                         </span>
                       )}
@@ -538,20 +583,20 @@ export const PracticeStudio: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-5 rounded-2xl bg-slate-900/90 border border-pink-500/30 space-y-3 shadow-xl"
+                  className="p-5 sm:p-6 rounded-2xl bg-slate-900/90 border border-pink-500/30 space-y-3 shadow-xl"
                 >
-                  <div className="flex items-center gap-2 text-xs font-mono font-bold text-rose-400">
+                  <div className="flex items-center gap-2 text-xs sm:text-sm font-mono font-bold text-rose-400">
                     <Sparkles className="w-4 h-4 text-rose-400" />
                     <span>EXPLANATION & SYSTEM LOGIC</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-sans">
+                  <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans">
                     {currentQuestion.options[selectedOption].explanation}
                   </p>
 
                   <div className="pt-2 flex justify-end">
                     <button
                       onClick={handleNextQuiz}
-                      className="px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-600 to-amber-600 text-white font-bold text-xs flex items-center gap-2 hover:opacity-95 transition-all shadow-xl shadow-pink-500/25 min-h-[44px]"
+                      className="px-6 py-3 rounded-2xl bg-gradient-to-r from-pink-600 via-rose-600 to-amber-600 text-white font-bold text-sm flex items-center gap-2 hover:opacity-95 transition-all shadow-xl shadow-pink-500/25 min-h-[44px] cursor-pointer"
                     >
                       <span>Next Challenge</span>
                       <ArrowRight className="w-4 h-4" />
@@ -653,12 +698,7 @@ export const PracticeStudio: React.FC = () => {
                       <h3 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
                         {currentFlashcard.term}
                       </h3>
-                      {currentFlashcard.phonetic && (
-                        <p className="font-mono text-sm text-purple-300 font-semibold">
-                          {currentFlashcard.phonetic}
-                        </p>
-                      )}
-                      <p className="text-xs text-slate-400 max-w-sm mx-auto">
+                      <p className="text-sm text-slate-300 max-w-sm mx-auto">
                         Tap or click anywhere on this card to flip and reveal the definition & code analogy.
                       </p>
                     </div>
@@ -706,7 +746,7 @@ export const PracticeStudio: React.FC = () => {
                       </div>
 
                       {currentFlashcard.corporateTranslation && (
-                        <div className="p-3 rounded-xl bg-slate-950/70 border border-white/10 text-xs text-slate-300 italic">
+                        <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/70 border border-white/10 text-sm sm:text-base text-slate-200 italic leading-relaxed">
                           "{currentFlashcard.corporateTranslation}"
                         </div>
                       )}

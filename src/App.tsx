@@ -18,6 +18,13 @@ export default function App() {
   const [inspectedIdiom, setInspectedIdiom] = useState<Idiom | null>(null);
   const [isBookmarksOpen, setIsBookmarksOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isDistractionFree, setIsDistractionFree] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('idiomatic_distraction_free') === 'true';
+    }
+    return false;
+  });
+  const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [theme, setTheme] = useState<'dark' | 'light'>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('idiomatic_theme');
@@ -35,6 +42,57 @@ export default function App() {
       return next;
     });
   };
+
+  const toggleDistractionFree = () => {
+    setIsDistractionFree((prev) => {
+      const next = !prev;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('idiomatic_distraction_free', String(next));
+      }
+      return next;
+    });
+  };
+
+  const toggleFullscreen = async () => {
+    try {
+      if (!document.fullscreenElement && !(document as any).webkitFullscreenElement) {
+        const docEl = document.documentElement as any;
+        if (docEl.requestFullscreen) {
+          await docEl.requestFullscreen();
+        } else if (docEl.webkitRequestFullscreen) {
+          await docEl.webkitRequestFullscreen();
+        }
+        setIsFullscreen(true);
+      } else {
+        const doc = document as any;
+        if (doc.exitFullscreen) {
+          await doc.exitFullscreen();
+        } else if (doc.webkitExitFullscreen) {
+          await doc.webkitExitFullscreen();
+        }
+        setIsFullscreen(false);
+      }
+    } catch {
+      // In sandbox/iframe environments where requestFullscreen is restricted,
+      // toggle the visual full-viewport immersive mode
+      setIsFullscreen((prev) => !prev);
+    }
+  };
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isCurrentlyFs = !!(document.fullscreenElement || (document as any).webkitFullscreenElement);
+      setIsFullscreen(isCurrentlyFs);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,10 +157,14 @@ export default function App() {
           setSearchQuery={setSearchQuery}
           theme={theme}
           onToggleTheme={toggleTheme}
+          isDistractionFree={isDistractionFree}
+          onToggleDistractionFree={toggleDistractionFree}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={toggleFullscreen}
         />
 
         {/* Main View Container with Smooth Tab Transitions */}
-        <main className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-4 sm:pt-8 pb-16">
+        <main className={`max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pb-16 transition-all ${isDistractionFree ? 'pt-2 sm:pt-4' : 'pt-4 sm:pt-8'}`}>
           <AnimatePresence mode="wait">
             {activeTab === 'explorer' && (
               <motion.div
@@ -119,6 +181,7 @@ export default function App() {
                   onInspect={setInspectedIdiom}
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
+                  isDistractionFree={isDistractionFree}
                 />
               </motion.div>
             )}
@@ -131,7 +194,7 @@ export default function App() {
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.25 }}
               >
-                <MeetingCeremonyPlaybook />
+                <MeetingCeremonyPlaybook isDistractionFree={isDistractionFree} />
               </motion.div>
             )}
 
@@ -146,6 +209,7 @@ export default function App() {
                 <ContextualSimulator
                   onSelectTerm={handleSelectTermFromSimulator}
                   allIdioms={IDIOMS_DATA}
+                  isDistractionFree={isDistractionFree}
                 />
               </motion.div>
             )}
@@ -158,7 +222,7 @@ export default function App() {
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.25 }}
               >
-                <PracticeStudio />
+                <PracticeStudio isDistractionFree={isDistractionFree} />
               </motion.div>
             )}
           </AnimatePresence>

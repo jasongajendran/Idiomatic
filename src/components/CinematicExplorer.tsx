@@ -490,17 +490,12 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                 onClick={() => onInspect(idiom)}
                 className="p-4 sm:p-5 md:p-6 rounded-2xl bg-slate-900/95 border border-slate-700/80 hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/15 cursor-pointer transition-all duration-200 group flex flex-col gap-3.5 shadow-md"
               >
-                {/* Row Header: Term Name, Phonetic, Category, and 1-Tap Quick Action Buttons */}
+                {/* Row Header: Term Name, Category, and 1-Tap Quick Action Buttons */}
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <div className="flex items-center gap-2.5 flex-wrap min-w-0">
                     <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-indigo-300 transition-colors">
                       {idiom.term}
                     </h3>
-                    {idiom.phonetic && (
-                      <span className="font-mono text-xs sm:text-sm text-indigo-200 bg-indigo-950/70 px-2.5 py-1 rounded-md border border-indigo-500/40">
-                        {idiom.phonetic}
-                      </span>
-                    )}
                     <span className={`px-2.5 py-1 rounded-lg text-xs sm:text-sm font-bold border ${getCategoryBadgeStyle(idiom.category)}`}>
                       {idiom.category}
                     </span>
@@ -511,7 +506,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                     {/* Audio Icon for Term Pronunciation */}
                     <button
                       onClick={(e) => handleSpeakTerm(e, idiom)}
-                      className={`p-2.5 rounded-xl border transition-all min-h-[42px] min-w-[42px] flex items-center justify-center cursor-pointer ${
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl border transition-all flex items-center justify-center shrink-0 cursor-pointer ${
                         isSpeakingTerm
                           ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md'
                           : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
@@ -525,7 +520,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                     {/* Bookmark Toggle */}
                     <button
                       onClick={() => onToggleBookmark(idiom.id)}
-                      className={`p-2.5 rounded-xl border transition-all min-h-[42px] min-w-[42px] flex items-center justify-center cursor-pointer ${
+                      className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl border transition-all flex items-center justify-center shrink-0 cursor-pointer ${
                         isBookmarked
                           ? 'bg-amber-500/25 text-amber-300 border-amber-500/50 shadow-sm'
                           : 'bg-slate-800 text-slate-200 border-slate-700 hover:text-white hover:bg-slate-700'
@@ -539,7 +534,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                     {/* Details Sheet Trigger */}
                     <button
                       onClick={() => onInspect(idiom)}
-                      className="px-3.5 py-2 rounded-xl bg-indigo-600/25 text-indigo-200 hover:bg-indigo-600 hover:text-white border border-indigo-500/40 text-xs sm:text-sm font-bold transition-all min-h-[42px] flex items-center gap-1.5 cursor-pointer"
+                      className="px-3.5 h-9 sm:h-10 rounded-xl bg-indigo-600/25 text-indigo-200 hover:bg-indigo-600 hover:text-white border border-indigo-500/40 text-xs sm:text-sm font-bold transition-all flex items-center gap-1.5 cursor-pointer shrink-0"
                     >
                       <span>Details</span>
                       <ArrowRight className="w-4 h-4" />
@@ -547,14 +542,14 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                   </div>
                 </div>
 
-                {/* Plain English Meaning with Audio Read Button */}
+                {/* Plain English Meaning with Aligned Audio Read Button */}
                 <div className="flex items-start justify-between gap-3">
                   <p className="text-sm sm:text-base text-slate-100 font-medium leading-relaxed font-sans flex-1">
                     {idiom.realMeaning}
                   </p>
                   <button
                     onClick={(e) => handleSpeakMeaning(e, idiom)}
-                    className={`p-1.5 sm:p-2 rounded-xl border transition-all shrink-0 min-h-[34px] min-w-[34px] flex items-center justify-center cursor-pointer mt-0.5 ${
+                    className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border transition-all shrink-0 flex items-center justify-center cursor-pointer mt-0.5 ${
                       speakingMeaningId === idiom.id
                         ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
                         : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
@@ -562,24 +557,24 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                     title="Listen to definition"
                     aria-label={`Listen to definition of ${idiom.term}`}
                   >
-                    <Volume2 className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${speakingMeaningId === idiom.id ? 'text-white' : 'text-indigo-300'}`} />
+                    <Volume2 className={`w-4 h-4 ${speakingMeaningId === idiom.id ? 'text-white' : 'text-indigo-300'}`} />
                   </button>
                 </div>
 
-                {/* Workplace Dialogue Example WITH Audio Icon */}
+                {/* Workplace Dialogue Example WITH Aligned Audio Icon */}
                 {primaryEx && (
-                  <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-700/80 flex items-start justify-between gap-3 text-xs sm:text-sm">
-                    <div className="flex items-start gap-2.5 leading-relaxed">
-                      <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-700/80 flex items-start justify-between gap-3 text-sm sm:text-base">
+                    <div className="flex items-start gap-2.5 leading-relaxed flex-1">
+                      <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0 mt-1" />
                       <div>
-                        <span className="text-indigo-300 font-bold">{primaryEx.speaker} ({primaryEx.context}): </span>
-                        <span className="text-white italic">"{primaryEx.quote}"</span>
+                        <span className="text-indigo-300 font-bold text-sm sm:text-base">{primaryEx.speaker} ({primaryEx.context}): </span>
+                        <span className="text-white italic text-sm sm:text-base">"{primaryEx.quote}"</span>
                       </div>
                     </div>
                     {/* Audio Icon for the Example Sentence */}
                     <button
                       onClick={(e) => handleSpeakExampleQuote(e, idiom.id, primaryEx.quote)}
-                      className={`p-2 rounded-xl border transition-all shrink-0 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer ${
+                      className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border transition-all shrink-0 flex items-center justify-center cursor-pointer mt-0.5 ${
                         isSpeakingExample
                           ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
                           : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'

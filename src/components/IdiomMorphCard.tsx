@@ -87,10 +87,10 @@ export const IdiomMorphCard: React.FC<IdiomMorphCardProps> = ({
           <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={handleSpeak}
-              className={`p-2 rounded-xl border transition-all min-h-[38px] min-w-[38px] flex items-center justify-center ${
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl border transition-all flex items-center justify-center shrink-0 cursor-pointer ${
                 isPlayingAudio 
                   ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md' 
-                  : 'bg-slate-800 text-indigo-300 border-slate-700 hover:text-white hover:bg-indigo-600/40'
+                  : 'bg-slate-800 text-indigo-300 border-slate-700 hover:text-white hover:bg-indigo-600'
               }`}
               title="Pronounce phrase"
               aria-label={`Pronounce ${idiom.term}`}
@@ -99,7 +99,7 @@ export const IdiomMorphCard: React.FC<IdiomMorphCardProps> = ({
             </button>
             <button
               onClick={() => onToggleBookmark(idiom.id)}
-              className={`p-2 rounded-xl border transition-all min-h-[38px] min-w-[38px] flex items-center justify-center ${
+              className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl border transition-all flex items-center justify-center shrink-0 cursor-pointer ${
                 isBookmarked
                   ? 'bg-amber-500/25 text-amber-300 border-amber-500/50 shadow-sm'
                   : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white hover:bg-slate-700'
@@ -112,27 +112,20 @@ export const IdiomMorphCard: React.FC<IdiomMorphCardProps> = ({
           </div>
         </div>
 
-        {/* Term & Phonetics */}
+        {/* Term Title */}
         <div className="mb-3">
-          <div className="flex items-baseline gap-2 flex-wrap">
-            <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-indigo-300 transition-colors">
-              {idiom.term}
-            </h3>
-            {idiom.phonetic && (
-              <span className="font-mono text-xs sm:text-sm text-indigo-200 bg-indigo-950/70 px-2.5 py-0.5 rounded border border-indigo-500/40">
-                {idiom.phonetic}
-              </span>
-            )}
-          </div>
+          <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-indigo-300 transition-colors">
+            {idiom.term}
+          </h3>
 
-          {/* Real Plain English Meaning with Audio Read button */}
-          <div className="mt-2 flex items-start justify-between gap-2.5">
+          {/* Real Plain English Meaning with Aligned Audio Read button */}
+          <div className="mt-2.5 flex items-start justify-between gap-3">
             <p className="text-sm sm:text-base text-slate-100 leading-relaxed font-sans font-medium flex-1">
               {idiom.realMeaning}
             </p>
             <button
               onClick={handleSpeakMeaning}
-              className={`p-1.5 rounded-lg border transition-all shrink-0 min-h-[30px] min-w-[30px] flex items-center justify-center cursor-pointer mt-0.5 ${
+              className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border transition-all shrink-0 flex items-center justify-center cursor-pointer mt-0.5 ${
                 isPlayingMeaningAudio
                   ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
                   : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
@@ -140,38 +133,38 @@ export const IdiomMorphCard: React.FC<IdiomMorphCardProps> = ({
               title="Listen to definition"
               aria-label="Listen to definition read aloud"
             >
-              <Volume2 className={`w-3.5 h-3.5 ${isPlayingMeaningAudio ? 'text-white' : 'text-indigo-300'}`} />
+              <Volume2 className="w-4 h-4" />
             </button>
           </div>
         </div>
 
         {/* Translation / Subtext Box */}
         {idiom.corporateTranslation && (
-          <div className="p-3.5 rounded-xl bg-slate-950/85 border border-slate-700/80 text-xs sm:text-sm text-slate-100 space-y-1.5 my-3 shadow-inner">
+          <div className="p-3.5 rounded-xl bg-slate-950/85 border border-slate-700/80 text-sm sm:text-base text-slate-100 space-y-1.5 my-3 shadow-inner">
             <div className="flex items-center gap-1.5 text-xs font-bold text-purple-300 uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5 text-purple-400 shrink-0" />
               <span>In Tech Meetings & Chats</span>
             </div>
-            <p className="italic text-slate-200 leading-relaxed font-sans font-medium">
+            <p className="italic text-slate-100 leading-relaxed font-sans font-medium text-sm sm:text-base">
               "{idiom.corporateTranslation}"
             </p>
           </div>
         )}
 
-        {/* Workplace Dialogue Example with Audio Icon */}
+        {/* Workplace Dialogue Example with Aligned Audio Icon */}
         {primaryExample && (
           <div className="pt-1 pb-2">
-            <div className="p-3 sm:p-3.5 rounded-xl bg-slate-950/80 border border-slate-700/70 flex items-start justify-between gap-3 text-xs sm:text-sm">
-              <div className="flex items-start gap-2 leading-relaxed">
-                <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
+            <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-700/70 flex items-start justify-between gap-3 text-sm sm:text-base">
+              <div className="flex items-start gap-2.5 leading-relaxed flex-1">
+                <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0 mt-1" />
                 <div>
-                  <span className="text-indigo-300 font-bold">{primaryExample.speaker} ({primaryExample.context}): </span>
-                  <span className="text-white italic">"{primaryExample.quote}"</span>
+                  <span className="text-indigo-300 font-bold text-sm sm:text-base">{primaryExample.speaker} ({primaryExample.context}): </span>
+                  <span className="text-white italic text-sm sm:text-base">"{primaryExample.quote}"</span>
                 </div>
               </div>
               <button
                 onClick={handleSpeakExample}
-                className={`p-2 rounded-xl border transition-all shrink-0 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer ${
+                className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl border transition-all shrink-0 flex items-center justify-center cursor-pointer mt-0.5 ${
                   isPlayingExampleAudio
                     ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
                     : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
@@ -179,7 +172,7 @@ export const IdiomMorphCard: React.FC<IdiomMorphCardProps> = ({
                 title="Listen to this example sentence"
                 aria-label={`Listen to example: ${primaryExample.quote}`}
               >
-                <Volume2 className={`w-4 h-4 ${isPlayingExampleAudio ? 'text-white' : 'text-indigo-300'}`} />
+                <Volume2 className="w-4 h-4" />
               </button>
             </div>
           </div>

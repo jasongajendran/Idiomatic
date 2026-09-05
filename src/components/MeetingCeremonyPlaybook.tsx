@@ -28,7 +28,13 @@ import {
 } from '../data/ceremoniesData';
 import { speakTerm, speakSentence } from '../utils/speechUtils';
 
-export const MeetingCeremonyPlaybook: React.FC = () => {
+interface MeetingCeremonyPlaybookProps {
+  isDistractionFree?: boolean;
+}
+
+export const MeetingCeremonyPlaybook: React.FC<MeetingCeremonyPlaybookProps> = ({
+  isDistractionFree = false
+}) => {
   const [selectedRole, setSelectedRole] = useState<MeetingRole | 'All'>('All');
   const [selectedCeremony, setSelectedCeremony] = useState<AgileCeremony | 'All'>('All');
   const [selectedTone, setSelectedTone] = useState<PhraseTone | 'All'>('All');
@@ -125,46 +131,48 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
   };
 
   return (
-    <div className="space-y-8 pb-16">
+    <div className="space-y-6 pb-16">
       
-      {/* Header Banner - High-contrast & Eye-Friendly */}
-      <div className="relative rounded-3xl bg-slate-900/90 border border-white/10 p-6 sm:p-10 backdrop-blur-2xl overflow-hidden shadow-2xl">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-500/15 via-purple-500/15 to-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Header Banner - High-contrast & Eye-Friendly (Hidden in Distraction Free Mode) */}
+      {!isDistractionFree && (
+        <div className="relative rounded-3xl bg-slate-900/90 border border-white/10 p-6 sm:p-10 backdrop-blur-2xl overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-indigo-500/15 via-purple-500/15 to-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 max-w-4xl space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 shadow-inner">
-            <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
-            <span>MEETING & AGILE CEREMONIES PLAYBOOK</span>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
-            Meeting Dialogue & <br className="hidden sm:inline" />
-            <span className="bg-gradient-to-r from-indigo-300 via-purple-200 to-cyan-300 bg-clip-text text-transparent">
-              Agile Ceremony Phrases
-            </span>
-          </h1>
-
-          <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-sans max-w-3xl">
-            Curated, ready-to-use sentences and battle-tested phrases for developers, testers, BSAs, iteration managers, work colleagues, and Gen-Z tech teammates across all agile rituals.
-          </p>
-
-          {/* Quick Metrics */}
-          <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-slate-300 font-mono font-bold">
-            <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
-              <span className="text-indigo-400 font-black text-lg">{CEREMONIES_DATA.length}</span>
-              <span>Ceremony Sentences</span>
+          <div className="relative z-10 max-w-4xl space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30 shadow-inner">
+              <MessageSquare className="w-3.5 h-3.5 text-indigo-400" />
+              <span>MEETING & AGILE CEREMONIES PLAYBOOK</span>
             </div>
-            <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
-              <span className="text-pink-400 font-black text-lg">6 Roles</span>
-              <span>Dev, QA, BSA, IM, Colleague, Gen-Z</span>
-            </div>
-            <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
-              <span className="text-cyan-400 font-black text-lg">Audio</span>
-              <span>Spoken Pronunciation</span>
+
+            <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight">
+              Meeting Dialogue & <br className="hidden sm:inline" />
+              <span className="bg-gradient-to-r from-indigo-300 via-purple-200 to-cyan-300 bg-clip-text text-transparent">
+                Agile Ceremony Phrases
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-slate-200 leading-relaxed font-sans max-w-3xl">
+              Curated, ready-to-use sentences and battle-tested phrases for developers, testers, BSAs, iteration managers, work colleagues, and Gen-Z tech teammates across all agile rituals.
+            </p>
+
+            {/* Quick Metrics */}
+            <div className="pt-2 flex flex-wrap items-center gap-3 sm:gap-6 text-xs text-slate-300 font-mono font-bold">
+              <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
+                <span className="text-indigo-400 font-black text-lg">{CEREMONIES_DATA.length}</span>
+                <span>Ceremony Sentences</span>
+              </div>
+              <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
+                <span className="text-pink-400 font-black text-lg">6 Roles</span>
+                <span>Dev, QA, BSA, IM, Colleague, Gen-Z</span>
+              </div>
+              <div className="flex items-center gap-2 bg-slate-950/80 px-3.5 py-1.5 rounded-xl border border-white/10 shadow-sm">
+                <span className="text-cyan-400 font-black text-lg">Audio</span>
+                <span>Spoken Pronunciation</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* Interactive Controls & Filters */}
       <div className="space-y-4">
@@ -280,15 +288,15 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                     {/* Top Row: Role & Ceremony Badges */}
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-bold font-mono border ${getRoleBadgeStyle(phrase.role)}`}>
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs sm:text-sm font-bold font-mono border ${getRoleBadgeStyle(phrase.role)}`}>
                           {phrase.role}
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-lg text-[11px] font-semibold bg-slate-800 text-slate-200 border border-slate-700">
+                        <span className="px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-800 text-slate-200 border border-slate-700">
                           {phrase.ceremony}
                         </span>
                       </div>
 
-                      <span className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold font-mono border ${getToneBadgeStyle(phrase.tone)}`}>
+                      <span className={`px-2.5 py-1 rounded-full text-xs font-semibold font-mono border ${getToneBadgeStyle(phrase.tone)}`}>
                         {phrase.tone}
                       </span>
                     </div>
@@ -302,28 +310,28 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                     </div>
 
                     {/* Context & Meaning Box */}
-                    <div className="rounded-2xl bg-slate-950/70 border border-white/5 p-4 space-y-2.5">
+                    <div className="rounded-2xl bg-slate-950/70 border border-white/5 p-4 sm:p-5 space-y-3">
                       <div>
-                        <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider block">
+                        <span className="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider block">
                           When to use in meeting:
                         </span>
-                        <p className="text-xs sm:text-sm text-slate-200 leading-normal mt-0.5">
+                        <p className="text-sm sm:text-base text-slate-100 leading-relaxed mt-1">
                           {phrase.scenarioContext}
                         </p>
                       </div>
 
-                      <div className="pt-1.5 border-t border-white/5 flex items-start justify-between gap-2.5">
+                      <div className="pt-2 border-t border-white/5 flex items-start justify-between gap-2.5">
                         <div className="flex-1">
-                          <span className="text-[11px] font-mono font-bold text-indigo-300 uppercase tracking-wider block">
+                          <span className="text-xs font-mono font-bold text-indigo-300 uppercase tracking-wider block">
                             Behind the scenes signal:
                           </span>
-                          <p className="text-xs sm:text-sm text-indigo-200 leading-normal mt-0.5 font-medium">
+                          <p className="text-sm sm:text-base text-indigo-100 leading-relaxed mt-1 font-medium">
                             {phrase.realMeaning}
                           </p>
                         </div>
                         <button
                           onClick={() => handleSpeakMeaning(phrase)}
-                          className={`p-1.5 rounded-lg border transition-all shrink-0 min-h-[30px] min-w-[30px] flex items-center justify-center cursor-pointer mt-1 ${
+                          className={`p-2 rounded-lg border transition-all shrink-0 min-h-[34px] min-w-[34px] flex items-center justify-center cursor-pointer mt-1 ${
                             speakingMeaningId === phrase.id
                               ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
                               : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
@@ -331,16 +339,16 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                           title="Listen to signal meaning"
                           aria-label={`Listen to meaning of phrase: ${phrase.phrase}`}
                         >
-                          <Volume2 className={`w-3.5 h-3.5 ${speakingMeaningId === phrase.id ? 'text-white' : 'text-indigo-300'}`} />
+                          <Volume2 className={`w-4 h-4 ${speakingMeaningId === phrase.id ? 'text-white' : 'text-indigo-300'}`} />
                         </button>
                       </div>
                     </div>
 
                     {/* Agile Pro-Tip Box */}
-                    <div className="flex items-start gap-2.5 p-3 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-xs text-emerald-200 leading-relaxed">
-                      <Lightbulb className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
+                    <div className="flex items-start gap-2.5 p-3.5 sm:p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/20 text-sm sm:text-base text-emerald-100 leading-relaxed">
+                      <Lightbulb className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400 shrink-0 mt-0.5" />
                       <div>
-                        <strong className="font-bold text-emerald-300 mr-1">Agile Tip:</strong>
+                        <strong className="font-bold text-emerald-300 mr-1.5">Agile Tip:</strong>
                         {phrase.proTip}
                       </div>
                     </div>
@@ -352,7 +360,7 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                       {phrase.tags.map((tag) => (
                         <span 
                           key={tag} 
-                          className="px-2 py-0.5 rounded-md text-[10px] font-mono bg-slate-800/80 text-slate-300 border border-slate-700/60"
+                          className="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-800/80 text-slate-300 border border-slate-700/60"
                         >
                           #{tag}
                         </span>

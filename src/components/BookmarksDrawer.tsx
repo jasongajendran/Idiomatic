@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Bookmark, ArrowRight, Trash2, BookOpen } from 'lucide-react';
+import { X, Bookmark, ArrowRight, Trash2, BookOpen, Volume2 } from 'lucide-react';
 import { Idiom } from '../types';
+import { speakTerm } from '../utils/speechUtils';
 
 interface BookmarksDrawerProps {
   isOpen: boolean;
@@ -18,7 +19,16 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
   onRemoveBookmark,
   onInspect
 }) => {
+  const [speakingId, setSpeakingId] = useState<string | null>(null);
+
   if (!isOpen) return null;
+
+  const handleSpeak = async (e: React.MouseEvent, idiom: Idiom) => {
+    e.stopPropagation();
+    setSpeakingId(idiom.id);
+    await speakTerm(idiom.term);
+    setSpeakingId(null);
+  };
 
   return (
     <AnimatePresence>
@@ -40,65 +50,77 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
         >
           <div className="space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-800">
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2.5">
                 <Bookmark className="w-5 h-5 text-amber-400 fill-amber-400" />
-                <h3 className="text-lg font-bold text-white">Saved Idioms</h3>
-                <span className="px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300">
+                <h3 className="text-xl font-black text-white">Saved Phrases</h3>
+                <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-amber-500/20 text-amber-300">
                   {bookmarkedIdioms.length}
                 </span>
               </div>
               <button
                 onClick={onClose}
-                className="p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white border border-slate-800"
+                className="p-2 rounded-xl bg-slate-900 text-slate-400 hover:text-white border border-slate-800 cursor-pointer min-h-[38px] min-w-[38px] flex items-center justify-center"
+                title="Close bookmarks drawer"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {bookmarkedIdioms.length === 0 ? (
-              <div className="text-center py-16 text-slate-500 space-y-2">
+              <div className="text-center py-16 text-slate-400 space-y-2">
                 <BookOpen className="w-10 h-10 mx-auto text-slate-600" />
-                <p className="text-xs font-medium">No saved idioms yet.</p>
-                <p className="text-[11px]">Click the bookmark icon on any card to add it to your saved list.</p>
+                <p className="text-sm font-semibold text-slate-200">No saved phrases yet.</p>
+                <p className="text-xs text-slate-400">Tap the bookmark icon on any phrase card to save it here.</p>
               </div>
             ) : (
               <div className="space-y-3">
                 {bookmarkedIdioms.map((idiom) => (
                   <div
                     key={idiom.id}
-                    className="p-4 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-2 group"
+                    onClick={() => {
+                      onInspect(idiom);
+                      onClose();
+                    }}
+                    className="p-4 sm:p-5 rounded-2xl bg-slate-900/95 border border-slate-800 hover:border-indigo-500/50 space-y-2.5 group cursor-pointer transition-all shadow-md"
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-sm text-white group-hover:text-indigo-300">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="font-bold text-base text-white group-hover:text-indigo-300 transition-colors">
                         {idiom.term}
                       </span>
-                      <button
-                        onClick={() => onRemoveBookmark(idiom.id)}
-                        className="p-1 rounded text-slate-500 hover:text-rose-400"
-                        title="Remove bookmark"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      <div className="flex items-center gap-1.5 shrink-0" onClick={(e) => e.stopPropagation()}>
+                        <button
+                          onClick={(e) => handleSpeak(e, idiom)}
+                          className={`p-1.5 rounded-lg border transition-all cursor-pointer min-h-[32px] min-w-[32px] flex items-center justify-center ${
+                            speakingId === idiom.id
+                              ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse'
+                              : 'bg-slate-800 text-indigo-300 border-slate-700 hover:text-white hover:bg-indigo-600'
+                          }`}
+                          title={`Pronounce ${idiom.term}`}
+                        >
+                          <Volume2 className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={() => onRemoveBookmark(idiom.id)}
+                          className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-slate-800 border border-transparent hover:border-slate-700 cursor-pointer min-h-[32px] min-w-[32px] flex items-center justify-center transition-all"
+                          title="Remove bookmark"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
                     </div>
 
-                    <p className="text-xs text-slate-400 line-clamp-2">
+                    <p className="text-sm text-slate-200 line-clamp-2 leading-relaxed font-sans">
                       {idiom.realMeaning}
                     </p>
 
-                    <div className="pt-2 flex items-center justify-between">
-                      <span className="text-[10px] font-mono text-indigo-400">
+                    <div className="pt-2 flex items-center justify-between border-t border-slate-800/80 text-xs">
+                      <span className="font-mono text-indigo-400 font-semibold">
                         {idiom.category}
                       </span>
-                      <button
-                        onClick={() => {
-                          onInspect(idiom);
-                          onClose();
-                        }}
-                        className="flex items-center gap-1 text-xs text-indigo-300 hover:text-white"
-                      >
-                        <span>Inspect</span>
-                        <ArrowRight className="w-3 h-3" />
-                      </button>
+                      <span className="flex items-center gap-1 text-indigo-300 group-hover:text-white font-bold">
+                        <span>Details</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
                     </div>
                   </div>
                 ))}
@@ -108,7 +130,7 @@ export const BookmarksDrawer: React.FC<BookmarksDrawerProps> = ({
 
           <button
             onClick={onClose}
-            className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-medium text-xs border border-slate-800 transition-colors"
+            className="w-full py-3 rounded-2xl bg-slate-900 hover:bg-slate-800 text-slate-200 font-bold text-xs sm:text-sm border border-slate-800 transition-colors cursor-pointer min-h-[44px]"
           >
             Close
           </button>

@@ -150,19 +150,12 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
           {/* Modal Scrollable Content Body */}
           <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
             
-            {/* Title, Phonetic & Audio Pronunciation */}
+            {/* Title & Audio Pronunciation */}
             <div className="space-y-3.5 pb-3 border-b border-white/10">
               <div className="flex items-center justify-between flex-wrap gap-3">
-                <div className="flex items-baseline gap-2.5 flex-wrap">
-                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
-                    {idiom.term}
-                  </h2>
-                  {idiom.phonetic && (
-                    <span className="font-mono text-xs sm:text-sm text-indigo-300 bg-indigo-950/60 px-2.5 py-1 rounded-lg border border-indigo-500/30">
-                      {idiom.phonetic}
-                    </span>
-                  )}
-                </div>
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
+                  {idiom.term}
+                </h2>
 
                 {/* Term Pronunciation Audio Icon Button */}
                 <button
@@ -233,18 +226,17 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
             {idiom.examples && idiom.examples.length > 0 && (
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs sm:text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-1.5">
+                  <span className="text-sm font-bold text-slate-200 uppercase tracking-wider flex items-center gap-2">
                     <MessageSquare className="w-4 h-4 text-indigo-400" />
                     Real-World Workplace Dialogue
                   </span>
-                  <span className="text-xs text-slate-300 font-medium">Click audio to listen</span>
                 </div>
                 <div className="space-y-3">
                   {idiom.examples.map((ex, idx) => (
                     <div key={idx} className="rounded-2xl bg-slate-950/90 p-4 sm:p-5 border border-slate-700/80 shadow-md space-y-3 hover:border-indigo-500/50 transition-colors">
-                      <div className="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono flex-wrap">
+                      <div className="flex items-center justify-between gap-3 text-sm font-mono flex-wrap">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-indigo-300 font-bold text-sm sm:text-base">{ex.speaker}</span>
+                          <span className="text-indigo-300 font-bold text-base">{ex.speaker}</span>
                           <span className="bg-slate-800 text-slate-200 px-2.5 py-1 rounded-md text-xs font-sans border border-slate-700 font-semibold">
                             {ex.context}
                           </span>
@@ -252,18 +244,18 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
                         {/* Audio Button on Example Quote */}
                         <button
                           onClick={() => handleSpeakExample(ex.quote, idx)}
-                          className={`p-2 rounded-xl border transition-all cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center ${
+                          className={`p-2 rounded-xl border transition-all cursor-pointer min-h-[38px] min-w-[38px] flex items-center justify-center ${
                             speakingExampleIdx === idx
                               ? 'bg-indigo-600 text-white border-indigo-400 shadow-md animate-pulse'
                               : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
                           }`}
-                          title="Listen to how this sentence is spoken"
+                          title="Listen to sentence pronunciation"
                           aria-label={`Listen to quote: ${ex.quote}`}
                         >
                           <Volume2 className={`w-4 h-4 ${speakingExampleIdx === idx ? 'text-white' : 'text-indigo-300'}`} />
                         </button>
                       </div>
-                      <p className="italic text-white text-sm sm:text-base font-sans leading-relaxed font-normal">
+                      <p className="italic text-white text-base sm:text-lg font-sans leading-relaxed font-normal">
                         "{ex.quote}"
                       </p>
                       <p className="text-sm sm:text-base text-indigo-300 font-sans font-medium">

@@ -21,11 +21,13 @@ import { speakSentence } from '../utils/speechUtils';
 interface ContextualSimulatorProps {
   onSelectTerm: (termId: string) => void;
   allIdioms: Idiom[];
+  isDistractionFree?: boolean;
 }
 
 export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
   onSelectTerm,
-  allIdioms
+  allIdioms,
+  isDistractionFree = false
 }) => {
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>(SCENARIOS_DATA[0].id);
   const [userComment, setUserComment] = useState('');
@@ -127,51 +129,74 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
   };
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className="space-y-6 pb-12">
       
-      {/* Sophisticated Dark Banner */}
-      <div className="rounded-3xl bg-[#080d1a] border border-cyan-500/20 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl shadow-cyan-500/5 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* Sophisticated Dark Banner (Hidden in Focus Mode) */}
+      {!isDistractionFree ? (
+        <div className="rounded-3xl bg-[#080d1a] border border-cyan-500/20 p-6 sm:p-10 backdrop-blur-2xl shadow-2xl shadow-cyan-500/5 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div className="space-y-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
-              <MessageSquareCode className="w-3.5 h-3.5 text-cyan-400" />
-              <span>WORKPLACE SCENARIO SIMULATOR</span>
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div className="space-y-3 max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono font-bold bg-cyan-500/10 text-cyan-300 border border-cyan-500/20">
+                <MessageSquareCode className="w-3.5 h-3.5 text-cyan-400" />
+                <span>WORKPLACE SCENARIO SIMULATOR</span>
+              </div>
+              <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                Workplace Scenario <br />
+                <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
+                  Conversational Simulator
+                </span>
+              </h2>
+              <p className="text-sm text-slate-200 leading-relaxed font-sans">
+                Experience real-world developer standups, code reviews, incident response threads, and client alignment syncs. Click highlighted terms inline to inspect definitions, corporate translations, and system mechanics.
+              </p>
             </div>
-            <h2 className="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
-              Workplace Scenario <br />
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-300 to-emerald-400 bg-clip-text text-transparent">
-                Conversational Simulator
-              </span>
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans">
-              Experience real-world developer standups, code reviews, incident response threads, and client alignment syncs. Click highlighted terms inline to inspect definitions, corporate translations, and system mechanics.
-            </p>
-          </div>
 
-          {/* Scenario Selector Buttons */}
-          <div className="flex flex-wrap md:flex-col gap-2.5 shrink-0">
-            {SCENARIOS_DATA.map((sc) => (
-              <button
-                key={sc.id}
-                onClick={() => {
-                  setSelectedScenarioId(sc.id);
-                  setAddedComments([]);
-                }}
-                className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 border ${
-                  selectedScenarioId === sc.id
-                    ? 'bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 text-white shadow-lg shadow-cyan-500/25 border-white/20'
-                    : 'bg-[#030712] text-slate-400 border-white/10 hover:text-white hover:bg-slate-900'
-                }`}
-              >
-                {getScenarioIcon(sc.type)}
-                <span>{sc.contextTag}</span>
-              </button>
-            ))}
+            {/* Scenario Selector Buttons */}
+            <div className="flex flex-wrap md:flex-col gap-2.5 shrink-0">
+              {SCENARIOS_DATA.map((sc) => (
+                <button
+                  key={sc.id}
+                  onClick={() => {
+                    setSelectedScenarioId(sc.id);
+                    setAddedComments([]);
+                  }}
+                  className={`flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 border cursor-pointer ${
+                    selectedScenarioId === sc.id
+                      ? 'bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 text-white shadow-lg shadow-cyan-500/25 border-white/20'
+                      : 'bg-[#030712] text-slate-300 border-white/10 hover:text-white hover:bg-slate-900'
+                  }`}
+                >
+                  {getScenarioIcon(sc.type)}
+                  <span>{sc.contextTag}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /* Streamlined Scenario Picker for Focus Mode */
+        <div className="flex items-center gap-2 overflow-x-auto pb-1">
+          {SCENARIOS_DATA.map((sc) => (
+            <button
+              key={sc.id}
+              onClick={() => {
+                setSelectedScenarioId(sc.id);
+                setAddedComments([]);
+              }}
+              className={`flex items-center gap-2 px-4 py-2.5 rounded-2xl text-xs font-bold transition-all border shrink-0 cursor-pointer ${
+                selectedScenarioId === sc.id
+                  ? 'bg-gradient-to-r from-cyan-600 via-teal-600 to-emerald-600 text-white shadow-md border-white/20'
+                  : 'bg-slate-900 text-slate-300 border-slate-800 hover:text-white hover:bg-slate-800'
+              }`}
+            >
+              {getScenarioIcon(sc.type)}
+              <span>{sc.contextTag}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Dark Luxury Chat Window */}
       <div className="rounded-3xl bg-[#030712] border border-cyan-500/20 shadow-2xl overflow-hidden">
@@ -182,19 +207,19 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
             <div className="w-3 h-3 rounded-full bg-rose-500" />
             <div className="w-3 h-3 rounded-full bg-amber-500" />
             <div className="w-3 h-3 rounded-full bg-emerald-500" />
-            <span className="text-xs font-mono text-cyan-300 ml-2 font-bold flex items-center gap-2">
+            <span className="text-xs sm:text-sm font-mono text-cyan-300 ml-2 font-bold flex items-center gap-2">
               {getScenarioIcon(scenario.type)}
               {scenario.title}
             </span>
           </div>
 
-          <div className="text-[11px] font-mono text-slate-400 hidden sm:block font-semibold">
+          <div className="text-xs font-mono text-slate-300 hidden sm:block font-semibold">
             {scenario.subtitle}
           </div>
         </div>
 
         {/* Message Stream */}
-        <div className="p-5 sm:p-8 space-y-6 max-h-[520px] overflow-y-auto font-sans text-sm bg-[#030712]">
+        <div className="p-5 sm:p-8 space-y-6 max-h-[560px] overflow-y-auto font-sans bg-[#030712]">
           {scenario.messages.map((msg, idx) => (
             <div key={msg.id} className="flex items-start gap-4 group">
               <img
@@ -202,23 +227,23 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
                 alt={msg.author}
                 className="w-10 h-10 rounded-2xl object-cover ring-2 ring-cyan-500/30 shadow-md"
               />
-              <div className="flex-1 space-y-1.5">
+              <div className="flex-1 space-y-2">
                 <div className="flex items-center justify-between gap-2.5">
                   <div className="flex items-baseline gap-2.5 flex-wrap">
-                    <span className="font-bold text-white text-sm">{msg.author}</span>
-                    <span className="text-[11px] font-mono font-bold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">
+                    <span className="font-bold text-white text-sm sm:text-base">{msg.author}</span>
+                    <span className="text-xs font-mono font-bold text-cyan-300 bg-cyan-500/15 px-2.5 py-0.5 rounded-md border border-cyan-500/30">
                       {msg.role}
                     </span>
                   </div>
                   <div className="flex items-center gap-2 ml-auto">
-                    <span className="text-[10px] text-slate-500 font-mono">{msg.timestamp}</span>
+                    <span className="text-xs text-slate-400 font-mono">{msg.timestamp}</span>
                     <button
                       onClick={async () => {
                         setSpeakingMsgIdx(idx);
                         await speakSentence(msg.content);
                         setSpeakingMsgIdx(null);
                       }}
-                      className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+                      className={`p-1.5 sm:p-2 rounded-xl border transition-all cursor-pointer min-h-[32px] min-w-[32px] flex items-center justify-center ${
                         speakingMsgIdx === idx
                           ? 'bg-cyan-600 text-white border-cyan-400 animate-pulse'
                           : 'bg-slate-900 text-cyan-300 border-slate-700 hover:text-white hover:bg-cyan-700'
@@ -226,12 +251,12 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
                       title="Listen to message"
                       aria-label={`Listen to message by ${msg.author}`}
                     >
-                      <Volume2 className="w-3.5 h-3.5" />
+                      <Volume2 className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-[#090f1d] border border-white/10 text-slate-200 leading-relaxed text-xs sm:text-sm shadow-md">
+                <div className="p-4 sm:p-5 rounded-2xl bg-[#090f1d] border border-white/10 text-slate-100 leading-relaxed text-sm sm:text-base shadow-md">
                   {renderInteractiveContent(msg.content, msg.highlightedTerms)}
                 </div>
               </div>
@@ -244,15 +269,15 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
               <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-cyan-500 via-teal-600 to-emerald-600 flex items-center justify-center text-white font-black text-xs shadow-lg shadow-cyan-500/20">
                 YOU
               </div>
-              <div className="flex-1 space-y-1.5">
+              <div className="flex-1 space-y-2">
                 <div className="flex items-baseline gap-2.5">
-                  <span className="font-bold text-white text-sm">{cm.author}</span>
-                  <span className="text-[11px] font-mono font-bold text-teal-300 bg-teal-500/10 px-2 py-0.5 rounded-md border border-teal-500/20">
+                  <span className="font-bold text-white text-sm sm:text-base">{cm.author}</span>
+                  <span className="text-xs font-mono font-bold text-teal-300 bg-teal-500/15 px-2.5 py-0.5 rounded-md border border-teal-500/30">
                     {cm.role}
                   </span>
-                  <span className="text-[10px] text-slate-500 font-mono ml-auto">{cm.timestamp}</span>
+                  <span className="text-xs text-slate-400 font-mono ml-auto">{cm.timestamp}</span>
                 </div>
-                <div className="p-4 rounded-2xl bg-teal-950/40 border border-teal-500/30 text-teal-100 text-xs sm:text-sm">
+                <div className="p-4 sm:p-5 rounded-2xl bg-teal-950/40 border border-teal-500/30 text-teal-100 text-sm sm:text-base leading-relaxed">
                   {cm.content}
                 </div>
               </div>
