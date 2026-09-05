@@ -35,6 +35,7 @@ interface CinematicExplorerProps {
   onInspect: (idiom: Idiom) => void;
   searchQuery: string;
   setSearchQuery: (q: string) => void;
+  isDistractionFree?: boolean;
 }
 
 export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
@@ -43,7 +44,8 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
   onToggleBookmark,
   onInspect,
   searchQuery,
-  setSearchQuery
+  setSearchQuery,
+  isDistractionFree = false
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<WorkflowCategory | 'All'>('All');
   const [selectedFormality, setSelectedFormality] = useState<string>('All');
@@ -53,6 +55,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
   const [showPopularPhrases, setShowPopularPhrases] = useState(false);
 
   const [speakingTermId, setSpeakingTermId] = useState<string | null>(null);
+  const [speakingMeaningId, setSpeakingMeaningId] = useState<string | null>(null);
   const [speakingExampleId, setSpeakingExampleId] = useState<string | null>(null);
 
   const handleSpeakTerm = async (e: React.MouseEvent, idiom: Idiom) => {
@@ -60,6 +63,13 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
     setSpeakingTermId(idiom.id);
     await speakTerm(idiom.term);
     setSpeakingTermId(null);
+  };
+
+  const handleSpeakMeaning = async (e: React.MouseEvent, idiom: Idiom) => {
+    e.stopPropagation();
+    setSpeakingMeaningId(idiom.id);
+    await speakSentence(idiom.realMeaning);
+    setSpeakingMeaningId(null);
   };
 
   const handleSpeakExampleQuote = async (e: React.MouseEvent, idiomId: string, quote: string) => {
@@ -172,110 +182,142 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
   };
 
   return (
-    <div className="space-y-8 pb-12">
+    <div className={`space-y-6 sm:space-y-8 ${isDistractionFree ? 'pt-1 pb-8' : 'pb-12'}`}>
       
-      {/* Hero Header Section */}
-      <div className="relative rounded-3xl bg-slate-900/90 border border-white/10 p-6 sm:p-10 backdrop-blur-2xl overflow-hidden shadow-2xl">
-        <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl pointer-events-none" />
-        
-        <div className="relative z-10 max-w-4xl space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-              <span>SOFTWARE & WORKPLACE PHRASES DICTIONARY</span>
-            </div>
-
-            <button
-              onClick={handleRandomIdiom}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold bg-purple-500/20 hover:bg-purple-500/30 text-purple-300 border border-purple-500/40 transition-all shadow-sm group cursor-pointer"
-              title="Inspect a random idiom"
-            >
-              <Dice5 className="w-4 h-4 text-purple-400 group-hover:rotate-180 transition-transform duration-500" />
-              <span>Random Discovery</span>
-            </button>
-          </div>
-
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
-            Everyday Tech Idioms & <br />
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
-              Workplace Phrases
-            </span>
-          </h1>
-
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
-            Clear meanings, workplace subtext, audio pronunciations, and real-world meeting examples for phrases used by developers, tech leads, PMs, and engineering teams.
-          </p>
-
-          {/* Quick Counter */}
-          <div className="pt-1 flex flex-wrap items-center gap-4 text-xs text-slate-300 font-semibold">
-            <span className="text-indigo-400 font-bold text-base">{idioms.length} Phrases & Terms</span>
-            <span className="text-slate-600 hidden sm:inline">•</span>
-            <span className="text-slate-300">Phonetic Audio Pronunciations</span>
-            <span className="text-slate-600 hidden sm:inline">•</span>
-            <span className="text-slate-300">Plain English Translations</span>
-          </div>
-
-          {/* Search Input inside Header on Mobile / Direct Access */}
-          <div className="pt-2">
-            <div className="relative max-w-xl">
-              <Search className="absolute left-4 top-3.5 w-4 h-4 text-slate-400" />
-              <input
-                type="text"
-                placeholder="Search phrase, meaning, tag, or plain alternative..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-11 pr-10 py-3 bg-slate-950/90 border border-white/15 rounded-2xl text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all font-sans shadow-inner"
-              />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery('')}
-                  className="absolute right-3.5 top-3.5 text-slate-400 hover:text-white transition-colors"
-                  title="Clear search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Popular Phrases Quick Search Chips (Collapsible) */}
-          <div className="pt-2">
-            <button
-              onClick={() => setShowPopularPhrases(!showPopularPhrases)}
-              className="flex items-center gap-2 text-xs font-semibold text-slate-300 hover:text-white transition-colors py-1 px-2.5 -ml-2.5 rounded-lg hover:bg-white/5 group"
-            >
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
-              <span>POPULAR PHRASES ({popularPhraseChips.length})</span>
-              {showPopularPhrases ? (
-                <ChevronUp className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform" />
-              ) : (
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform" />
-              )}
-              <span className="text-[11px] font-normal text-slate-400 ml-1">
-                {showPopularPhrases ? 'Hide chips' : 'Show quick filters'}
-              </span>
-            </button>
-            
-            {showPopularPhrases && (
-              <div className="flex flex-wrap gap-2 mt-2.5 animate-fadeIn">
-                {popularPhraseChips.map((chip) => (
-                  <button
-                    key={chip}
-                    onClick={() => setSearchQuery(searchQuery === chip ? '' : chip)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                      searchQuery === chip
-                        ? 'bg-indigo-600 text-white font-bold shadow-md shadow-indigo-500/30 border border-indigo-400'
-                        : 'bg-slate-950/80 text-slate-300 hover:text-white hover:bg-slate-800 border border-white/10'
-                    }`}
-                  >
-                    {chip}
-                  </button>
-                ))}
+      {/* Hero Header Section - Hidden in Distraction Free Mode */}
+      {!isDistractionFree ? (
+        <div className="relative rounded-3xl bg-slate-900/95 border border-white/15 p-5 sm:p-8 md:p-10 backdrop-blur-2xl overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-[450px] h-[450px] bg-gradient-to-br from-indigo-500/10 via-purple-500/10 to-pink-500/10 rounded-full blur-3xl pointer-events-none" />
+          
+          <div className="relative z-10 max-w-4xl space-y-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-bold bg-indigo-500/15 text-indigo-300 border border-indigo-500/30">
+                <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                <span>SOFTWARE & WORKPLACE PHRASES DICTIONARY</span>
               </div>
-            )}
+
+              <button
+                onClick={handleRandomIdiom}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 border border-purple-500/40 transition-all shadow-sm group cursor-pointer"
+                title="Inspect a random idiom"
+              >
+                <Dice5 className="w-4 h-4 text-purple-400 group-hover:rotate-180 transition-transform duration-500" />
+                <span>Random Discovery</span>
+              </button>
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+              Everyday Tech Idioms & <br />
+              <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
+                Workplace Phrases
+              </span>
+            </h1>
+
+            <p className="text-base sm:text-lg text-slate-200 leading-relaxed max-w-3xl">
+              Clear meanings, workplace subtext, audio pronunciations, and real-world meeting examples for phrases used by developers, tech leads, PMs, and engineering teams.
+            </p>
+
+            {/* Quick Counter */}
+            <div className="pt-1 flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-200 font-semibold">
+              <span className="text-indigo-400 font-bold text-base">{idioms.length} Phrases & Terms</span>
+              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span className="text-slate-200">Phonetic Audio Pronunciations</span>
+              <span className="text-slate-600 hidden sm:inline">•</span>
+              <span className="text-slate-200">Plain English Translations</span>
+            </div>
+
+            {/* Search Input inside Header on Mobile / Direct Access */}
+            <div className="pt-2">
+              <div className="relative max-w-xl">
+                <Search className="absolute left-4 top-3.5 w-4 h-4 text-slate-400" />
+                <input
+                  type="text"
+                  placeholder="Search phrase, meaning, tag, or plain alternative..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-11 pr-10 py-3 bg-slate-950/95 border border-white/20 rounded-2xl text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all font-sans shadow-inner"
+                />
+                {searchQuery && (
+                  <button
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3.5 top-3.5 text-slate-400 hover:text-white transition-colors"
+                    title="Clear search"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                )}
+              </div>
+            </div>
+
+            {/* Popular Phrases Quick Search Chips (Collapsible) */}
+            <div className="pt-2">
+              <button
+                onClick={() => setShowPopularPhrases(!showPopularPhrases)}
+                className="flex items-center gap-2 text-xs sm:text-sm font-semibold text-slate-200 hover:text-white transition-colors py-1 px-2.5 -ml-2.5 rounded-lg hover:bg-white/5 group"
+              >
+                <Sparkles className="w-4 h-4 text-indigo-400" />
+                <span>POPULAR PHRASES ({popularPhraseChips.length})</span>
+                {showPopularPhrases ? (
+                  <ChevronUp className="w-4 h-4 text-slate-400 group-hover:text-white transition-transform" />
+                ) : (
+                  <ChevronDown className="w-4 h-4 text-slate-400 group-hover:text-white transition-transform" />
+                )}
+                <span className="text-xs font-normal text-slate-400 ml-1">
+                  {showPopularPhrases ? 'Hide chips' : 'Show quick filters'}
+                </span>
+              </button>
+              
+              {showPopularPhrases && (
+                <div className="flex flex-wrap gap-2 mt-2.5 animate-fadeIn">
+                  {popularPhraseChips.map((chip) => (
+                    <button
+                      key={chip}
+                      onClick={() => setSearchQuery(searchQuery === chip ? '' : chip)}
+                      className={`px-3 py-1.5 rounded-xl text-xs sm:text-sm font-medium transition-all ${
+                        searchQuery === chip
+                          ? 'bg-indigo-600 text-white font-bold shadow-md shadow-indigo-500/30 border border-indigo-400'
+                          : 'bg-slate-950/90 text-slate-200 hover:text-white hover:bg-slate-800 border border-white/10'
+                      }`}
+                    >
+                      {chip}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      ) : (
+        /* Distraction-Free Focused Header - Clean Search & Quick Discover */
+        <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/95 border border-slate-700/80 shadow-md flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+          <div className="relative flex-1">
+            <Search className="absolute left-4 top-3.5 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              placeholder="Search phrase, meaning, tag, or plain alternative..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-11 pr-10 py-2.5 bg-slate-950/95 border border-white/20 rounded-xl text-sm sm:text-base text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-all font-sans"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3.5 top-3 text-slate-400 hover:text-white transition-colors"
+                title="Clear search"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
+          </div>
+          <button
+            onClick={handleRandomIdiom}
+            className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-mono font-bold bg-purple-500/20 hover:bg-purple-500/30 text-purple-200 border border-purple-500/40 transition-all shadow-sm cursor-pointer shrink-0"
+          >
+            <Dice5 className="w-4 h-4 text-purple-400" />
+            <span>Random Phrase</span>
+          </button>
+        </div>
+      )}
 
       {/* Filter Controls Bar */}
       <div className="space-y-4">
@@ -446,48 +488,47 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
               <div
                 key={idiom.id}
                 onClick={() => onInspect(idiom)}
-                className="p-4 sm:p-5 rounded-2xl bg-slate-900/95 border border-slate-700/70 hover:border-indigo-400/80 hover:shadow-xl hover:shadow-indigo-500/10 cursor-pointer transition-all duration-200 group flex flex-col gap-3 shadow-md"
+                className="p-4 sm:p-5 md:p-6 rounded-2xl bg-slate-900/95 border border-slate-700/80 hover:border-indigo-400 hover:shadow-xl hover:shadow-indigo-500/15 cursor-pointer transition-all duration-200 group flex flex-col gap-3.5 shadow-md"
               >
                 {/* Row Header: Term Name, Phonetic, Category, and 1-Tap Quick Action Buttons */}
                 <div className="flex items-center justify-between gap-3 flex-wrap">
                   <div className="flex items-center gap-2.5 flex-wrap min-w-0">
-                    <h3 className="text-lg sm:text-xl font-black tracking-tight text-white group-hover:text-indigo-300 transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white group-hover:text-indigo-300 transition-colors">
                       {idiom.term}
                     </h3>
                     {idiom.phonetic && (
-                      <span className="font-mono text-xs text-indigo-200 bg-indigo-950/50 px-2 py-0.5 rounded border border-indigo-500/30">
+                      <span className="font-mono text-xs sm:text-sm text-indigo-200 bg-indigo-950/70 px-2.5 py-1 rounded-md border border-indigo-500/40">
                         {idiom.phonetic}
                       </span>
                     )}
-                    <span className={`px-2.5 py-0.5 rounded-lg text-xs font-bold border ${getCategoryBadgeStyle(idiom.category)}`}>
+                    <span className={`px-2.5 py-1 rounded-lg text-xs sm:text-sm font-bold border ${getCategoryBadgeStyle(idiom.category)}`}>
                       {idiom.category}
                     </span>
                   </div>
 
                   {/* Right side controls: Audio Icon, Bookmark, and Details */}
                   <div className="flex items-center gap-2 shrink-0" onClick={(e) => e.stopPropagation()}>
-                    {/* Audio Icon for Term */}
+                    {/* Audio Icon for Term Pronunciation */}
                     <button
                       onClick={(e) => handleSpeakTerm(e, idiom)}
-                      className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all flex items-center gap-1.5 min-h-[40px] cursor-pointer ${
+                      className={`p-2.5 rounded-xl border transition-all min-h-[42px] min-w-[42px] flex items-center justify-center cursor-pointer ${
                         isSpeakingTerm
                           ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md'
-                          : 'bg-slate-800 text-indigo-300 border-slate-700 hover:text-white hover:bg-indigo-600/40'
+                          : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
                       }`}
                       title={`Listen to pronunciation of "${idiom.term}"`}
                       aria-label={`Listen to pronunciation of ${idiom.term}`}
                     >
-                      <Volume2 className="w-4 h-4 text-indigo-400" />
-                      <span className="text-[11px] sm:text-xs">Audio</span>
+                      <Volume2 className="w-4 h-4 text-indigo-300" />
                     </button>
 
                     {/* Bookmark Toggle */}
                     <button
                       onClick={() => onToggleBookmark(idiom.id)}
-                      className={`p-2 rounded-xl border transition-all min-h-[40px] min-w-[40px] flex items-center justify-center cursor-pointer ${
+                      className={`p-2.5 rounded-xl border transition-all min-h-[42px] min-w-[42px] flex items-center justify-center cursor-pointer ${
                         isBookmarked
                           ? 'bg-amber-500/25 text-amber-300 border-amber-500/50 shadow-sm'
-                          : 'bg-slate-800 text-slate-300 border-slate-700 hover:text-white hover:bg-slate-700'
+                          : 'bg-slate-800 text-slate-200 border-slate-700 hover:text-white hover:bg-slate-700'
                       }`}
                       title={isBookmarked ? 'Bookmarked' : 'Bookmark phrase'}
                       aria-label={isBookmarked ? 'Remove bookmark' : 'Bookmark phrase'}
@@ -498,7 +539,7 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                     {/* Details Sheet Trigger */}
                     <button
                       onClick={() => onInspect(idiom)}
-                      className="px-3 py-1.5 rounded-xl bg-indigo-600/20 text-indigo-300 hover:bg-indigo-600 hover:text-white border border-indigo-500/30 text-xs font-bold transition-all min-h-[40px] flex items-center gap-1 cursor-pointer"
+                      className="px-3.5 py-2 rounded-xl bg-indigo-600/25 text-indigo-200 hover:bg-indigo-600 hover:text-white border border-indigo-500/40 text-xs sm:text-sm font-bold transition-all min-h-[42px] flex items-center gap-1.5 cursor-pointer"
                     >
                       <span>Details</span>
                       <ArrowRight className="w-4 h-4" />
@@ -506,50 +547,64 @@ export const CinematicExplorer: React.FC<CinematicExplorerProps> = ({
                   </div>
                 </div>
 
-                {/* Plain English Meaning - High Contrast & Easily Readable */}
-                <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed font-sans">
-                  {idiom.realMeaning}
-                </p>
+                {/* Plain English Meaning with Audio Read Button */}
+                <div className="flex items-start justify-between gap-3">
+                  <p className="text-sm sm:text-base text-slate-100 font-medium leading-relaxed font-sans flex-1">
+                    {idiom.realMeaning}
+                  </p>
+                  <button
+                    onClick={(e) => handleSpeakMeaning(e, idiom)}
+                    className={`p-1.5 sm:p-2 rounded-xl border transition-all shrink-0 min-h-[34px] min-w-[34px] flex items-center justify-center cursor-pointer mt-0.5 ${
+                      speakingMeaningId === idiom.id
+                        ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
+                        : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
+                    }`}
+                    title="Listen to definition"
+                    aria-label={`Listen to definition of ${idiom.term}`}
+                  >
+                    <Volume2 className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${speakingMeaningId === idiom.id ? 'text-white' : 'text-indigo-300'}`} />
+                  </button>
+                </div>
 
                 {/* Workplace Dialogue Example WITH Audio Icon */}
                 {primaryEx && (
-                  <div className="p-3 rounded-xl bg-slate-950/75 border border-slate-700/60 flex items-start justify-between gap-2.5 text-xs">
-                    <div className="flex items-start gap-2 leading-relaxed">
-                      <MessageSquare className="w-3.5 h-3.5 text-indigo-400 shrink-0 mt-0.5" />
+                  <div className="p-3.5 sm:p-4 rounded-xl bg-slate-950/80 border border-slate-700/80 flex items-start justify-between gap-3 text-xs sm:text-sm">
+                    <div className="flex items-start gap-2.5 leading-relaxed">
+                      <MessageSquare className="w-4 h-4 text-indigo-400 shrink-0 mt-0.5" />
                       <div>
                         <span className="text-indigo-300 font-bold">{primaryEx.speaker} ({primaryEx.context}): </span>
-                        <span className="text-slate-100 italic">"{primaryEx.quote}"</span>
+                        <span className="text-white italic">"{primaryEx.quote}"</span>
                       </div>
                     </div>
                     {/* Audio Icon for the Example Sentence */}
                     <button
                       onClick={(e) => handleSpeakExampleQuote(e, idiom.id, primaryEx.quote)}
-                      className={`p-1.5 rounded-lg border transition-all shrink-0 min-h-[32px] min-w-[32px] flex items-center justify-center cursor-pointer ${
+                      className={`p-2 rounded-xl border transition-all shrink-0 min-h-[36px] min-w-[36px] flex items-center justify-center cursor-pointer ${
                         isSpeakingExample
                           ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
-                          : 'bg-slate-800 text-indigo-300 border-slate-700 hover:text-white hover:bg-indigo-600/40'
+                          : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
                       }`}
                       title="Listen to this example sentence"
                       aria-label={`Listen to example: ${primaryEx.quote}`}
                     >
-                      <Volume2 className={`w-3.5 h-3.5 ${isSpeakingExample ? 'text-white' : 'text-indigo-400'}`} />
+                      <Volume2 className={`w-4 h-4 ${isSpeakingExample ? 'text-white' : 'text-indigo-300'}`} />
                     </button>
                   </div>
                 )}
 
                 {/* Plain Wording Alternative */}
-                <div className="flex items-center gap-1.5 text-xs text-slate-300 pt-0.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span className="text-slate-400">Plain wording: </span>
-                  <span className="font-semibold text-emerald-300">{idiom.safeAlternative}</span>
+                <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-200 pt-0.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span className="text-slate-300">Plain wording: </span>
+                  <span className="font-semibold text-emerald-300 text-sm sm:text-base">{idiom.safeAlternative}</span>
                 </div>
               </div>
             );
           })}
         </div>
       ) : (
-        /* Multi-column Grid Cards View */
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        /* Multi-column Grid Cards View - Responsive & Space-Efficient */
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5.5">
           <AnimatePresence mode="popLayout">
             {filteredIdioms.map((idiom) => (
               <IdiomMorphCard

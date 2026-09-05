@@ -12,8 +12,7 @@ import {
   Shield,
   Layers,
   ArrowRight,
-  Eye,
-  Code2
+  Eye
 } from 'lucide-react';
 import { Idiom } from '../types';
 import { speakTerm, speakSentence } from '../utils/speechUtils';
@@ -35,6 +34,7 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
   onSelectRelated
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlayingMeaning, setIsPlayingMeaning] = useState(false);
   const [speakingExampleIdx, setSpeakingExampleIdx] = useState<number | null>(null);
 
   if (!idiom) return null;
@@ -43,6 +43,12 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
     setIsPlaying(true);
     await speakTerm(idiom.term);
     setIsPlaying(false);
+  };
+
+  const handleSpeakMeaning = async () => {
+    setIsPlayingMeaning(true);
+    await speakSentence(idiom.realMeaning);
+    setIsPlayingMeaning(false);
   };
 
   const handleSpeakExample = async (sentence: string, idx: number) => {
@@ -145,7 +151,7 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
           <div className="flex-1 overflow-y-auto p-5 sm:p-7 space-y-6">
             
             {/* Title, Phonetic & Audio Pronunciation */}
-            <div className="space-y-3 pb-2 border-b border-white/10">
+            <div className="space-y-3.5 pb-3 border-b border-white/10">
               <div className="flex items-center justify-between flex-wrap gap-3">
                 <div className="flex items-baseline gap-2.5 flex-wrap">
                   <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-white tracking-tight">
@@ -158,35 +164,53 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
                   )}
                 </div>
 
+                {/* Term Pronunciation Audio Icon Button */}
                 <button
                   id="modal-pronounce-term-btn"
                   onClick={handleSpeak}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs sm:text-sm font-mono font-bold transition-all cursor-pointer min-h-[40px] ${
+                  className={`flex items-center justify-center p-2.5 rounded-xl border transition-all cursor-pointer min-h-[40px] min-w-[40px] ${
                     isPlaying
                       ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md shadow-indigo-500/30'
                       : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
                   }`}
-                  title="Listen to pronunciation"
+                  title="Listen to phrase pronunciation"
                   aria-label={`Pronounce ${idiom.term}`}
                 >
-                  <Volume2 className="w-4 h-4 text-indigo-300" />
-                  <span>{isPlaying ? 'Playing...' : 'Audio Pronunciation'}</span>
+                  <Volume2 className="w-5 h-5" />
                 </button>
               </div>
 
-              <p className="text-base sm:text-lg text-slate-100 leading-relaxed font-sans font-medium">
-                {idiom.realMeaning}
-              </p>
+              {/* Definition / Real Meaning with dedicated Audio Read button */}
+              <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-700/70 flex items-start justify-between gap-3 shadow-sm">
+                <div className="space-y-1 flex-1">
+                  <span className="text-xs font-bold text-indigo-300 uppercase tracking-wider block">Plain English Definition</span>
+                  <p className="text-base sm:text-lg text-slate-100 leading-relaxed font-sans font-medium">
+                    {idiom.realMeaning}
+                  </p>
+                </div>
+                <button
+                  onClick={handleSpeakMeaning}
+                  className={`p-2.5 rounded-xl border transition-all shrink-0 min-h-[38px] min-w-[38px] flex items-center justify-center cursor-pointer ${
+                    isPlayingMeaning
+                      ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md'
+                      : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
+                  }`}
+                  title="Listen to definition"
+                  aria-label="Listen to definition read aloud"
+                >
+                  <Volume2 className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             {/* Literal Visual Metaphor */}
             {idiom.literalDefinition && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-950 to-indigo-950/40 border border-white/10 space-y-1.5 shadow-inner">
-                <span className="text-[11px] sm:text-xs font-bold text-cyan-400 flex items-center gap-1.5 uppercase tracking-wider">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-slate-950 to-indigo-950/40 border border-white/15 space-y-2 shadow-inner">
+                <span className="text-xs sm:text-sm font-bold text-cyan-300 flex items-center gap-1.5 uppercase tracking-wider">
                   <Eye className="w-4 h-4 text-cyan-400" />
                   Visual & Literal Origin Analogy
                 </span>
-                <p className="text-xs sm:text-sm text-slate-200 font-sans leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-100 font-sans leading-relaxed">
                   {idiom.literalDefinition}
                 </p>
               </div>
@@ -194,12 +218,12 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 
             {/* Practical Subtext & Meeting Translation */}
             {idiom.corporateTranslation && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/90 border border-purple-500/20 space-y-2 shadow-inner">
-                <span className="text-[11px] sm:text-xs font-bold text-purple-300 flex items-center gap-1.5 uppercase tracking-wider">
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/90 border border-purple-500/30 space-y-2 shadow-inner">
+                <span className="text-xs sm:text-sm font-bold text-purple-300 flex items-center gap-1.5 uppercase tracking-wider">
                   <Sparkles className="w-4 h-4 text-purple-400" />
                   In Tech Meetings & Slack Chats
                 </span>
-                <p className="text-xs sm:text-sm text-slate-200 italic font-medium leading-relaxed font-sans">
+                <p className="text-sm sm:text-base text-purple-100 italic font-medium leading-relaxed font-sans">
                   "{idiom.corporateTranslation}"
                 </p>
               </div>
@@ -213,22 +237,22 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
                     <MessageSquare className="w-4 h-4 text-indigo-400" />
                     Real-World Workplace Dialogue
                   </span>
-                  <span className="text-[11px] text-slate-400 font-medium">Click audio to listen</span>
+                  <span className="text-xs text-slate-300 font-medium">Click audio to listen</span>
                 </div>
                 <div className="space-y-3">
                   {idiom.examples.map((ex, idx) => (
-                    <div key={idx} className="rounded-xl bg-slate-950/85 p-4 border border-slate-700/60 shadow-md space-y-2.5 hover:border-indigo-500/40 transition-colors">
-                      <div className="flex items-center justify-between gap-2 text-xs font-mono">
+                    <div key={idx} className="rounded-2xl bg-slate-950/90 p-4 sm:p-5 border border-slate-700/80 shadow-md space-y-3 hover:border-indigo-500/50 transition-colors">
+                      <div className="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono flex-wrap">
                         <div className="flex items-center gap-2 flex-wrap">
-                          <span className="text-indigo-300 font-bold">{ex.speaker}</span>
-                          <span className="bg-slate-800 text-slate-200 px-2 py-0.5 rounded text-[11px] font-sans border border-slate-700">
+                          <span className="text-indigo-300 font-bold text-sm sm:text-base">{ex.speaker}</span>
+                          <span className="bg-slate-800 text-slate-200 px-2.5 py-1 rounded-md text-xs font-sans border border-slate-700 font-semibold">
                             {ex.context}
                           </span>
                         </div>
                         {/* Audio Button on Example Quote */}
                         <button
                           onClick={() => handleSpeakExample(ex.quote, idx)}
-                          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-sans font-semibold transition-all cursor-pointer min-h-[34px] ${
+                          className={`p-2 rounded-xl border transition-all cursor-pointer min-h-[36px] min-w-[36px] flex items-center justify-center ${
                             speakingExampleIdx === idx
                               ? 'bg-indigo-600 text-white border-indigo-400 shadow-md animate-pulse'
                               : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
@@ -236,14 +260,13 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
                           title="Listen to how this sentence is spoken"
                           aria-label={`Listen to quote: ${ex.quote}`}
                         >
-                          <Volume2 className={`w-3.5 h-3.5 ${speakingExampleIdx === idx ? 'text-white' : 'text-indigo-400'}`} />
-                          <span className="text-[11px]">{speakingExampleIdx === idx ? 'Playing...' : 'Audio'}</span>
+                          <Volume2 className={`w-4 h-4 ${speakingExampleIdx === idx ? 'text-white' : 'text-indigo-300'}`} />
                         </button>
                       </div>
-                      <p className="italic text-slate-100 text-xs sm:text-sm font-sans leading-relaxed">
+                      <p className="italic text-white text-sm sm:text-base font-sans leading-relaxed font-normal">
                         "{ex.quote}"
                       </p>
-                      <p className="text-xs text-indigo-300 font-sans font-medium">
+                      <p className="text-sm sm:text-base text-indigo-300 font-sans font-medium">
                         → Plain meaning: {ex.translatedQuote}
                       </p>
                     </div>
@@ -254,39 +277,23 @@ export const JargonInspectorSheet: React.FC<JargonInspectorSheetProps> = ({
 
             {/* Direct Alternative / Plain Language */}
             {idiom.safeAlternative && (
-              <div className="p-4 rounded-2xl bg-slate-950/90 border border-emerald-500/30 text-xs sm:text-sm leading-relaxed font-sans space-y-1">
-                <div className="flex items-center gap-1.5 font-bold text-emerald-300">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-emerald-950/30 border border-emerald-500/40 text-sm sm:text-base leading-relaxed font-sans space-y-1.5 shadow-sm">
+                <div className="flex items-center gap-2 font-bold text-emerald-300">
+                  <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-400" />
                   <span>Plain English Alternative</span>
                 </div>
-                <p className="text-slate-100 font-medium">"{idiom.safeAlternative}"</p>
-              </div>
-            )}
-
-            {/* Code Analogy if available */}
-            {idiom.codeAnalogy && (
-              <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/95 border border-slate-700/80 space-y-2 font-mono">
-                <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300 uppercase tracking-wider">
-                  <Code2 className="w-4 h-4 text-amber-400" />
-                  <span>Code Analogy: {idiom.codeAnalogy.concept}</span>
-                </div>
-                <pre className="p-3 bg-slate-900 rounded-xl text-xs text-slate-200 overflow-x-auto border border-white/5 leading-relaxed font-mono">
-                  {idiom.codeAnalogy.snippet}
-                </pre>
-                <p className="text-xs text-slate-300 font-sans">
-                  {idiom.codeAnalogy.explanation}
-                </p>
+                <p className="text-white font-semibold text-base sm:text-lg">"{idiom.safeAlternative}"</p>
               </div>
             )}
 
             {/* Origin & Etymology */}
             {idiom.etymology && (
-              <div className="p-4 rounded-2xl bg-slate-950/80 border border-white/10 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans space-y-1.5">
-                <div className="flex items-center gap-1.5 font-bold text-indigo-300">
-                  <BookOpen className="w-4 h-4 text-indigo-400" />
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-950/80 border border-white/10 text-sm sm:text-base text-slate-200 leading-relaxed font-sans space-y-2">
+                <div className="flex items-center gap-2 font-bold text-indigo-300">
+                  <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400" />
                   <span>Origin & Background</span>
                 </div>
-                <p>{idiom.etymology}</p>
+                <p className="text-slate-100">{idiom.etymology}</p>
               </div>
             )}
 

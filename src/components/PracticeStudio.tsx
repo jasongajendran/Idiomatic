@@ -24,7 +24,7 @@ import {
 import { IDIOMS_DATA } from '../data/idiomsData';
 import { QUIZ_QUESTIONS } from '../data/quizData';
 import { Idiom, WorkflowCategory } from '../types';
-import { speakTerm } from '../utils/speechUtils';
+import { speakTerm, speakSentence } from '../utils/speechUtils';
 
 type PracticeMode = 'quiz' | 'flashcards' | 'speed_match';
 
@@ -686,8 +686,21 @@ export const PracticeStudio: React.FC = () => {
 
                     <div className="space-y-3">
                       <div className="space-y-1">
-                        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Real Meaning</span>
-                        <p className="text-sm text-slate-100 font-medium leading-relaxed">
+                        <div className="flex items-center justify-between gap-2">
+                          <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Real Meaning</span>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              speakSentence(currentFlashcard.realMeaning);
+                            }}
+                            className="p-1.5 rounded-lg bg-slate-950 text-purple-300 hover:text-white border border-purple-500/30 text-xs flex items-center gap-1 cursor-pointer"
+                            title="Listen to definition"
+                            aria-label="Listen to definition"
+                          >
+                            <Volume2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                        <p className="text-sm sm:text-base text-slate-100 font-medium leading-relaxed">
                           {currentFlashcard.realMeaning}
                         </p>
                       </div>

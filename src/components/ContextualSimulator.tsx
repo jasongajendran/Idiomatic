@@ -11,10 +11,12 @@ import {
   AlertTriangle,
   Terminal,
   Cpu,
-  Layers
+  Layers,
+  Volume2
 } from 'lucide-react';
 import { Scenario, ScenarioType, Idiom } from '../types';
 import { SCENARIOS_DATA } from '../data/scenariosData';
+import { speakSentence } from '../utils/speechUtils';
 
 interface ContextualSimulatorProps {
   onSelectTerm: (termId: string) => void;
@@ -28,6 +30,7 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
   const [selectedScenarioId, setSelectedScenarioId] = useState<string>(SCENARIOS_DATA[0].id);
   const [userComment, setUserComment] = useState('');
   const [addedComments, setAddedComments] = useState<Array<{ id: string; author: string; role: string; content: string; timestamp: string }>>([]);
+  const [speakingMsgIdx, setSpeakingMsgIdx] = useState<number | null>(null);
   const [feedbackMsg, setFeedbackMsg] = useState<{ text: string; type: 'success' | 'info' } | null>(null);
 
   const scenario = SCENARIOS_DATA.find((s) => s.id === selectedScenarioId) || SCENARIOS_DATA[0];
@@ -192,7 +195,7 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
 
         {/* Message Stream */}
         <div className="p-5 sm:p-8 space-y-6 max-h-[520px] overflow-y-auto font-sans text-sm bg-[#030712]">
-          {scenario.messages.map((msg) => (
+          {scenario.messages.map((msg, idx) => (
             <div key={msg.id} className="flex items-start gap-4 group">
               <img
                 src={msg.avatar}
@@ -200,12 +203,32 @@ export const ContextualSimulator: React.FC<ContextualSimulatorProps> = ({
                 className="w-10 h-10 rounded-2xl object-cover ring-2 ring-cyan-500/30 shadow-md"
               />
               <div className="flex-1 space-y-1.5">
-                <div className="flex items-baseline gap-2.5">
-                  <span className="font-bold text-white text-sm">{msg.author}</span>
-                  <span className="text-[11px] font-mono font-bold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">
-                    {msg.role}
-                  </span>
-                  <span className="text-[10px] text-slate-500 font-mono ml-auto">{msg.timestamp}</span>
+                <div className="flex items-center justify-between gap-2.5">
+                  <div className="flex items-baseline gap-2.5 flex-wrap">
+                    <span className="font-bold text-white text-sm">{msg.author}</span>
+                    <span className="text-[11px] font-mono font-bold text-cyan-300 bg-cyan-500/10 px-2 py-0.5 rounded-md border border-cyan-500/20">
+                      {msg.role}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 ml-auto">
+                    <span className="text-[10px] text-slate-500 font-mono">{msg.timestamp}</span>
+                    <button
+                      onClick={async () => {
+                        setSpeakingMsgIdx(idx);
+                        await speakSentence(msg.content);
+                        setSpeakingMsgIdx(null);
+                      }}
+                      className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+                        speakingMsgIdx === idx
+                          ? 'bg-cyan-600 text-white border-cyan-400 animate-pulse'
+                          : 'bg-slate-900 text-cyan-300 border-slate-700 hover:text-white hover:bg-cyan-700'
+                      }`}
+                      title="Listen to message"
+                      aria-label={`Listen to message by ${msg.author}`}
+                    >
+                      <Volume2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="p-4 rounded-2xl bg-[#090f1d] border border-white/10 text-slate-200 leading-relaxed text-xs sm:text-sm shadow-md">

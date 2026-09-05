@@ -26,7 +26,7 @@ import {
   PhraseTone, 
   MeetingPhrase 
 } from '../data/ceremoniesData';
-import { speakTerm } from '../utils/speechUtils';
+import { speakTerm, speakSentence } from '../utils/speechUtils';
 
 export const MeetingCeremonyPlaybook: React.FC = () => {
   const [selectedRole, setSelectedRole] = useState<MeetingRole | 'All'>('All');
@@ -34,6 +34,7 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
   const [selectedTone, setSelectedTone] = useState<PhraseTone | 'All'>('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [speakingId, setSpeakingId] = useState<string | null>(null);
+  const [speakingMeaningId, setSpeakingMeaningId] = useState<string | null>(null);
 
   const roles: Array<{ role: MeetingRole | 'All'; icon: React.ReactNode; label: string }> = [
     { role: 'All', icon: <Users className="w-4 h-4" />, label: 'All Roles' },
@@ -79,6 +80,12 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
     setSpeakingId(phrase.id);
     await speakTerm(phrase.phrase, 0.95);
     setSpeakingId(null);
+  };
+
+  const handleSpeakMeaning = async (phrase: MeetingPhrase) => {
+    setSpeakingMeaningId(phrase.id);
+    await speakSentence(phrase.realMeaning);
+    setSpeakingMeaningId(null);
   };
 
   const getToneBadgeStyle = (tone: PhraseTone) => {
@@ -305,13 +312,27 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                         </p>
                       </div>
 
-                      <div className="pt-1.5 border-t border-white/5">
-                        <span className="text-[11px] font-mono font-bold text-indigo-300 uppercase tracking-wider block">
-                          Behind the scenes signal:
-                        </span>
-                        <p className="text-xs sm:text-sm text-indigo-200 leading-normal mt-0.5 font-medium">
-                          {phrase.realMeaning}
-                        </p>
+                      <div className="pt-1.5 border-t border-white/5 flex items-start justify-between gap-2.5">
+                        <div className="flex-1">
+                          <span className="text-[11px] font-mono font-bold text-indigo-300 uppercase tracking-wider block">
+                            Behind the scenes signal:
+                          </span>
+                          <p className="text-xs sm:text-sm text-indigo-200 leading-normal mt-0.5 font-medium">
+                            {phrase.realMeaning}
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => handleSpeakMeaning(phrase)}
+                          className={`p-1.5 rounded-lg border transition-all shrink-0 min-h-[30px] min-w-[30px] flex items-center justify-center cursor-pointer mt-1 ${
+                            speakingMeaningId === phrase.id
+                              ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow'
+                              : 'bg-slate-800 text-indigo-200 border-slate-700 hover:text-white hover:bg-indigo-600'
+                          }`}
+                          title="Listen to signal meaning"
+                          aria-label={`Listen to meaning of phrase: ${phrase.phrase}`}
+                        >
+                          <Volume2 className={`w-3.5 h-3.5 ${speakingMeaningId === phrase.id ? 'text-white' : 'text-indigo-300'}`} />
+                        </button>
                       </div>
                     </div>
 
@@ -325,8 +346,8 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                     </div>
                   </div>
 
-                  {/* Bottom Action Row: Audio Speech */}
-                  <div className="pt-5 mt-4 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">
+                  {/* Bottom Action Row: Audio Speech & Tags */}
+                  <div className="pt-4 mt-3 border-t border-white/10 flex items-center justify-between gap-3 flex-wrap">
                     <div className="flex flex-wrap items-center gap-1.5">
                       {phrase.tags.map((tag) => (
                         <span 
@@ -341,16 +362,15 @@ export const MeetingCeremonyPlaybook: React.FC = () => {
                     <div className="flex items-center gap-2 shrink-0">
                       <button
                         onClick={() => handleSpeak(phrase)}
-                        className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border transition-all min-h-[40px] cursor-pointer text-xs font-semibold ${
+                        className={`p-2.5 rounded-xl border transition-all min-h-[40px] min-w-[40px] flex items-center justify-center cursor-pointer ${
                           isSpeaking 
                             ? 'bg-indigo-600 text-white border-indigo-400 animate-pulse shadow-md shadow-indigo-500/30' 
                             : 'bg-slate-800 text-indigo-200 border-indigo-500/30 hover:bg-indigo-600 hover:text-white'
                         }`}
-                        title="Listen to pronunciation & delivery"
+                        title="Listen to phrase delivery"
                         aria-label={`Listen to phrase: ${phrase.phrase}`}
                       >
-                        <Volume2 className="w-4 h-4 text-indigo-400" />
-                        <span>{isSpeaking ? 'Playing...' : 'Audio Pronunciation'}</span>
+                        <Volume2 className="w-4 h-4 text-indigo-300" />
                       </button>
                     </div>
                   </div>
